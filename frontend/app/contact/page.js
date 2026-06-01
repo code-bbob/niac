@@ -195,13 +195,13 @@ const leadership = [
     name: "Matrika Prasad Niraula",
     title: "MANAGING DIRECTOR",
     email: "lawyers.adr@gmail.com",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAtDzmyUpEG_5rZOOE2IOMHddqWGeanvB0KkUsxYE3TwlkSwsH7Brl-uYO0EiQM5L0zlSlIgrZFfXb6aM_WJJjHZ50naWwQkp49wrt8Xppk4k0auioj0zffjg7aQMoNPiIcfX9uqg6Z9XRTWfPM494GxGHiOu9To9GcMmuCRRVQF-Nab-0fVLmW-7GtImkivBQC_sfYGkmyiO8NEkccZHwv8NPMYpCazxM9HGJ-csenZCKrizwSxWEX4iqgFAHFZHfXnVNocnqE337b",
+    image: "https://cdn.equitylawandco.com/images/team/matrika.png",
   },
   {
     name: "Rabina Jangam",
     title: "EXECUTIVE OFFICER",
     email: "rabina.niac@gmail.com",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDdNWvUIzEKl52zF6tkEU7nTAc6ZHSSyDil4XUlYOwetfFp9l5-GfiM6ukeAPb_HSfbK4uXTJj4xzll-4vNN4VqWYuPD1qSefP-CZHsiS1Z75u2eibXpfNlqNVQgLmd5jqFIhiU3ZeZlZLqQbS9HxCHVDrqCVYqbsYA5ax4imMEJzEVtyXMVkwsN29XwR43GRIzD_gcgO_YzRcu-FUs_2-kSZTssnexB5sXv5qEJ8yTdRWvCRnINttcVSx2QRkX8MjXDxWG0dZQVBk-",
+    image: "https://cdn.equitylawandco.com/images/team/rabina-e1722594475871-255x182.jpg",
   },
 ];
 
