@@ -1,0 +1,98 @@
+# =========================
+# OS Files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Python / Django
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Django
+db.sqlite3-journal
+media/
+staticfiles/
+
+# Logs
+*.log
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Pytest
+.pytest_cache/
+
+# Coverage
+.coverage
+htmlcov/
+
+# Mypy
+.mypy_cache/
+
+# Ruff
+.ruff_cache/
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# =========================
+# Node / Next.js
+# =========================
+node_modules/
+
+# Next.js build output
+.next/
+out/
+
+# Turbopack
+.turbo/
+
+# Vercel
+.vercel/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+backend/.env
+
+# =========================
+# Build files
+# =========================
+dist/
+build/
+
+# =========================
+# Docker
+# =========================
+*.pid
+docker-compose.override.yml
+
+# =========================
+# Misc
+# =========================
+*.swp
+*.swo
+*~

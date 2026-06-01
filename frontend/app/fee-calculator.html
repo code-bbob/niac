@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffe08f",
+                    "inverse-on-surface": "#f0f1f1",
+                    "primary-fixed-dim": "#bbc7df",
+                    "primary-container": "#101c2e",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#1a1c1c",
+                    "on-error": "#ffffff",
+                    "outline": "#75777d",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-surface": "#2f3131",
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#5b636e",
+                    "on-error-container": "#93000a",
+                    "surface-container": "#eeeeee",
+                    "tertiary-fixed-dim": "#e6c364",
+                    "error-container": "#ffdad6",
+                    "on-surface": "#1a1c1c",
+                    "on-tertiary-fixed": "#241a00",
+                    "secondary": "#575f69",
+                    "on-tertiary-fixed-variant": "#584400",
+                    "surface-tint": "#535f74",
+                    "primary-fixed": "#d7e3fc",
+                    "surface-bright": "#f9f9f9",
+                    "surface-container-high": "#e8e8e8",
+                    "on-secondary-fixed": "#141c25",
+                    "surface": "#f9f9f9",
+                    "on-surface-variant": "#45474c",
+                    "tertiary-container": "#c9a84c",
+                    "secondary-container": "#d8e0ec",
+                    "surface-container-low": "#f3f3f4",
+                    "error": "#ba1a1a",
+                    "surface-dim": "#dadada",
+                    "on-tertiary-container": "#503d00",
+                    "secondary-fixed-dim": "#bfc7d3",
+                    "primary": "#000000",
+                    "tertiary": "#755b00",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed": "#101c2e",
+                    "on-primary-container": "#79849b",
+                    "inverse-primary": "#bbc7df",
+                    "secondary-fixed": "#dbe3ef",
+                    "surface-container-highest": "#e2e2e2",
+                    "outline-variant": "#c5c6cd",
+                    "surface-variant": "#e2e2e2",
+                    "on-primary-fixed-variant": "#3c475b",
+                    "on-secondary-fixed-variant": "#3f4751",
+                    "background": "#f9f9f9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-padding": "120px",
+                    "gutter": "32px",
+                    "container-max": "1280px",
+                    "stack-md": "16px",
+                    "stack-sm": "8px",
+                    "stack-lg": "24px",
+                    "margin-mobile": "20px"
+            },
+            "fontFamily": {
+                    "label-caps": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Playfair Display"],
+                    "headline-md": ["Playfair Display"],
+                    "headline-lg": ["Playfair Display"],
+                    "display-lg": ["Playfair Display"],
+                    "body-md": ["Inter"],
+                    "headline-sm": ["Playfair Display"]
+            },
+            "fontSize": {
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                    "headline-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-sm": ["24px", {"lineHeight": "1.4", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .luxury-shadow {
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05);
+        }
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 bg-surface border-b border-outline-variant flex justify-between items-center px-gutter py-4 max-w-container-max mx-auto w-full">
+<div class="font-headline-sm text-headline-sm text-primary">Arbitration Center</div>
+<nav class="hidden md:flex gap-8 items-center">
+<a class="font-label-caps text-label-caps text-secondary hover:text-tertiary transition-colors duration-300" href="#">Home</a>
+<a class="font-label-caps text-label-caps text-secondary hover:text-tertiary transition-colors duration-300" href="#">About Us</a>
+<a class="font-label-caps text-label-caps text-secondary hover:text-tertiary transition-colors duration-300" href="#">Services</a>
+<a class="font-label-caps text-label-caps text-secondary hover:text-tertiary transition-colors duration-300" href="#">Panelists</a>
+<a class="font-label-caps text-label-caps text-tertiary border-b-2 border-tertiary pb-1" href="#">Fee Calculator</a>
+<a class="font-label-caps text-label-caps text-secondary hover:text-tertiary transition-colors duration-300" href="#">Rules</a>
+<button class="bg-primary text-on-primary px-6 py-2 font-label-caps text-label-caps hover:bg-tertiary transition-all">Contact</button>
+</nav>
+<button class="md:hidden">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<main class="max-w-container-max mx-auto px-gutter py-section-padding">
+<!-- Hero Section / Title -->
+<div class="max-w-3xl mb-stack-lg fade-in">
+<h1 class="font-display-lg text-display-lg mb-stack-md">Fee Calculator</h1>
+<p class="font-body-lg text-body-lg text-secondary max-w-2xl">
+                A transparent tool for estimating administrative and arbitrator fees. Calculate your total investment in professional dispute resolution based on institutional regulations.
+            </p>
+</div>
+<!-- Main Calculator Card -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start fade-in" style="animation-delay: 0.1s;">
+<!-- Left: Inputs -->
+<div class="lg:col-span-7 bg-white border border-outline-variant border-t-2 border-t-tertiary-container p-10 luxury-shadow">
+<form class="space-y-12" id="calculatorForm">
+<!-- Step 1: Dispute Type -->
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-stack-md">Step 01 / SELECT DISPUTE TYPE</label>
+<div class="flex flex-wrap gap-2">
+<label class="cursor-pointer group">
+<input checked="" class="hidden peer" name="disputeType" type="radio" value="arbitration"/>
+<div class="px-6 py-3 border border-outline-variant peer-checked:bg-primary-container peer-checked:text-on-primary-container peer-checked:border-primary-container transition-all group-hover:border-primary">
+<span class="font-label-caps text-label-caps">Arbitration</span>
+</div>
+</label>
+<label class="cursor-pointer group">
+<input class="hidden peer" name="disputeType" type="radio" value="mediation"/>
+<div class="px-6 py-3 border border-outline-variant peer-checked:bg-primary-container peer-checked:text-on-primary-container peer-checked:border-primary-container transition-all group-hover:border-primary">
+<span class="font-label-caps text-label-caps">Mediation</span>
+</div>
+</label>
+<label class="cursor-pointer group">
+<input class="hidden peer" name="disputeType" type="radio" value="adjudication"/>
+<div class="px-6 py-3 border border-outline-variant peer-checked:bg-primary-container peer-checked:text-on-primary-container peer-checked:border-primary-container transition-all group-hover:border-primary">
+<span class="font-label-caps text-label-caps">Adjudication</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Step 2: Claim Amount -->
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-stack-md">Step 02 / ENTER CLAIM AMOUNT</label>
+<div class="relative group">
+<div class="absolute right-0 top-0 h-full flex items-center pr-4">
+<select class="bg-transparent border-none font-label-caps text-label-caps text-primary focus:ring-0 cursor-pointer" name="currency">
+<option value="USD">USD</option>
+<option value="NPR">NPR</option>
+</select>
+</div>
+<input class="w-full bg-transparent border-b border-outline-variant focus:border-primary focus:ring-0 py-4 text-headline-sm font-headline-sm transition-all outline-none" name="amount" placeholder="0.00" required="" type="number"/>
+</div>
+</div>
+<!-- Step 3: Arbitrators -->
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-stack-md">Step 03 / NUMBER OF ARBITRATORS</label>
+<div class="flex gap-4">
+<label class="flex-1 cursor-pointer">
+<input checked="" class="hidden peer" name="arbitrators" type="radio" value="1"/>
+<div class="w-full py-4 text-center border border-outline-variant peer-checked:bg-primary peer-checked:text-on-primary transition-all">
+<span class="font-label-caps text-label-caps">Sole Arbitrator (1)</span>
+</div>
+</label>
+<label class="flex-1 cursor-pointer">
+<input class="hidden peer" name="arbitrators" type="radio" value="3"/>
+<div class="w-full py-4 text-center border border-outline-variant peer-checked:bg-primary peer-checked:text-on-primary transition-all">
+<span class="font-label-caps text-label-caps">Tribunal (3)</span>
+</div>
+</label>
+</div>
+</div>
+<button class="w-full bg-tertiary-container text-on-tertiary-container py-5 font-label-caps text-label-caps tracking-widest hover:brightness-95 transition-all shadow-sm" type="submit">
+                        CALCULATE ESTIMATED FEES
+                    </button>
+</form>
+<div class="mt-stack-lg pt-stack-lg border-t border-outline-variant opacity-60">
+<p class="font-body-sm text-body-sm">
+                        * Estimates are based on the latest 2024 Schedule of Fees. Actual costs may vary based on complexity, administrative adjustments, and procedural expenses. All figures exclude VAT.
+                    </p>
+</div>
+</div>
+<!-- Right: Results -->
+<div class="lg:col-span-5 space-y-gutter">
+<div class="bg-primary-container text-on-primary-container p-10 border-t-2 border-t-tertiary luxury-shadow">
+<h3 class="font-label-caps text-label-caps mb-8 opacity-70">Total Estimate</h3>
+<div class="flex items-baseline gap-2 mb-10">
+<span class="font-headline-md text-headline-md opacity-50" id="res-currency">USD</span>
+<span class="font-display-lg text-display-lg" id="res-total">0.00</span>
+</div>
+<div class="space-y-6">
+<div class="flex justify-between items-center pb-4 border-b border-white/10">
+<span class="font-label-caps text-label-caps opacity-70">Filing Fee</span>
+<span class="font-body-lg text-body-lg" id="res-filing">0.00</span>
+</div>
+<div class="flex justify-between items-center pb-4 border-b border-white/10">
+<span class="font-label-caps text-label-caps opacity-70">Administrative Fee</span>
+<span class="font-body-lg text-body-lg" id="res-admin">0.00</span>
+</div>
+<div class="flex justify-between items-center pb-4 border-b border-white/10">
+<span class="font-label-caps text-label-caps opacity-70">Arbitrator(s) Fee</span>
+<span class="font-body-lg text-body-lg" id="res-arb">0.00</span>
+</div>
+</div>
+</div>
+<!-- Info Card -->
+<div class="bg-surface-container-low border border-outline-variant p-8">
+<div class="flex gap-4 items-start">
+<span class="material-symbols-outlined text-tertiary">info</span>
+<div>
+<h4 class="font-label-caps text-label-caps text-primary mb-2">Note on Expenses</h4>
+<p class="font-body-sm text-body-sm text-secondary">
+                                This calculation does not include travel, accommodation, or hearing room rentals. For complex multi-party disputes, please contact the secretariat for a customized quote.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Supplementary Rules Section -->
+<section class="mt-section-padding grid md:grid-cols-2 gap-12 border-t border-outline-variant pt-12 fade-in" style="animation-delay: 0.3s;">
+<div>
+<h3 class="font-headline-md text-headline-md mb-6">Official Rules &amp; Regulations</h3>
+<p class="font-body-md text-body-md text-secondary mb-8">
+                    The International Arbitration Center operates under a strict set of procedural rules designed to ensure impartiality, efficiency, and legal certainty in all proceedings.
+                </p>
+<div class="space-y-4">
+<a class="flex items-center gap-4 group" href="#">
+<span class="material-symbols-outlined p-3 bg-secondary-container text-on-secondary-container">description</span>
+<span class="font-label-caps text-label-caps border-b border-transparent group-hover:border-tertiary transition-all">Download Rules of Arbitration (PDF)</span>
+</a>
+<a class="flex items-center gap-4 group" href="#">
+<span class="material-symbols-outlined p-3 bg-secondary-container text-on-secondary-container">account_balance_wallet</span>
+<span class="font-label-caps text-label-caps border-b border-transparent group-hover:border-tertiary transition-all">View Full Fee Schedule</span>
+</a>
+</div>
+</div>
+<div class="relative h-64 overflow-hidden">
+<img alt="Legal Gavel" class="w-full h-full object-cover grayscale brightness-90" data-alt="A macro photograph of a polished wooden gavel resting on a leather-bound law book in a classic law library. The lighting is low and sophisticated, with soft focus on the background shelves filled with antique books. The atmosphere is quiet, authoritative, and professional, utilizing warm wood tones and deep shadows to convey a sense of traditional justice." src="https://lh3.googleusercontent.com/aida-public/AB6AXuACQelxIeneVZKYY1dnGWXyRg7tznZZkqI9tzmQmeIyqV6ArJ5ELa0a5Bk9j4Da137HoggRNlFSco_CIHiFYnOvwErS9llYT9WIg2zlBteuIC3MYInSkQodnqgOyP-c1gMlXHfN7xlJ52k9_xTONYbcOtjxcSIp2BU3a1e_f4BHMzfhoQeBN5cbF6jrnIuQGfb5Ys3yoETyqDCIAV2AM59nwwS_9SfgoOfs8hUrNE5T0-YbDUtFG8oykv82sPeI5gsyGbSXjEZ3FShH"/>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-primary-container text-on-primary-container w-full border-t border-outline-variant">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-gutter py-section-padding max-w-container-max mx-auto">
+<div class="md:col-span-1">
+<div class="font-headline-sm text-headline-sm text-on-primary mb-4">Arbitration Center</div>
+<p class="font-body-sm text-body-sm opacity-80">World-class dispute resolution services, ensuring integrity and excellence in the legal ecosystem since 1994.</p>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-label-caps text-label-caps text-tertiary-fixed">Navigation</h4>
+<a class="font-body-sm text-body-sm opacity-80 hover:text-tertiary-fixed-dim transition-colors" href="#">Services</a>
+<a class="font-body-sm text-body-sm opacity-80 hover:text-tertiary-fixed-dim transition-colors" href="#">Fee Schedule</a>
+<a class="font-body-sm text-body-sm opacity-80 hover:text-tertiary-fixed-dim transition-colors" href="#">Case Management</a>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-label-caps text-label-caps text-tertiary-fixed">Legal</h4>
+<a class="font-body-sm text-body-sm opacity-80 hover:text-tertiary-fixed-dim transition-colors" href="#">Privacy Policy</a>
+<a class="font-body-sm text-body-sm opacity-80 hover:text-tertiary-fixed-dim transition-colors" href="#">Terms of Service</a>
+<a class="font-body-sm text-body-sm opacity-80 hover:text-tertiary-fixed-dim transition-colors" href="#">Disclaimer</a>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-label-caps text-label-caps text-tertiary-fixed">Contact</h4>
+<p class="font-body-sm text-body-sm opacity-80">Level 12, Corporate Tower<br/>Global Financial District</p>
+<p class="font-body-sm text-body-sm opacity-80">contact@arbitration.center</p>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-gutter py-8 border-t border-white/10 flex justify-between items-center text-body-sm opacity-60">
+<span>© 2024 International Arbitration &amp; Mediation Center. All Rights Reserved.</span>
+<div class="flex gap-6">
+<a class="hover:text-tertiary-fixed-dim transition-colors" href="#">Sitemap</a>
+</div>
+</div>
+</footer>
+<script>
+        document.getElementById('calculatorForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const amount = parseFloat(formData.get('amount')) || 0;
+            const currency = formData.get('currency');
+            const arbitrators = parseInt(formData.get('arbitrators'));
+            const type = formData.get('disputeType');
+
+            // Simplified Mock Calculation Logic
+            let filingFee = 1000;
+            let adminFee = 0;
+            let arbFee = 0;
+
+            if (type === 'arbitration') {
+                adminFee = amount * 0.01 + 500;
+                arbFee = (amount * 0.03 * arbitrators) + (2000 * arbitrators);
+            } else if (type === 'mediation') {
+                adminFee = 750;
+                arbFee = 1500;
+                filingFee = 500;
+            } else {
+                adminFee = amount * 0.005;
+                arbFee = 3000;
+                filingFee = 250;
+            }
+
+            const total = filingFee + adminFee + arbFee;
+
+            // Display Results with counter animation
+            const animateValue = (id, start, end, duration) => {
+                const obj = document.getElementById(id);
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    obj.innerHTML = (progress * (end - start) + start).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            };
+
+            document.getElementById('res-currency').innerText = currency;
+            animateValue('res-total', 0, total, 600);
+            animateValue('res-filing', 0, filingFee, 600);
+            animateValue('res-admin', 0, adminFee, 600);
+            animateValue('res-arb', 0, arbFee, 600);
+        });
+
+        // Initial state
+        document.getElementById('res-total').innerText = "0.00";
+    </script>
+</body></html>

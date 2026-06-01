@@ -1,0 +1,19 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle (optional - remove if you want pure transparency) -->
+  <circle cx="50" cy="50" r="48" fill="none" stroke="#3B82F6" stroke-width="2"/>
+  
+  <!-- Shield shape for law firm -->
+  <path d="M50 10L75 25V50C75 70 50 85 50 85C50 85 25 70 25 50V25L50 10Z" fill="#3B82F6" stroke="#1E40AF" stroke-width="1.5"/>
+  
+  <!-- Scales of justice inside shield -->
+  <g transform="translate(50, 50)">
+    <!-- Center beam -->
+    <line x1="0" y1="-8" x2="0" y2="8" stroke="white" stroke-width="1.5"/>
+    <!-- Left scale -->
+    <circle cx="-8" cy="0" r="3" fill="white"/>
+    <line x1="-8" y1="0" x2="-8" y2="6" stroke="white" stroke-width="1"/>
+    <!-- Right scale -->
+    <circle cx="8" cy="0" r="3" fill="white"/>
+    <line x1="8" y1="0" x2="8" y2="6" stroke="white" stroke-width="1"/>
+  </g>
+</svg>
