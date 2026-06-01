@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-eyf#)cck(*3g(0l#gx#%#07rg917m!9d3b5i8!-1(wtsj9y(5o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.214','localhost','equitylawandco.pythonanywhere.com']
+ALLOWED_HOSTS = ['niac.org.np','localhost','niac.pythonanywhere.com']
 
 
 # Application definition
