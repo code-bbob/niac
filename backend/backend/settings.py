@@ -117,6 +117,35 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Tell django-storages to use the S3Boto3 backend:
+# STORAGES = {
+#     "default": {
+#         "BACKEND": "storages.backends.s3.S3Storage",
+#         "OPTIONS": {
+#             "access_key": os.getenv('AWS_ACCESS_KEY_ID'),
+#             "secret_key": os.getenv('AWS_SECRET_ACCESS_KEY'),
+#             "bucket_name": os.getenv('AWS_STORAGE_BUCKET_NAME'),
+#             "endpoint_url": os.getenv('AWS_S3_ENDPOINT_URL'),
+#             "location":'images',
+#             "default_acl": "public-read",
+#             "custom_domain": os.getenv('AWS_S3_CUSTOM_DOMAIN'),
+#         }
+#     },
+#     "staticfiles": {
+#         "BACKEND": "storages.backends.s3.S3Storage",
+#         "OPTIONS": {
+#             "access_key": os.getenv('AWS_ACCESS_KEY_ID'),
+#             "secret_key": os.getenv('AWS_SECRET_ACCESS_KEY'),
+#             "bucket_name": os.getenv('AWS_STORAGE_BUCKET_NAME'),
+#             "endpoint_url": os.getenv('AWS_S3_ENDPOINT_URL'),
+#             "location":'static',
+#             "default_acl": "public-read",
+#             "custom_domain": os.getenv('AWS_S3_CUSTOM_DOMAIN'),
+#         }
+#     },
+# }
+#okay
+
+
 STORAGES = {
     "default": {
         "BACKEND": "storages.backends.s3.S3Storage",
@@ -143,15 +172,6 @@ STORAGES = {
         }
     },
 }
-#okay
-
-# You can also configure additional options if needed:
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-}
-
-
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
@@ -528,3 +548,9 @@ REST_FRAMEWORK = {
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://niac.pythonanywhere.com",
+    "https://niac.org.np",
+]
+
