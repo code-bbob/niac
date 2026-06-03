@@ -222,3 +222,19 @@ class Blog(models.Model):
             models.Index(fields=['slug']),
             models.Index(fields=['is_published']),
         ]
+
+
+class Bulletin(models.Model):
+    title = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='bulletins/', help_text="Bulletin image/notice")
+    description = models.TextField(blank=True, help_text="Optional description")
+    is_active = models.BooleanField(default=True, help_text="Whether to display this bulletin on the website")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name_plural = "Bulletins"
+        ordering = ['-created_at']

@@ -2,11 +2,11 @@ import { Globe, AtSign, Share2, MapPin, Phone, Mail, Send } from "lucide-react";
 
 export default function NiacFooter() {
   return (
-    <footer className="bg-primary-container text-on-primary-container border-t border-outline-variant">
+    <footer className="bg-[#0F1B4B] text-on-primary-container border-t border-outline-variant">
       {/* Subtle top accent */}
-      <div className="h-px bg-gradient-to-r from-transparent via-tertiary-fixed/30 to-transparent" />
+      {/* <div className="h-px bg-gradient-to-r from-transparent via-tertiary-fixed/30 to-transparent" />
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-4 sm:px-8 py-[50px] sm:py-[100px] max-w-[1600px] mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-4 sm:px-8 py-[50px] sm:py-[100px] max-w-[1200px] mx-auto">
         <div className="col-span-1">
           <div className="font-serif text-2xl text-white mb-1">NIAC</div>
           <div className="text-[9px] tracking-[0.25em] uppercase text-tertiary-fixed/60 mb-6">
@@ -58,19 +58,19 @@ export default function NiacFooter() {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Bottom bar */}
       <div className="border-t border-outline-variant/30">
-        <div className="max-w-[1280px] mx-auto px-8 py-7 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs opacity-50">
+        <div className="max-w-[1280px]  mx-auto px-8 py-7 flex flex-col md:flex-row justify-center items-center gap-4">
+          <p className="text-white">
             &copy; {new Date().getFullYear()} NIAC &mdash; Nepal International ADR Center. All Rights Reserved.
           </p>
-          <div className="flex gap-6 text-xs opacity-50">
-            <a className="hover:text-tertiary-fixed hover:opacity-100 transition-all duration-300" href="#">Privacy Policy</a>
+          {/* <div className="flex text-white gap-6 text-xs opacity-50">
+            <a className="hover:text-tertiary-fixed hover:opacity-100 transition-all duration-" href="#">Privacy Policy</a>
             <a className="hover:text-tertiary-fixed hover:opacity-100 transition-all duration-300" href="#">Terms of Service</a>
             <a className="hover:text-tertiary-fixed hover:opacity-100 transition-all duration-300" href="#">Disclaimer</a>
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>

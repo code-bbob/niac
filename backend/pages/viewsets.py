@@ -2,10 +2,11 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from datetime import datetime, timedelta
-from .models import Service, ContactMessage, Appointment, AppointmentDay, AvailableHours, Team
+from .models import Service, ContactMessage, Appointment, AppointmentDay, AvailableHours, Team, Bulletin
 from .serializers import (
     ServiceSerializer, ContactMessageSerializer, 
-    AppointmentSerializer, AppointmentDaySerializer, AvailableHoursSerializer, TeamSerializer
+    AppointmentSerializer, AppointmentDaySerializer, AvailableHoursSerializer, TeamSerializer,
+    BulletinSerializer
 )
 from .utils import send_contact_email_async, send_appointment_confirmation_email, get_available_time_slots
 
@@ -220,4 +221,10 @@ class TeamViewSet(viewsets.ModelViewSet):
     ordering_fields = ['order', 'full_name', 'job_title']
     ordering = ['order', 'full_name']
     lookup_field = 'slug'
+
+
+class BulletinViewSet(viewsets.ModelViewSet):
+    queryset = Bulletin.objects.filter(is_active=True)
+    serializer_class = BulletinSerializer
+    ordering = ['-created_at']
 

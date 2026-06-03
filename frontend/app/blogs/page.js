@@ -122,21 +122,8 @@ export default async function BlogsPage({ searchParams }) {
   return (
     <div className="bg-white">
       {/* Hero */}
-      <section className="relative overflow-hidden bg-primary-container pt-[200px]">
-        <div className="absolute inset-0 z-0">
-          <div
-            className="w-full h-full bg-cover bg-center"
-            style={{
-              backgroundImage:
-                "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCkhaHZh4zXeTLzrXvrkuN-R1ThgwMOwIs3K4JeA-f5Bgecemn1_zh4pwYETiJsK3fTcXiwEbgbPg1E0QXRrfjXZzueu9fbtc8_NVxqMbdt5BBSaZ_pY4xj-mCA2_eZHLI2L1lTOWSOLEQnksSAWPT_cD1JxhH4_ChrSPomNrewPTLfLovb3wU1PVKq3KfMBIhOk8Ker6qOAKW9e0ku1bUxh_zbKjg3RxNGCVf7dqeiQM_zhY5730AVPK90zRIjfGxdtIT8oKjkfPN8')",
-            }}
-          />
-          <div
-            className="absolute inset-0"
-            style={{ background: "linear-gradient(rgba(16, 28, 46, 0.85), rgba(16, 28, 46, 0.95))" }}
-          />
-        </div>
-        <div className="relative z-10 max-w-[1600px] mx-auto px-8 pb-[120px]">
+      <section className="relative overflow-hidden bg-[#0F1B4B] pt-[100px]">
+        <div className="relative z-10 max-w-[1200px] mx-auto px-8 pb-[50px]">
           <nav className="flex items-center gap-2 mb-4 text-white/60 text-[11px] font-semibold tracking-[0.1em] uppercase">
             <Link href="/" className="text-white hover:text-tertiary-fixed transition-colors">Home</Link>
             <ChevronRight className="w-3.5 h-3.5 text-white" />
@@ -145,7 +132,7 @@ export default async function BlogsPage({ searchParams }) {
           <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-white max-w-3xl mb-6 leading-tight">
             News & Insights
           </h1>
-          <p className="text-base sm:text-lg text-[#79849b] max-w-2xl leading-relaxed">
+          <p className="text-base sm:text-lg text-white max-w-2xl leading-relaxed">
             Stay informed with the latest developments in arbitration, mediation, and alternative dispute resolution from NIAC and the global ADR community.
           </p>
         </div>
@@ -153,7 +140,7 @@ export default async function BlogsPage({ searchParams }) {
       </section>
 
       {/* Blog Grid */}
-      <section className="max-w-[1600px] mx-auto px-8 py-[120px]">
+      <section className="max-w-[1200px] mx-auto px-8 py-[50px]">
         {blogs.length === 0 ? (
           <div className="text-center max-w-7xl mx-auto py-20">
             <div className="text-6xl mb-4">&#128214;</div>

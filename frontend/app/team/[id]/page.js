@@ -108,7 +108,7 @@ export default async function TeamDetailsPage({ params }) {
             style={{ background: 'linear-gradient(rgba(16, 28, 46, 0.9), rgba(16, 28, 46, 0.98))' }}
           />
         </div>
-        <div className="relative z-10 max-w-[1600px] mx-auto px-8">
+        <div className="relative z-10 max-w-[1200px] mx-auto px-8">
           <div className="flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-white/70 mb-6">
             <Link href="/" className="hover:text-tertiary-fixed transition-colors">Home</Link>
             <span>•</span>
@@ -126,7 +126,7 @@ export default async function TeamDetailsPage({ params }) {
       </section>
 
       {/* Profile */}
-      <section className="max-w-[1600px] mx-auto px-8 py-[90px]">
+      <section className="max-w-[1200px] mx-auto px-8 py-[90px]">
         <div className="grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-10 items-start">
           <div className="bg-surface-container-lowest border border-outline-variant/70 p-6">
             <div className="relative w-full aspect-[5/4] overflow-hidden">

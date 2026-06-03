@@ -1,205 +1,180 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { MapPin, Phone, Mail, ChevronRight } from "lucide-react";
-
-function RevealObserver() {
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("active");
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
-    );
-    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-  return null;
-}
-
-function CtaMouseFollow() {
-  useEffect(() => {
-    const cta = document.querySelector("section.cta-section");
-    if (!cta) return;
-    const onMove = (e) => {
-      const { left, top, width, height } = cta.getBoundingClientRect();
-      const x = ((e.clientX - left) / width) * 100;
-      const y = ((e.clientY - top) / height) * 100;
-      cta.style.setProperty("--mouse-x", `${x}%`);
-      cta.style.setProperty("--mouse-y", `${y}%`);
-    };
-    cta.addEventListener("mousemove", onMove);
-    return () => cta.removeEventListener("mousemove", onMove);
-  }, []);
-  return null;
-}
+import { ChevronRight } from "lucide-react";
 
 export default function ContactPage() {
   return (
-    <div className="bg-white text-gray-900">
-      <RevealObserver />
-      <CtaMouseFollow />
-
-      {/* Hero */}
-      <section className="relative overflow-hidden px-8 bg-[#101c2e] pt-[200px] pb-[120px]">
-        <div className="absolute inset-0 pointer-events-none opacity-[0.05]"
-          style={{ backgroundImage: "url('https://www.transparenttextures.com/patterns/natural-paper.png')" }}
-        />
-        <div className="max-w-[1600px] px-8 mx-auto relative z-10">
-          <nav className="flex items-center gap-2 mb-4 text-white/60 text-[11px] font-semibold tracking-[0.1em] uppercase">
-            <span className="text-white">Home</span>
-            <ChevronRight className="w-3.5 h-3.5 text-white" />
-            <span className="text-[#bbc7df]">Contact</span>
-          </nav>
-          <div className="reveal">
-            <span className="text-[10px] font-semibold tracking-[0.25em] uppercase text-[#c9a84c] mb-4 block">
-              Institutional Trust
-            </span>
-            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-white mb-6 max-w-3xl leading-tight">
-              Contact NIAC
-            </h1>
-            <p className="text-base sm:text-lg text-[#79849b] max-w-2xl leading-relaxed">
-              Accessible and credible ADR services for modern dispute resolution. We provide a dignified environment for high-stakes mediation and international arbitration.
-            </p>
-          </div>
-        </div>
-        <div className="absolute -right-1/4 -top-1/4 w-[600px] h-[600px] bg-[#755b00] opacity-10 blur-[120px] rounded-full pointer-events-none" />
-      </section>
-
-      {/* Contact Info & Form */}
-      <section className="py-[120px] px-8 max-w-[1600px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-          {/* Left: Contact Info */}
-          <div className="md:col-span-5 space-y-6 reveal">
-            <div className="bg-white border border-[#c5c6cd] p-8 shadow-sm"
-              style={{ borderTop: "2px solid #c9a84c" }}
-            >
-              <h2 className="font-serif text-2xl sm:text-3xl text-gray-900 mb-8">Kathmandu Office</h2>
-              <div className="space-y-8">
-                <div className="flex gap-4">
-                  <MapPin className="text-[#c9a84c] w-5 h-5 mt-1 shrink-0" />
-                  <div>
-                    <h3 className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#45474c] mb-1">HEADQUARTERS</h3>
-                    <p className="text-sm text-gray-900 leading-relaxed">House no. 163, Pragati Marg,<br />Hanumansthan, Anamnagar,<br />Kathmandu-29, Nepal</p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <Phone className="text-[#c9a84c] w-5 h-5 mt-1 shrink-0" />
-                  <div>
-                    <h3 className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#45474c] mb-1">TELEPHONE</h3>
-                    <p className="text-sm text-gray-900 leading-relaxed">+977 01 5705609</p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <Mail className="text-[#c9a84c] w-5 h-5 mt-1 shrink-0" />
-                  <div>
-                    <h3 className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#45474c] mb-1">ELECTRONIC MAIL</h3>
-                    <p className="text-sm text-gray-900 leading-relaxed">niacadrweek@gmail.com</p>
-                    <p className="text-sm text-gray-900 leading-relaxed">adrcenter@niac.asia</p>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-12 pt-8 border-t border-[#c5c6cd]">
-                <h3 className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#45474c] mb-4">LOCATION DATA</h3>
-                <div className="relative aspect-video w-full overflow-hidden bg-[#eeeeee]">
-                  <iframe
-                    title="NIAC location map"
-                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d220.79660034471283!2d85.32842763827327!3d27.694256489686484!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19a4b1f5a3a5%3A0x20634b5fe727d535!2sNiraula%20Law%20Chamber%20%26%20Co!5e0!3m2!1sen!2snp!4v1779967553121!5m2!1sen!2snp"
-                    className="absolute inset-0 h-full w-full border-0"
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right: Form */}
-          <div className="md:col-span-7 reveal">
-            <div className="p-8 md:p-12 border border-[#c5c6cd]"
-              style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)" }}
-            >
-              <h2 className="font-serif text-2xl sm:text-3xl text-gray-900 mb-2">Service Inquiry</h2>
-              <p className="text-sm text-[#45474c] mb-10">
-                Please provide the details of your inquiry. All communications are handled with absolute confidentiality.
-              </p>
-              <ContactForm />
-            </div>
+    <div className="bg-white min-h-screen">
+      {/* Breadcrumbs */}
+      <section className="bg-[#f5f5f5] border-b border-gray-200">
+        <div className="max-w-[1200px] mx-auto px-8 py-4">
+          <div className="flex items-center gap-2 text-[11px] font-semibold tracking-[0.05em] uppercase text-gray-500">
+            <a href="/" className="text-gray-500 hover:text-primary transition-colors">Home</a>
+            <ChevronRight className="w-3 h-3" />
+            <span className="text-primary">Contact</span>
           </div>
         </div>
       </section>
 
-      {/* Leadership */}
-      <section className="bg-white py-[120px] px-8">
-        <div className="max-w-[1600px] mx-auto">
-          <div className="text-center mb-16 reveal">
-            <span className="text-[10px] font-semibold tracking-[0.25em] uppercase text-[#c9a84c] mb-2 block">
-              Institutional Governance
-            </span>
-            <h2 className="font-serif text-3xl sm:text-4xl text-gray-900">NIAC Leadership</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
-            {leadership.map((person, i) => (
-              <div key={person.name} className="group reveal" style={{ transitionDelay: `${i * 100}ms` }}>
-                <div className="bg-white border border-[#c5c6cd] p-1 hover:border-[#c9a84c] transition-all duration-500 overflow-hidden"
-                  style={{ borderTop: "2px solid #c9a84c" }}
-                >
-                  <div className="aspect-[4/5] bg-[#eeeeee] mb-6 overflow-hidden relative">
-                    <img
-                      alt={person.name}
-                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-                      src={person.image}
-                    />
-                  </div>
-                  <div className="px-6 pb-8">
-                    <h3 className="font-serif text-xl sm:text-2xl text-gray-900 mb-1">{person.name}</h3>
-                    <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#c9a84c] mb-4">{person.title}</p>
-                    <a href={`mailto:${person.email}`} className="inline-flex items-center gap-2 text-gray-900 group/email hover:text-[#c9a84c] transition-colors duration-300">
-                      <Mail className="w-4 h-4" />
-                      <span className="text-sm">{person.email}</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="cta-section py-[120px] px-8 bg-[#101c2e] relative overflow-hidden">
-        <div className="max-w-[1600px] mx-auto text-center relative z-10 reveal">
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-white mb-8 leading-tight">
-            Looking for Accessible and Credible ADR Service Provider?
-          </h2>
-          <div className="flex justify-center">
-            <button className="group relative px-12 py-5 bg-[#755b00] text-white text-[11px] font-semibold tracking-[0.15em] uppercase transition-all duration-500 hover:bg-white hover:text-black">
-              <span className="relative z-10">REQUEST A CONSULTATION</span>
-              <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
+      {/* Contact Us */}
+      <section className="max-w-[1200px] mx-auto  py-16">
+              <h2 class="relative text-[#0F1B4B] inline-block after:content-[''] my-8 after:absolute after:left-0 after:-bottom-2 after:w-10 after:h-2 after:bg-[#b08d2a] after:rounded-full">
+              Contact Us
+              </h2>
+        {/* Tab: Kathmandu Office */}
+        <div>
+          <div className="flex border-b bg-[#9F8320] border-gray-300 mb-8">
+            <button className="px-6 py-4 text-[13px] font-bold uppercase tracking-[0.05em] text-white font-bold border-b-2 border-primary bg-[#0F1B6B]">
+              Kathmandu Office
             </button>
           </div>
+
+          {/* Row 1: Image / Map / Contact Details */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+            {/* Image */}
+            <div className="overflow-hidden">
+              <img
+                src="/images/contact-page-image.jpeg"
+                alt="NIAC Kathmandu Office"
+                className="w-full h-auto object-cover"
+                onError={(e) => { e.target.src = "https://placehold.co/600x400/eeeeee/999999?text=NIAC+Office"; }}
+              />
+            </div>
+
+            {/* Google Map */}
+            <div className="overflow-hidden">
+              <iframe
+                title="NIAC location map"
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d220.79660034471283!2d85.32842763827327!3d27.694256489686484!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19a4b1f5a3a5%3A0x20634b5fe727d535!2sNiraula%20Law%20Chamber%20%26%20Co!5e0!3m2!1sen!2snp!4v1779967553121!5m2!1sen!2snp"
+                width="100%"
+                height="330"
+                className="border-0"
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+
+            {/* Contact Details */}
+            <div
+              className="relative p-10 text-white flex flex-col justify-center"
+              style={{
+                backgroundImage: "url('https://placehold.co/600x400/10246e/10246e')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            >
+              <div className="absolute inset-0 bg-[#10246e]/85" />
+              <div className="relative z-10">
+                <h4 className="font-bold text-lg mb-6">Contact Details</h4>
+                <ul className="space-y-5">
+                  <li className="flex gap-3">
+                    <span className="mt-0.5 shrink-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </span>
+                    <span className="text-sm leading-relaxed">House no. 163, Pragati Marg, Hanumansthan, Anamnagar, Kathmandu-29</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="mt-0.5 shrink-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    </span>
+                    <span className="text-sm">+977 01 5705609</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="mt-0.5 shrink-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    </span>
+                    <div className="text-sm">
+                      <a href="mailto:niacadrweek@gmail.com" className="hover:underline block">niacadrweek@gmail.com</a>
+                      <a href="mailto:adrcenter@niac.asia" className="hover:underline">adrcenter@niac.asia</a>
+                    </div>
+                  </li>
+                </ul>
+                {/* Social */}
+                <div className="flex gap-3 mt-8 pt-6 border-t border-white/20">
+                  <a href="https://www.facebook.com/niac.asia" target="_blank" rel="noopener noreferrer" className="w-8 h-8 flex items-center justify-center border border-white/40 rounded-full hover:bg-white hover:text-[#10246e] transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                  </a>
+                  <a href="#" target="_blank" rel="noopener noreferrer" className="w-8 h-8 flex items-center justify-center border border-white/40 rounded-full hover:bg-white hover:text-[#10246e] transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+                  </a>
+                  <a href="#" target="_blank" rel="noopener noreferrer" className="w-8 h-8 flex items-center justify-center border border-white/40 rounded-full hover:bg-white hover:text-[#10246e] transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Row 2: Feedback Form + Your Contact */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            {/* Feedback Form */}
+            <div className="lg:col-span-8">
+                            <h2 class="relative text-[#0F1B4B] inline-block after:content-[''] mb-8 after:absolute after:left-0 after:-bottom-2 after:w-10 after:h-2 after:bg-[#b08d2a] after:rounded-full">
+              Feedback Form
+              </h2>
+              <ContactForm />
+            </div>
+
+            {/* Your Contact */}
+            <div className="lg:col-span-4">
+              <h4 className="font-bold text-lg text-[#222] mb-6">Your contact</h4>
+              <div className="space-y-8">
+                {staff.map((person) => (
+                  <div key={person.name} className="flex gap-4">
+                    <div className="w-[100px] h-[100px] shrink-0 overflow-hidden bg-gray-100">
+                      <img
+                        src={person.image}
+                        alt={person.name}
+                        className="w-full h-full object-cover"
+                        onError={(e) => { e.target.src = "https://placehold.co/174x174/eeeeee/999999?text=NIAC"; }}
+                      />
+                    </div>
+                    <div>
+                      <h5 className="font-bold text-sm text-[#222]">{person.name}</h5>
+                      <p className="text-[11px] font-semibold tracking-[0.05em] uppercase text-[#888] mb-2">{person.title}</p>
+                      <a href={`mailto:${person.email}`} className="text-[13px] text-primary hover:underline">
+                        {person.email}
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="absolute left-1/2 bottom-0 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-[#755b00] to-transparent opacity-50" />
+      </section>
+
+      {/* Bottom CTA */}
+      <section className="bg-[#9F8320]">
+        <div className="max-w-[1200px] mx-auto px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <p className="text-xl font-bold text-white">
+            Looking for Accessible and Credible ADR Service Provider?
+          </p>
+          <a
+            href="/contact"
+            className="inline-flex items-center gap-2 bg-[#0F1B4B] text-white px-8 py-4 text-[13px] font-semibold tracking-[0.05em] uppercase hover:brightness-110 transition-all rounded-sm"
+          >
+            Contact Us
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
       </section>
     </div>
   );
 }
 
-const leadership = [
+const staff = [
   {
     name: "Matrika Prasad Niraula",
-    title: "MANAGING DIRECTOR",
+    title: "Managing Director",
     email: "lawyers.adr@gmail.com",
     image: "https://cdn.equitylawandco.com/images/team/matrika.png",
   },
   {
     name: "Rabina Jangam",
-    title: "EXECUTIVE OFFICER",
+    title: "Executive Officer",
     email: "rabina.niac@gmail.com",
     image: "https://cdn.equitylawandco.com/images/team/rabina-e1722594475871-255x182.jpg",
   },
@@ -210,7 +185,6 @@ function ContactForm() {
     name: "",
     email: "",
     phone: "",
-    subject: "Arbitration Inquiry",
     message: "",
   });
   const [loading, setLoading] = useState(false);
@@ -236,103 +210,75 @@ function ContactForm() {
       });
       if (!response.ok) throw new Error("Failed to send message");
       setSuccess(true);
-      setFormData({ name: "", email: "", phone: "", subject: "Arbitration Inquiry", message: "" });
+      setFormData({ name: "", email: "", phone: "", message: "" });
       setTimeout(() => setSuccess(false), 5000);
     } catch (err) {
-      setError(err.message || "An error occurred. Please try again.");
+      setError(err.message || "An error occurred.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="relative">
-          <label className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#45474c] block mb-2">FULL NAME</label>
+    <form onSubmit={handleSubmit}>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="space-y-5">
           <input
             name="name"
             value={formData.name}
             onChange={handleChange}
             required
-            className="w-full bg-transparent border-0 border-b border-[#c5c6cd] focus:border-gray-900 px-0 py-2 text-sm text-gray-900 transition-all duration-300 outline-none placeholder:text-gray-400"
-            placeholder="e.g. Alexander Hamilton"
-            type="text"
+            placeholder="First name *"
+            className="w-full border border-gray-300 px-4 py-3 text-sm text-[#555] placeholder:text-[#999] focus:outline-none focus:border-primary transition-colors"
           />
-        </div>
-        <div className="relative">
-          <label className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#45474c] block mb-2">EMAIL ADDRESS</label>
           <input
             name="email"
+            type="email"
             value={formData.email}
             onChange={handleChange}
             required
-            className="w-full bg-transparent border-0 border-b border-[#c5c6cd] focus:border-gray-900 px-0 py-2 text-sm text-gray-900 transition-all duration-300 outline-none placeholder:text-gray-400"
-            placeholder="name@firm.com"
-            type="email"
+            placeholder="E-mail *"
+            className="w-full border border-gray-300 px-4 py-3 text-sm text-[#555] placeholder:text-[#999] focus:outline-none focus:border-primary transition-colors"
           />
-        </div>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="relative">
-          <label className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#45474c] block mb-2">PHONE NUMBER</label>
           <input
             name="phone"
+            type="tel"
             value={formData.phone}
             onChange={handleChange}
-            className="w-full bg-transparent border-0 border-b border-[#c5c6cd] focus:border-gray-900 px-0 py-2 text-sm text-gray-900 transition-all duration-300 outline-none placeholder:text-gray-400"
-            placeholder="+000 000 0000"
-            type="tel"
+            required
+            placeholder="Phone *"
+            className="w-full border border-gray-300 px-4 py-3 text-sm text-[#555] placeholder:text-[#999] focus:outline-none focus:border-primary transition-colors"
           />
         </div>
-        <div className="relative">
-          <label className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#45474c] block mb-2">SUBJECT</label>
-          <select
-            name="subject"
-            value={formData.subject}
+        <div className="space-y-5">
+          <textarea
+            name="message"
+            value={formData.message}
             onChange={handleChange}
-            className="w-full bg-transparent border-0 border-b border-[#c5c6cd] focus:border-gray-900 px-0 py-2 text-sm text-gray-900 transition-all duration-300 outline-none appearance-none"
+            required
+            placeholder="Your Message *"
+            rows="6"
+            className="w-full border border-gray-300 px-4 py-3 text-sm text-[#555] placeholder:text-[#999] focus:outline-none focus:border-primary transition-colors resize-none"
+          />
+          <button
+            type="submit"
+            disabled={loading}
+            className="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 text-[13px] font-semibold tracking-[0.05em] uppercase hover:bg-primary/90 transition-all disabled:opacity-60"
           >
-            <option>Arbitration Inquiry</option>
-            <option>Mediation Request</option>
-            <option>Panel Membership</option>
-            <option>General Feedback</option>
-          </select>
+            {loading ? "SENDING..." : "submit"}
+            <ChevronRight className="w-4 h-4" />
+          </button>
         </div>
-      </div>
-      <div className="relative">
-        <label className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#45474c] block mb-2">MESSAGE / BRIEF DESCRIPTION</label>
-        <textarea
-          name="message"
-          value={formData.message}
-          onChange={handleChange}
-          required
-          className="w-full bg-transparent border-0 border-b border-[#c5c6cd] focus:border-gray-900 px-0 py-2 text-sm text-gray-900 transition-all duration-300 outline-none resize-none placeholder:text-gray-400"
-          placeholder="Provide a summary of your inquiry..."
-          rows="4"
-        />
       </div>
 
       {error && (
-        <div className="bg-red-50 border border-red-300 text-red-700 px-4 py-3 text-sm">
-          {error}
-        </div>
+        <div className="mt-4 bg-red-50 border border-red-300 text-red-700 px-4 py-3 text-sm">{error}</div>
       )}
       {success && (
-        <div className="bg-green-50 border border-green-300 text-green-700 px-4 py-3 text-sm">
-          Thank you! Your message has been sent successfully. We will get back to you soon.
+        <div className="mt-4 bg-green-50 border border-green-300 text-green-700 px-4 py-3 text-sm">
+          Thank you! Your message has been sent successfully.
         </div>
       )}
-
-      <div className="pt-6">
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full md:w-auto bg-[#c9a84c] text-white px-12 py-4 text-[11px] font-semibold tracking-[0.15em] uppercase hover:bg-[#101c2e] transition-all duration-400 disabled:opacity-60"
-        >
-          {loading ? "SENDING..." : "SUBMIT INQUIRY"}
-        </button>
-      </div>
     </form>
   );
 }

@@ -1,64 +1,15 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import {
-  Gavel, Handshake, BadgeCheck, ArrowRight, CheckCircle,
-  ChevronLeft, ChevronRight, Quote
-} from "lucide-react";
-import { useTeams } from "./hooks/useAttorneys";
+import Image from "next/image";
+import { ArrowRight, ChevronRight } from "lucide-react";
 import { useServices } from "./hooks/usePracticeAreas";
+import { useBlogs } from "./hooks/useBlogs";
+import { useBulletins } from "./hooks/useBulletins";
+import { routerServerGlobal } from "next/dist/server/lib/router-utils/router-server-context";
 
-const stats = [
-  { value: "500+", label: "Cases Resolved" },
-  { value: "20+", label: "Years of Excellence" },
-  { value: "150+", label: "Qualified Panelists" },
-  { value: "12", label: "Countries Represented" },
-];
-
-const iconMap = {
-  arbitration: Gavel,
-  arbitrations: Gavel,
-  mediation: Handshake,
-  "med-arb-arb-med": BadgeCheck,
-  adjudication: BadgeCheck,
-};
-
-const linkLabels = {
-  arbitration: "EXPLORE PROCESS",
-  arbitrations: "EXPLORE PROCESS",
-  mediation: "LEARN MORE",
-  "med-arb-arb-med": "LEARN MORE",
-  adjudication: "VIEW SERVICES",
-};
-
-const advantages = [
-  {
-    title: "Strict Confidentiality",
-    description:
-      "Maintaining the privacy of your sensitive business and trade secrets throughout the process.",
-  },
-  {
-    title: "Expert Neutrality",
-    description:
-      "A panel of distinguished jurists and industry veterans from across the globe.",
-  },
-  {
-    title: "Global Standard Rules",
-    description:
-      "Aligned with UNCITRAL model laws to ensure international enforceability of awards.",
-  },
-  {
-    title: "State-of-the-Art Facilities",
-    description:
-      "Virtual and physical hearing rooms equipped with the latest forensic technology.",
-  },
-  {
-    title: "Time Efficiency",
-    description:
-      "Streamlined procedures designed to deliver results in a fraction of court time.",
-  },
-];
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
 
 function RevealObserver() {
   useEffect(() => {
@@ -72,56 +23,42 @@ function RevealObserver() {
       },
       { threshold: 0.1 }
     );
-
     const observeElements = (root) => {
-      if (root.classList?.contains("reveal")) {
-        observer.observe(root);
-      }
-      root.querySelectorAll?.(".reveal").forEach((el) => {
-        observer.observe(el);
-      });
+      if (root.classList?.contains("reveal")) observer.observe(root);
+      root.querySelectorAll?.(".reveal").forEach((el) => observer.observe(el));
     };
-
     observeElements(document.body);
-
     const mutationObserver = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         mutation.addedNodes.forEach((node) => {
-          if (node.nodeType === Node.ELEMENT_NODE) {
-            observeElements(node);
-          }
+          if (node.nodeType === Node.ELEMENT_NODE) observeElements(node);
         });
       });
     });
-
-    mutationObserver.observe(document.body, {
-      childList: true,
-      subtree: true,
-    });
-
-    return () => {
-      observer.disconnect();
-      mutationObserver.disconnect();
-    };
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
+    return () => { observer.disconnect(); mutationObserver.disconnect(); };
   }, []);
   return null;
 }
 
 function HeroSection() {
   return (
-    <section className="relative min-h-screen w-full flex flex-col justify-center overflow-hidden pt-16 sm:pt-[160px] lg:pt-[200px] pb-[80px] sm:pb-[100px] lg:pb-[120px]">
-      <div className="absolute inset-0 z-0">
+    <section className="relative min-h-screen w-full flex flex-col justify-center overflow-hidden">
+      <div className="absolute hidden md:block inset-x-0 bottom-0 z-0 top-[80px]">
         <img
-          className="w-full h-full object-cover"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWhxFkO2KtR8P6sGfPlKHNjU0PfBpR42-L8gOob5lY8y17gQwUKJakVxXh0iXbWM-jA0gnczc_ByXYC_XSYQG0eBLYW7JGh7mNYX5ux9uVBIJOp0Cy1UzCwM2SMDOxk7Ig3jPQzsv2UBQBHrghnoF5wd7ix3dPwi5o_EAyl8GfH3hO9djStm9aRmoC_0w5719Rldd5FY0ExfHT3TH_t3kixZRec7HCPN-mIpw7blmO7TtKmFQjSBFA5UB0ykf4iiD7d95VQrBpELh0"
-          alt="A cinematic boardroom overlooking Kathmandu and the Himalayas"
-        />
-        <div
-          className="absolute inset-0"
-          style={{ background: "linear-gradient(rgba(16, 28, 46, 0.55), rgba(16, 28, 46, 0.55))" }}
+          className="w-full h-full object-cover object-top"
+          src="/images/herobg.png"
+          alt="NIAC Hero"
         />
       </div>
-      <div className="relative z-10 max-w-[1600px] mx-auto px-4 sm:px-8 w-full">
+        <div className="absolute block md:hidden inset-x-0 bottom-0 z-0 top-[80px]">
+        <img
+          className="w-full h-full object-cover object-top"
+          src="/images/mobile-bg.jpeg"
+          alt="NIAC Hero"
+        />
+      </div>
+      {/* <div className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-8 w-full">
         <div className="max-w-3xl reveal active">
           <span className="inline-flex items-center gap-3 text-[10px] px-1 font-semibold tracking-[0.25em] uppercase text-tertiary-fixed mb-6">
             NIAC
@@ -135,29 +72,38 @@ function HeroSection() {
             Nepal&apos;s leading international arbitration and mediation center, fostering excellence in alternative dispute resolution.
           </p>
           <div className="flex flex-wrap gap-4">
-            <button className="bg-tertiary-container text-white px-8 py-4 text-[11px] font-semibold tracking-[0.15em] uppercase hover:bg-tertiary transition-all duration-300">
-              File a Dispute
-            </button>
-            <button className="border border-tertiary-container/70 text-tertiary-container px-8 py-4 text-[11px] font-semibold tracking-[0.15em] uppercase hover:bg-white/10 transition-all duration-300">
-              Learn More
-            </button>
+            <Link href="/contact">
+              <button className="bg-tertiary-container text-white px-8 py-4 text-[11px] font-semibold tracking-[0.15em] uppercase hover:bg-tertiary transition-all duration-300">
+                File a Dispute
+              </button>
+            </Link>
+            <Link href="/about">
+              <button className="border border-tertiary-container/70 text-tertiary-container px-8 py-4 text-[11px] font-semibold tracking-[0.15em] uppercase hover:bg-white/10 transition-all duration-300">
+                Learn More
+              </button>
+            </Link>
           </div>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 }
 
-function StatsBar() {
+function CtaSection() {
   return (
-    <section className="bg-primary-container py-8 sm:py-12 border-b border-outline">
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-8 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 text-center">
-        {stats.map((stat, i) => (
-          <div key={stat.label} className="reveal" style={{ transitionDelay: `${i * 100}ms` }}>
-            <div className="font-serif text-3xl sm:text-4xl text-tertiary-container mb-2">{stat.value}</div>
-            <div className="text-[11px] font-semibold tracking-[0.1em] uppercase text-on-primary-container">{stat.label}</div>
-          </div>
-        ))}
+    <section className="bg-[#10245f] py-10 sm:py-14">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="text-white">
+          <p className="text-md font-bold mb-2">
+            &ldquo;Accessible and Credible Arbitration and Mediation forum in the Asia-Pacific region&rdquo;
+          </p>
+          <p className="text-[#a0863d] font-serif font-semibold text-base sm:text-lg">Looking for a Credible ADR Service Provider?</p>
+        </div>
+        <Link href="/contact">
+          <button className="bg-[#9f8320] hover:bg-[#b89a2e] text-white px-8 py-4 text-[13px] font-semibold tracking-[0.1em] uppercase transition-all duration-300 flex items-center gap-2 whitespace-nowrap rounded-sm">
+            Get In Touch <ChevronRight className="w-4 h-4" />
+          </button>
+        </Link>
       </div>
     </section>
   );
@@ -166,58 +112,57 @@ function StatsBar() {
 function ServicesSection() {
   const { Services: apiServices, loading } = useServices();
 
-  const mappedServices = apiServices.map((s) => ({
+  const services = apiServices.map((s) => ({
     title: s.name,
-    description: s.description?.replace(/<[^>]*>/g, "") || "",
     slug: s.slug,
-    Icon: iconMap[s.slug] || BadgeCheck,
-    linkLabel: linkLabels[s.slug] || "LEARN MORE",
+    image: s.featured_image_url || "/images/service-placeholder.jpg",
   }));
 
   return (
-    <section className="py-12 sm:py-16 bg-white">
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-8">
-        <div className="mb-12 sm:mb-20 reveal">
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-primary ">Our Services</h2>
-          <div className="w-24 h-1 bg-tertiary-container" />
-        </div>
+    <section className="py-16 sm:py-20 bg-white">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-8">
+        <h2 className="text-center font-serif text-3xl sm:text-4xl md:text-5xl text-primary mb-12 sm:mb-16 reveal">
+          Our Services
+        </h2>
         {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="animate-pulse bg-white border border-outline-variant border-t-[3px] border-t-tertiary-container p-6 sm:p-10">
-                <div className="w-9 h-9 bg-surface rounded mb-6" />
-                <div className="h-7 bg-surface rounded w-2/3 mb-4" />
-                <div className="h-4 bg-surface rounded w-full mb-2" />
-                <div className="h-4 bg-surface rounded w-5/6 mb-8" />
-                <div className="h-4 bg-surface rounded w-1/3" />
+              <div key={i} className="animate-pulse bg-surface">
+                <div className="aspect-[255/182] bg-surface-container-high" />
+                <div className="p-5">
+                  <div className="h-5 bg-surface-container-high rounded w-2/3" />
+                </div>
               </div>
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 sm:gap-8">
-            {mappedServices.length > 0 ? mappedServices.map((service, i) => {
-              const Icon = service.Icon;
-              return (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {services.length > 0 ? services.map((service, i) => (
+              <Link
+                key={service.slug}
+                href={`/services/${service.slug}`}
+                className="group block reveal relative"
+                style={{ transitionDelay: `${i * 100}ms` }}
+              >
+                <div className="overflow-hidden">
+                  <img
+                    className="w-full aspect-[255/182] object-cover transition-transform duration-500 group-hover:scale-105"
+                    src={service.image}
+                    alt={service.title}
+                  />
                 <div
-                  key={service.slug}
-                  className="bg-white border border-outline-variant border-t-[3px] border-t-tertiary-container p-6 sm:p-10 flex flex-col h-full hover:shadow-lg transition-all reveal"
-                  style={{ transitionDelay: `${i * 100}ms` }}
-                >
-                  <Icon className="text-tertiary-container w-9 h-9 mb-6" />
-                  <h3 className="font-serif text-2xl text-primary mb-4">{service.title}</h3>
-                  <p className="service-card__desc text-sm sm:text-base leading-relaxed text-on-surface-variant mb-8 flex-grow">
-                    {service.description}
-                  </p>
-                  <Link
-                    href={`/services/${service.slug}`}
-                    className="text-[11px] font-semibold tracking-[0.1em] text-tertiary-container flex items-center gap-2 group"
-                  >
-                    {service.linkLabel}{" "}
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </Link>
+  className="absolute inset-0"
+  style={{ background: "rgba(0, 0, 0, 0.4)" }}
+/>
                 </div>
-              );
-            }) : (
+                <div className="bg-transparent px-5 py-5 absolute bottom-2 flex items-center justify-between transition-colors duration-300 ">
+                  <h5 className="font-serif font-bold text-xl text-white transition-colors duration-300">{service.title}</h5>
+                  <span className="text-white transition-colors duration-300 text-sm">
+                    <ArrowRight className="w-4 h-4" />
+                  </span>
+                </div>
+              </Link>
+            )) : (
               <p className="col-span-full text-center text-on-surface-variant text-sm py-20">
                 Our services are being updated. Please check back soon.
               </p>
@@ -229,152 +174,359 @@ function ServicesSection() {
   );
 }
 
-function WhyChooseUs() {
-  return (
-    <section className="py-[60px] sm:py-[80px] lg:py-[120px] bg-surface">
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 lg:gap-20 items-center">
-        <div className="relative reveal">
-          <img
-            className="w-full h-[300px] sm:h-[450px] lg:h-[600px] object-cover transition-all duration-700"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYJA9TjWO46zwSf6QqYd_YUz5zABL_YQ8n1egov0FjM0Om_ou7TXnoymWI0pZjzuWn7EmM658GH6bzU_5XPQwCEK64ig-qiB2RASAOSx60rC4feyU3QsWUX51QlD6dcru0mJfLinVIRfap5ufSfUkuxaHrlbujVofI2YD0QcwP_Jw_fZCIc5VhZORh2zLIRhntS_3I7esgLI6QDkNHaPm1IGqRO5TWMdEwOtOTeHSTDs_NXi9sXBtGXz0PJzv1WoVd-EmHZa8S1zVq"
-            alt="Legal professionals in discussion"
-          />
-          {/* <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-tertiary-container hidden lg:block opacity-10" /> */}
-        </div>
-        <div className="reveal">
-          <h2 className="font-serif text-4xl sm:text-5xl text-primary mb-6">
-            Unparalleled Integrity in Dispute Resolution
-          </h2>
-          <p className="text-base sm:text-lg leading-relaxed text-on-surface-variant mb-10">
-            As the region&apos;s premier hub for ADR, we offer a neutral, efficient, and cost-effective alternative to traditional litigation, supported by internationally recognized rules and a stellar roster of experts.
-          </p>
-          <ul className="space-y-6">
-            {advantages.map((item) => (
-              <li key={item.title} className="flex items-start gap-4">
-                <CheckCircle className="text-tertiary-container w-5 h-5 mt-1 shrink-0" />
-                <div>
-                  <h4 className="text-[11px] font-semibold tracking-[0.1em] uppercase text-primary mb-1">{item.title}</h4>
-                  <p className="text-sm leading-relaxed text-on-surface-variant">{item.description}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function EventBanner() {
-  return (
-    <section className="relative py-16 sm:py-20 lg:py-24 overflow-hidden reveal">
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-primary-container/95 z-10" />
-        <img
-          className="w-full h-full object-cover"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEkPJv9gGNrdOoKE0wA-aVzPIFU8Bv5Hecp_J11PG1jFvSyDd27vK3y6jxKFYjmAMRIinjPVCS-dR49KuUScOmU4Gj5f2BzFNRYuX11zwljK-d8r6FqOrHZC_2HSn4KwGY4Hf0UHpn5W8lDK_zb-Oyl8wVBDfUoQBHlEHg32DcbViab46rt7MdG45OCGgSbfyMh9fBcQi4rktU7hq9197vIO7LUwhnObz-dkp0NfuZ2IANLZ8MyAhuNuT3xlvG8YtuwO3DYR5PjNce"
-          alt="Architectural building at night"
-        />
-      </div>
-      <div className="relative z-20 max-w-[1600px] mx-auto px-4 sm:px-8 flex flex-col md:flex-row justify-between items-center gap-6 sm:gap-10">
-        <div className="text-white max-w-2xl">
-          <span className="text-[11px] font-semibold tracking-[0.1em] text-tertiary-container mb-4 block uppercase">
-            SIGNATURE EVENT 2026
-          </span>
-          <h2 className="font-serif text-4xl sm:text-5xl mb-4">Asia ADR Summit 2026</h2>
-          <p className="text-base sm:text-lg leading-relaxed opacity-80">
-            Join world-leading arbitrators, counsel, and corporate heads for three days of high-level discourse on the future of international dispute resolution in Asia.
-          </p>
-        </div>
-        <button className="bg-white text-primary-container px-10 py-5 text-[11px] font-semibold tracking-[0.1em] uppercase hover:bg-tertiary-container hover:text-white transition-all whitespace-nowrap">
-          Register Now
-        </button>
-      </div>
-    </section>
-  );
-}
-
-function TeamSection() {
-  const { teams, loading } = useTeams();
-  const displayTeams = teams.slice(0, 4);
+function BulletinSection() {
+  const { bulletins, loading } = useBulletins();
 
   return (
-    <section className="py-12 sm:py-16 bg-white">
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-10 sm:mb-16 gap-6 reveal">
-          <div>
-            <h2 className="font-serif text-4xl sm:text-5xl text-primary mb-4">Meet Our Team</h2>
-            <div className="w-24 h-1 bg-tertiary-container" />
-          </div>
-          <Link href="/team" className="text-[11px] font-semibold tracking-[0.1em] text-primary border-b border-primary pb-1 hover:text-tertiary hover:border-tertiary transition-colors uppercase">
-            VIEW ALL TEAM
-          </Link>
-        </div>
+    <section className="py-16 sm:py-20 bg-white">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-8">
+        <h2 className="text-center font-serif text-3xl sm:text-4xl md:text-5xl text-primary mb-12 sm:mb-16 reveal">
+          NIAC Bulletin
+        </h2>
         {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="animate-pulse">
-                <div className="aspect-[3/4] bg-surface mb-6" />
-                <div className="h-6 bg-surface rounded w-3/4 mb-2" />
-                <div className="h-4 bg-surface rounded w-1/2 mb-2" />
-                <div className="h-4 bg-surface rounded w-2/3" />
-              </div>
-            ))}
+          <div className="animate-pulse max-w-md mx-auto">
+            <div className="aspect-[424/600] bg-surface-container-high rounded" />
+          </div>
+        ) : bulletins.length > 0 ? (
+          <div className="flex justify-center ">
+            <img
+              className="max-w-full h-auto max-h-[600px] object-contain shadow-lg"
+              src={bulletins[0].image_url}
+              alt={bulletins[0].title}
+            />
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {displayTeams.length > 0 ? displayTeams.map((team, i) => (
-              <Link key={team.id} href={`/team/${team.slug}`} className="group animate-fade-in" style={{ animationDelay: `${i * 100}ms` }}>
-                <div className="aspect-[3/4] overflow-hidden mb-6 bg-surface">
-                  {team.photo_url? (
-                    <img
-                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105"
-                      src={team.photo_url}
-                      alt={team.full_name}
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-on-surface-variant/30 text-6xl font-serif">
-                      {team.full_name?.charAt(0) || '?'}
-                    </div>
-                  )}
-                </div>
-                <h4 className="font-serif text-xl text-primary mb-1">{team.full_name}</h4>
-                <p className="text-[11px] font-semibold tracking-[0.1em] text-secondary uppercase mb-3">{team.job_title || 'Panelist'}</p>
-                <p className="text-sm italic text-on-surface-variant line-clamp-2">{team.professional_background || team.specializations || ''}</p>
-              </Link>
-            )) : (
-              <p className="col-span-full text-center text-on-surface-variant text-sm py-20">
-                Team information is being updated. Please check back soon.
-              </p>
-            )}
-          </div>
+          <p className="text-center text-on-surface-variant text-sm py-20">No bulletins available yet.</p>
         )}
       </div>
     </section>
   );
 }
 
-function TestimonialsSection() {
+function WhyChooseUs() {
+  const features = [
+    {
+      title: "Accessibility",
+      description: "NIAC has a dynamic secretariat in Kathmandu, Nepal which is accessible to domestic as well as international clientele. In case our clients are based elsewhere and would want to avail our services, we also provide services in eight countries of the Asia Pacific region.",
+      href: "/about",
+    },
+    {
+      title: "Credibility",
+      description: "NIAC provides an international roster of neutrals who have passed a rigorous accreditation process and have been selected for being impartial and competent. So, our clients can absolutely trust and rely on us for credible service that addresses their needs.",
+      href: "/about",
+    },
+    {
+      title: "Expertise",
+      description: "NIAC boasts of a vibrant team of ADR experts with decades of working experience and a drive for resolving disputes. We have a meticulous understanding of Alternative Resolution practices and follow the due course of procedures while delivering tailor-made services.",
+      href: "/about",
+    },
+  ];
+
   return (
-    <section className="py-[60px] sm:py-[80px] lg:py-[120px] bg-surface-container-low overflow-hidden">
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-8 text-center">
-        <Quote className="text-tertiary-container w-12 h-12 mb-8 mx-auto" />
-        <div className="max-w-4xl mx-auto reveal active">
-          <p className="font-serif text-2xl sm:text-3xl leading-relaxed text-primary mb-10 italic">
-            &ldquo;The Arbitration Center provided a level of professional neutrality and efficiency that exceeded our expectations. Their panel of experts truly understands the complexities of cross-border infrastructure projects.&rdquo;
-          </p>
+    <section className="py-16 sm:py-20 bg-[#f5f5f5]">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-8">
+        <h2 className="text-center font-serif text-3xl sm:text-4xl md:text-5xl text-primary mb-12 sm:mb-16 reveal">
+          Why Choose Us
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {features.map((feature, i) => (
+            <div key={feature.title} className="reveal" style={{ transitionDelay: `${i * 100}ms` }}>
+              <div className="bg-white p-8 sm:p-10 h-full">
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="w-12 h-12 flex items-center justify-center text-2xl text-[#10246e]">
+                    <FeatureIcon index={i} />
+                  </div>
+                  <h5 className="font-serif text-xl text-[#10246e] mt-2">
+                    <Link href={feature.href} className="hover:text-[#9f8320] transition-colors">{feature.title}</Link>
+                  </h5>
+                </div>
+                <p className="text-sm leading-relaxed text-[#555] mb-6">{feature.description}</p>
+                <Link href={feature.href} className="text-[11px] font-semibold tracking-[0.1em] uppercase text-[#9f8320] hover:text-[#10246e] transition-colors flex items-center gap-2">
+                  Read more <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FeatureIcon({ index }) {
+  const icons = [
+    <svg key="access" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>,
+    <svg key="cred" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
+    <svg key="expert" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>,
+  ];
+  return icons[index] || null;
+}
+
+function LatestNews() {
+  const { blogs, loading } = useBlogs();
+  const displayBlogs = blogs.slice(0, 6);
+
+  return (
+    <section className="py-16 sm:py-20 bg-white">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-8">
+        <h2 className="text-center font-serif text-3xl sm:text-4xl md:text-5xl text-primary mb-12 sm:mb-16 reveal">
+          Latest News
+        </h2>
+        {loading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={i} className="animate-pulse">
+                <div className="aspect-[350/250] bg-surface-container-high" />
+                <div className="p-5 space-y-3">
+                  <div className="h-5 bg-surface-container-high rounded w-3/4" />
+                  <div className="h-4 bg-surface-container-high rounded w-full" />
+                  <div className="h-4 bg-surface-container-high rounded w-1/3" />
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : displayBlogs.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {displayBlogs.map((blog, i) => (
+              <Link
+                key={blog.slug || blog.id}
+                href={`/blogs/${blog.slug}`}
+                className="group block reveal"
+                style={{ transitionDelay: `${i * 80}ms` }}
+              >
+                <div className="overflow-hidden">
+                  {blog.featured_image ? (
+                    <img
+                      className="w-full aspect-[350/250] object-cover transition-transform duration-500 group-hover:scale-105"
+                      src={blog?.featured_image}
+                      alt={blog.title}
+                    />
+                  ) : (
+                    <div className="w-full aspect-[350/250] bg-[#f5f5f5] flex items-center justify-center text-[#999] text-sm">
+                      No image
+                    </div>
+                  )}
+                </div>
+                <div className="p-5 bg-white">
+                  <h5 className="font-serif text-lg text-primary mb-2 line-clamp-2 group-hover:text-[#9f8320] transition-colors">
+                    {blog.title}
+                  </h5>
+                  {blog.excerpt && (
+                    <p className="text-sm text-[#666] leading-relaxed mb-3 line-clamp-2">{blog.excerpt.replace(/<[^>]*>/g, "")}</p>
+                  )}
+                  <span className="text-xs text-[#999]">
+                    {blog.published_date ? new Date(blog.published_date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : ""}
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <p className="text-center text-on-surface-variant text-sm py-20">No news articles yet.</p>
+        )}
+      </div>
+    </section>
+  );
+}
+
+function QuoteSection() {
+  return (
+    <section className="relative py-20 sm:py-28 overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-[#10246e]/40 z-10" />
+        <img
+          className="w-full h-full object-cover"
+          src="https://niac.asia/wp-content/uploads/2015/12/placeholder.gif"
+          alt="Background"
+        />
+      </div>
+      <div className="relative z-20 max-w-[900px] mx-auto px-4 sm:px-8 text-center">
+        <h5 className="text-white text-xl sm:text-2xl leading-relaxed font-light italic mb-6">
+          &ldquo;Discourage litigation. Persuade your neighbours to compromise whenever you can. Point out to them how the nominal winner is often the real loser &ndash; in fees, and expenses, and waste of time. As a peace-maker, the lawyer has a superior opportunity of being a good man. There will still be business enough.&rdquo;
+        </h5>
+        <p className="text-[#9f8320] text-lg font-semibold">&ndash; Abraham Lincoln</p>
+      </div>
+    </section>
+  );
+}
+
+function ApcamSection() {
+  return (
+    <section className="py-16 sm:py-20 bg-white">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-8">
+        <h2 className="font-serif text-3xl sm:text-4xl text-primary mb-10 reveal">APCAM</h2>
+        <div className="flex flex-col md:flex-row gap-20 items-start reveal">
+          <div className="shrink-0">
+            <img
+              className="w-[150px] h-auto"
+              src="/images/apcam-logo.png"
+              alt="APCAM"
+              onError={(e) => { e.target.style.display = "none"; }}
+            />
+          </div>
           <div>
-            <p className="text-[11px] font-semibold tracking-[0.1em] text-primary uppercase mb-1">Chief Legal Officer</p>
-            <p className="text-sm text-secondary">Global Logistics Syndicate</p>
+            <p className="text-sm sm:text-base leading-relaxed text-[#555] mb-8">
+              APCAM (Asia Pacific Centre for Arbitration &amp; Mediation) is an international ADR center formed jointly by about ten arbitration and mediation centers from the Asia-Pacific countries, which host APCAM centers in their respective countries. APCAM caters to the requirement of international and cross-border business disputes, and help the business community to resolve their international commercial and business disputes by mediation or arbitration under a single set of Mediation and Arbitration Rules and with a uniform fee structure in all the member countries to minimize the hassle of adhering to different laws or fees of different institutions.
+            </p>
+            <Link href="/apcam">
+              <button className="border-2 border-[#ddd] text-[#555] px-8 py-3 text-[12px] font-semibold tracking-[0.1em] uppercase hover:bg-[#10246e] hover:border-[#10246e] hover:text-white transition-all duration-300 rounded-sm">
+                Learn More
+              </button>
+            </Link>
           </div>
         </div>
-        <div className="flex justify-center gap-4 mt-12">
-          <button className="w-12 h-12 rounded-full border border-outline flex items-center justify-center bg-tertiary-container hover:text-white hover:scale-105 transition-all">
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-          <button className="w-12 h-12 rounded-full border border-outline flex items-center justify-center bg-tertiary-container hover:text-white hover:scale-105 transition-all">
-            <ChevronRight className="w-5 h-5" />
-          </button>
+      </div>
+    </section>
+  );
+}
+
+function RequestCallback() {
+  const [formData, setFormData] = useState({ service: "Mediation", name: "", phone: "" });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(`${API_URL}/contact/`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: `${formData.name.toLowerCase().replace(/\s+/g, ".")}@temp.com`,
+          phone: formData.phone,
+          message: `Callback request for ${formData.service} service from ${formData.name}`,
+        }),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+        setFormData({ service: "Mediation", name: "", phone: "" });
+      }
+    } catch {}
+  };
+
+  return (
+    <section className="relative py-16 sm:py-20 overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-[#19256e]/50 z-10" />
+        <img
+          className="w-full h-full object-cover"
+          src="https://niac.asia/wp-content/uploads/2015/12/placeholder.gif"
+          alt="Background"
+        />
+      </div>
+      <div className="relative z-20 max-w-[1200px] mx-auto px-4 sm:px-8">
+        <div className="max-w-3xl">
+          <h3 className="text-white text-3xl sm:text-3xl font-bold font-serif mb-4 reveal">REQUEST A CALL BACK</h3>
+          <p className="text-white/80 text-base mb-8 reveal">
+            Send us an email and we&apos;ll get in touch shortly, or phone between 8:00 and 18:00 Monday to Friday &mdash; we would be delighted to speak.
+          </p>
+          {submitted ? (
+            <div className="bg-white/10 text-white p-6 rounded-sm reveal">
+              <p className="text-lg font-medium">Thank you! We&apos;ll call you back soon.</p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="reveal">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <select
+                  value={formData.service}
+                  onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                  className="bg-white/10 border border-white/20 text-white px-4 py-4 text-sm appearance-none focus:outline-none focus:border-[#9f8320] transition-colors rounded-sm"
+                >
+                  <option value="Mediation" className="text-[#333]">Mediation</option>
+                  <option value="Arbitration" className="text-[#333]">Arbitration</option>
+                  <option value="Adjudication" className="text-[#333]">Adjudication</option>
+                  <option value="Med-Arb/ Arb-Med" className="text-[#333]">Med-Arb/ Arb-Med</option>
+                </select>
+                <input
+                  type="text"
+                  placeholder="First name"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  required
+                  className="bg-white/10 border border-white/20 text-white px-4 py-4 text-sm placeholder:text-white/50 focus:outline-none focus:border-[#9f8320] transition-colors rounded-sm"
+                />
+                <input
+                  type="tel"
+                  placeholder="Phone number"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  required
+                  className="bg-white/10 border border-white/20 text-white px-4 py-4 text-sm placeholder:text-white/50 focus:outline-none focus:border-[#9f8320] transition-colors rounded-sm"
+                />
+                <button
+                  type="submit"
+                  className="bg-[#9f8320] hover:bg-[#b89a2e] text-white px-8 py-4 text-[13px] font-semibold tracking-[0.1em] uppercase transition-all duration-300 flex items-center justify-center gap-2 rounded-sm"
+                >
+                  Submit <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
+            </form>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ImageSlider() {
+  const slides = [
+    { id: 1, src: "/images/niac-slider-1.png" },
+    { id: 2, src: "/images/niac-slider-2.png" },
+    { id: 3, src: "/images/niac-slider-3.png" },
+    { id: 4, src: "/images/niac-slider-4.png" },
+    { id: 5, src: "/images/niac-slider-5.png" },
+  ];
+
+  const [current, setCurrent] = useState(0);
+  const len = slides.length;
+
+  const next = () => setCurrent((c) => (c + 1) % len);
+  const prev = () => setCurrent((c) => (c - 1 + len) % len);
+
+  useEffect(() => {
+    const timer = setInterval(next, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <section className="relative w-full overflow-hidden bg-white">
+      <div className="relative w-full" style={{ height: "clamp(300px, 50vw, 700px)" }}>
+        {slides.map((slide, i) => (
+          <div
+            key={slide.id}
+            className="absolute inset-0 transition-opacity duration-700"
+            style={{ opacity: i === current ? 1 : 0 }}
+          >
+            <img
+              className="w-full h-full object-cover"
+              src={slide.src}
+              alt={`Slide ${slide.id}`}
+            />
+          </div>
+        ))}
+        <button
+          onClick={prev}
+          className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-black/40 text-white hover:bg-black/60 transition-colors z-10"
+          aria-label="Previous slide"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button
+          onClick={next}
+          className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-black/40 text-white hover:bg-black/60 transition-colors z-10"
+          aria-label="Next slide"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrent(i)}
+              className={`w-3 h-3 rounded-full transition-colors ${i === current ? "bg-white" : "bg-white/40"}`}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))}
         </div>
       </div>
     </section>
@@ -386,12 +538,15 @@ export default function Home() {
     <>
       <RevealObserver />
       <HeroSection />
-      <StatsBar />
+      <CtaSection />
       <ServicesSection />
+      <BulletinSection />
       <WhyChooseUs />
-      <EventBanner />
-      <TeamSection />
-      <TestimonialsSection />
+      <LatestNews />
+      <QuoteSection />
+      <ApcamSection />
+      <RequestCallback />
+      <ImageSlider />
     </>
   );
 }

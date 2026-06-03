@@ -104,7 +104,7 @@ export default async function BlogDetailPage({ params }) {
       />
 
       {/* Breadcrumb */}
-      <div className="max-w-[1600px] mx-auto px-8 pt-8">
+      <div className="max-w-[1200px] mx-auto px-8 pt-8">
         <nav className="flex items-center gap-2 text-[11px] font-semibold tracking-[0.1em] uppercase text-on-surface-variant">
           <Link href="/" className="hover:text-tertiary transition-colors">Home</Link>
           <ChevronRight className="w-3.5 h-3.5" />
@@ -114,7 +114,7 @@ export default async function BlogDetailPage({ params }) {
         </nav>
       </div>
 
-      <div className="max-w-[1600px] mx-auto px-8 py-8">
+      <div className="max-w-[1200px] mx-auto px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Main content */}
           <div className="lg:col-span-8">

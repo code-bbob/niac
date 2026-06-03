@@ -210,18 +210,18 @@ export default function FeeCalculatorPage() {
   return (
     <>
       {/* Hero Banner */}
-      <section className="relative overflow-hidden pt-[120px] pb-[100px] px-8 bg-primary-container">
+      <section className="relative overflow-hidden pt-[120px] pb-[100px] px-8 bg-[#9F8320]">
         <div className="absolute inset-0 bg-gradient-to-b from-white/[0.03] to-transparent" />
-        <div className="max-w-[1600px] mx-auto px-10 pt-10 relative z-10">
+        <div className="max-w-[1200px] mx-auto px-10 pt-10 relative z-10">
           <div className="animate-fade-in">
-            <span className="inline-flex items-center gap-3 text-[10px] font-semibold tracking-[0.25em] uppercase text-tertiary-fixed mb-4">
+            <span className="inline-flex items-center gap-3 text-[10px] font-semibold tracking-[0.25em] uppercase text-white mb-4">
               Fee Calculator
               <span className="h-px w-8 bg-tertiary-fixed/50" />
             </span>
             <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl leading-[1.08] tracking-tight font-bold text-white mb-6 max-w-7xl">
               Fee Calculator
             </h1>
-            <p className="text-base sm:text-lg lg:text-xl leading-relaxed text-on-primary-container max-w-2xl opacity-90">
+            <p className="text-base sm:text-lg lg:text-xl leading-relaxed text-white max-w-2xl opacity-90">
               A transparent tool for estimating administrative and arbitrator fees.
               Calculate your total investment in professional dispute resolution
               based on institutional regulations.
@@ -232,7 +232,7 @@ export default function FeeCalculatorPage() {
       </section>
 
       {/* Calculator */}
-      <section className="max-w-[1600px] mx-auto px-8 pb-[120px]">
+      <section className="max-w-[1200px] mx-auto px-8 py-[120px]">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left: Inputs */}
           <div className="lg:col-span-7 bg-white border border-outline-variant border-t-[3px] border-t-tertiary-container p-10 animate-fade-in-up animate-delay-100">
@@ -253,7 +253,7 @@ export default function FeeCalculatorPage() {
                         onChange={() => setContractType(ct.value)}
                         className="hidden peer"
                       />
-                      <div className="px-6 py-3 border border-outline-variant peer-checked:bg-primary-container peer-checked:text-on-primary-container peer-checked:border-primary-container transition-all group-hover:border-primary">
+                      <div className="px-6 py-3 border border-outline-variant peer-checked:bg-[#0F1B4B] peer-checked:text-white peer-checked:border-primary-container transition-all group-hover:border-primary">
                         <span className="text-[11px] font-semibold tracking-[0.1em] uppercase">
                           {ct.label}
                         </span>
@@ -305,7 +305,7 @@ export default function FeeCalculatorPage() {
                         onChange={() => setArbitrators(opt.value)}
                         className="hidden peer"
                       />
-                      <div className="w-full py-4 text-center border border-outline-variant peer-checked:bg-primary peer-checked:text-on-primary transition-all">
+                      <div className="w-full py-4 text-center border border-outline-variant peer-checked:bg-[#0F1B4B] peer-checked:text-on-primary transition-all">
                         <span className="text-[11px] font-semibold tracking-[0.1em] uppercase">
                           {opt.label}
                         </span>
@@ -335,7 +335,7 @@ export default function FeeCalculatorPage() {
 
           {/* Right: Results */}
           <div className="lg:col-span-5 space-y-8">
-            <div className="bg-primary-container text-white p-10 border-t-[3px] border-t-tertiary animate-fade-in-up animate-delay-200">
+            <div className="bg-blue-900 text-white p-10 border-t-[3px] border-t-tertiary animate-fade-in-up animate-delay-200">
               <h3 className="text-[11px] font-semibold tracking-[0.1em] uppercase mb-8 opacity-70">
                 Total Estimate
               </h3>
@@ -415,7 +415,7 @@ export default function FeeCalculatorPage() {
       </section>
 
       {/* Rules & Regulations */}
-      <section className="max-w-[1600px] mx-auto px-8 pb-[120px] border-t border-outline-variant pt-[80px]">
+      <section className="max-w-[1200px] mx-auto px-8 pb-[120px] border-t border-outline-variant pt-[80px]">
         <div className="grid md:grid-cols-2 gap-12 items-center animate-fade-in-up animate-delay-300">
           <div>
             <h3 className="font-serif text-3xl sm:text-4xl text-primary mb-6">

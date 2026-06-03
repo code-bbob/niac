@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Service, ServiceImage, ContactMessage, Appointment, AppointmentDay, AvailableHours, Team
+from .models import Service, ServiceImage, ContactMessage, Appointment, AppointmentDay, AvailableHours, Team, Bulletin
 
 
 class ServiceImageSerializer(serializers.ModelSerializer):
@@ -89,4 +89,21 @@ class TeamSerializer(serializers.ModelSerializer):
             if request:
                 return request.build_absolute_uri(obj.photo.url)
             return obj.photo.url
+        return None
+
+
+class BulletinSerializer(serializers.ModelSerializer):
+    image_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Bulletin
+        fields = ['id', 'title', 'image', 'image_url', 'description', 'is_active', 'created_at', 'updated_at']
+        read_only_fields = ['id', 'created_at', 'updated_at']
+
+    def get_image_url(self, obj):
+        if obj.image:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.image.url)
+            return obj.image.url
         return None

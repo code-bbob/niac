@@ -75,21 +75,9 @@ export default function ApcamPage() {
       <RevealObserver />
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-primary-container pt-[200px] pb-[120px]">
-        <div className="absolute inset-0 z-0">
-          <div
-            className="w-full h-full bg-cover bg-center"
-            style={{
-              backgroundImage:
-                "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCkhaHZh4zXeTLzrXvrkuN-R1ThgwMOwIs3K4JeA-f5Bgecemn1_zh4pwYETiJsK3fTcXiwEbgbPg1E0QXRrfjXZzueu9fbtc8_NVxqMbdt5BBSaZ_pY4xj-mCA2_eZHLI2L1lTOWSOLEQnksSAWPT_cD1JxhH4_ChrSPomNrewPTLfLovb3wU1PVKq3KfMBIhOk8Ker6qOAKW9e0ku1bUxh_zbKjg3RxNGCVf7dqeiQM_zhY5730AVPK90zRIjfGxdtIT8oKjkfPN8')",
-            }}
-          />
-          <div
-            className="absolute inset-0"
-            style={{ background: "linear-gradient(rgba(16, 28, 46, 0.85), rgba(16, 28, 46, 0.95))" }}
-          />
-        </div>
-        <div className="relative z-10 max-w-[1600px] mx-auto px-8 w-full">
+      <section className="relative bg-[#9F8320] overflow-hidden pt-[150px] pb-[50px]">
+   
+        <div className="relative z-10 max-w-[1200px] mx-auto px-8 w-full">
           <nav className="flex items-center gap-2 mb-4 text-white/60 text-[11px] font-semibold tracking-[0.1em] uppercase">
             <span className="text-white">Home</span>
             <ChevronRight className="w-3.5 h-3.5 text-white" />
@@ -105,7 +93,7 @@ export default function ApcamPage() {
       </section>
 
       {/* About APCAM */}
-      <section className="max-w-[1600px] mx-auto px-8 py-[120px]">
+      <section className="max-w-[1200px] mx-auto px-8 py-[50px]">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
           <div className="md:col-span-4 fade-up opacity-0 translate-y-10 transition-all duration-700">
             <a href="https://www.arbitrationindia.com/" target="_blank" rel="noopener noreferrer">
@@ -135,7 +123,7 @@ export default function ApcamPage() {
 
       {/* Constituent Members */}
       <section className="bg-surface-container-low py-[120px]">
-        <div className="max-w-[1600px] mx-auto px-8">
+        <div className="max-w-[1200px] mx-auto px-8">
           <div className="flex flex-col items-center mb-16">
             <h2 className="font-serif text-[32px] leading-[1.3] font-medium text-primary-container mb-4">Constituent Members</h2>
             <div className="w-16 h-1 bg-tertiary-container" />
@@ -173,8 +161,8 @@ export default function ApcamPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-primary-container py-[120px] text-white text-center">
-        <div className="max-w-[1600px] mx-auto px-8">
+      {/* <section className="bg-primary-container py-[120px] text-white text-center">
+        <div className="max-w-[1200px] mx-auto px-8">
           <div className="max-w-2xl mx-auto fade-up opacity-0 translate-y-10 transition-all duration-700">
             <h2 className="font-serif text-4xl sm:text-5xl mb-4">Transnational Collaboration</h2>
             <p className="text-white text-base sm:text-lg leading-relaxed mb-8">
@@ -188,7 +176,7 @@ export default function ApcamPage() {
             </a>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

@@ -33,18 +33,7 @@ export default async function InternationalPanelistPage() {
   return (
     <main className="bg-white min-h-screen">
       {/* Hero */}
-      <section className="relative overflow-hidden flex items-center justify-center pt-[200px] pb-[120px]">
-        <div className="absolute inset-0 z-0">
-          <img
-            className="w-full h-full object-cover brightness-50"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC__ARamoasU8vudNnniF55FAu2RLVGMqLQCUDe4jA6rrEGgzcKngsu5STJOME5Zwb-45IjN4VFk9ZVS4nc0NUVjA3sli3TlVYQnP2y2dKwI0S8hsiFmNq3EA_0YEnbuNwRi-TysXryDANgKzQVrbrby9Z0AMGj6ZksI_ix6P9xjyw0Re7-7eF3ZCnvg29_kYqK8tG1bhmRrrNNd3DW5xWVSnhbXE6kvo6whxlMfP4JWMvT5u5oVBYSTu5p8KR00kny2z-zVgWW7WZz"
-            alt="NIAC international panelists hero"
-          />
-          <div
-            className="absolute inset-0"
-            style={{ background: 'linear-gradient(rgba(16, 28, 46, 0.85), rgba(16, 28, 46, 0.95))' }}
-          />
-        </div>
+      <section className="relative bg-[#9F8320] overflow-hidden flex items-center justify-center pt-[150px] pb-[50px]">
         <div className="relative z-10 text-center px-8 max-w-4xl">
           <h1 className="font-serif text-5xl leading-[1.2] font-semibold text-white mb-2 drop-shadow-sm">
             International Panelist
@@ -56,7 +45,7 @@ export default async function InternationalPanelistPage() {
       </section>
 
       {/* Table */}
-      <section className="max-w-[1600px] mx-auto px-8 py-[120px]">
+      <section className="max-w-[1200px] mx-auto px-8 py-[120px]">
         <div className="mb-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-outline-variant pb-4">
             <h2 className="font-serif text-[32px] leading-[1.3] font-medium text-primary-container">
@@ -72,7 +61,7 @@ export default async function InternationalPanelistPage() {
 
       {/* CTA */}
       <section className="max-w-[1280px] mx-auto px-8 pb-[120px]">
-        <div className="bg-primary-container text-white px-10 py-12 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+        <div className="bg-[#9F8320] text-white px-10 py-12 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
           <div>
             <h2 className="font-serif text-[28px] mb-2">Global Dispute Resolution</h2>
             <p className="text-sm text-white/70 max-w-xl">

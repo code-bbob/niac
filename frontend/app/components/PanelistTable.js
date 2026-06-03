@@ -19,7 +19,6 @@ export default function PanelistTable({ panelists }) {
           <tr className="bg-primary-container">
             <th className="text-left px-6 py-4 text-xs font-semibold tracking-[0.15em] uppercase text-white">Name</th>
             <th className="text-left px-6 py-4 text-xs font-semibold tracking-[0.15em] uppercase text-white">Professional Background</th>
-            <th className="text-left px-6 py-4 text-xs font-semibold tracking-[0.15em] uppercase text-white">Email</th>
             <th className="text-left px-6 py-4 text-xs font-semibold tracking-[0.15em] uppercase text-white">Mobile</th>
             <th className="text-left px-6 py-4 text-xs font-semibold tracking-[0.15em] uppercase text-white">CV</th>
           </tr>
@@ -43,18 +42,7 @@ export default function PanelistTable({ panelists }) {
               <td className="px-6 py-4 text-sm text-on-surface-variant">
                 {p.professional_background || p.job_title || '-'}
               </td>
-              <td className="px-6 py-4">
-                {p.email ? (
-                  <a
-                    href={`mailto:${p.email}`}
-                    className="text-sm text-tertiary hover:text-tertiary-container transition-colors"
-                  >
-                    {p.email}
-                  </a>
-                ) : (
-                  <span className="text-sm text-on-surface-variant/50">-</span>
-                )}
-              </td>
+              
               <td className="px-6 py-4 text-sm text-on-surface-variant">{p.phone || '-'}</td>
               <td className="px-6 py-4">
                 <a

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Service, ServiceImage, ContactMessage, Appointment, AppointmentDay, AvailableHours, Team, Blog
+from .models import Service, ServiceImage, ContactMessage, Appointment, AppointmentDay, AvailableHours, Team, Blog, Bulletin
 
 
 admin.site.site_header = "NIAC Admin"
@@ -144,3 +144,19 @@ class BlogAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Blog, BlogAdmin)
+
+
+class BulletinAdmin(admin.ModelAdmin):
+    list_display = ['title', 'image_preview', 'is_active', 'created_at']
+    list_filter = ['is_active', 'created_at']
+    search_fields = ['title', 'description']
+    fields = ['title', 'image', 'description', 'is_active']
+
+    def image_preview(self, obj):
+        if obj.image:
+            return '✓ Image uploaded'
+        return '✗ No image'
+    image_preview.short_description = 'Image'
+
+
+admin.site.register(Bulletin, BulletinAdmin)
