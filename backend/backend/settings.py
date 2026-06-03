@@ -554,3 +554,4 @@ CSRF_TRUSTED_ORIGINS = [
     "https://niac.org.np",
 ]
 
+
