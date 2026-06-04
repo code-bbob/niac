@@ -13,7 +13,6 @@ html {
   --primary: #2d3748;
   --secondary: #c9a961;
   --accent: #d4a574;
-  --gold: #b8935f;
   --dark: #1f1f1f;
 }
 
@@ -22,7 +21,7 @@ html {
   --color-foreground: var(--foreground);
   --color-navy: #0a1628;
   --color-navy-light: #13203a;
-  --color-gold: #c9a961;
+  --color-[#9F8320]: #c9a961;
   --color-cream: #f5f0eb;
   --font-sans: var(--font-inter);
   --font-serif: var(--font-playfair);

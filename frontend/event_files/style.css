@@ -1,0 +1,1269 @@
+/*
+ Theme Name:   Course Builder Child
+ Theme URI:    http://wordpresslms.thimpress.com
+ Description:  Course Builder Child Theme
+ Author:       ThimPress
+ Author URI:   http://thimpress.com
+ Template:     course-builder
+ Version:      1.0.0
+ Text Domain:  course-builder-child
+*/
+
+.page-title .main-top .content .text-title {
+    overflow: hidden;
+}
+.thim-login .title {
+    display: none;
+}
+.thim-login .subtitle {
+    font-size: 25px !important;
+    font-weight: 600 !important;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#pmpro_account .pmpro_box {
+    border-top: 0;
+    margin: 0;
+    padding: 0;
+}
+
+#pmpro_account .pmpro_box h3 {
+    font-family: "Roboto";
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+#pmpro_account th,
+td {
+    padding: 10px !important;
+}
+
+#pmpro_account .pmpro_box ul {
+    margin-left: 0px;
+}
+
+#pmpro_account .pmpro_box ul li {
+    list-style: none;
+    line-height: 25px;
+}
+
+#pmpro_account-profile {
+    padding: 15px !important;
+    background: #fdfdfd;
+    margin: 30px 0px !important;
+    border: 1px solid #fffafa;
+}
+
+#pmpro_account-profile p {
+    display: none;
+}
+
+#pmpro_account thead {
+    background: #89191b;
+    color: #fff;
+    opacity: 1;
+    font-weight: 500;
+}
+
+.pmpro_actionlinks {
+    margin-top: 10px;
+}
+
+.pmpro-levels .interval {
+    display: none;
+}
+
+.pmpro-levels #shaon-pricing-table-plus .minimal .highlight .detail:after {
+    display: none;
+}
+
+.pmpro-checkout .lp-pmpro-membership-list {
+    display: none;
+}
+
+.pmpro-checkout table thead {
+    background: #89191b !important;
+    color: #fff;
+}
+
+table {
+    border: 1px solid #999;
+    background: #fafafa;
+}
+
+.pmpro-checkout form.pmpro_form label {
+    padding-left: 10px;
+}
+
+span.pmprorh_asterisk,
+span.pmpro_asterisk {
+    padding: 0px !important;
+    line-height: inherit !important;
+    position: absolute;
+    left: 0px;
+    top: 0;
+    color: red;
+}
+
+.checkout #pmpro_billing_address_fields span.pmpro_asterisk {
+    left: 10px;
+}
+#pmpro_form table td {
+    display: flex;
+    flex-wrap: wrap; padding-bottom: 25px !important;
+}
+#pmpro_form table td div {
+    position: relative;
+    margin-top: 15px;
+    width: 50%;
+    padding: 0px 10px;
+}
+
+form.pmpro_form .input,
+form.pmpro_form textarea,
+form.pmpro_form select,
+#loginform input[type="text"],
+#loginform input[type="password"] {
+    max-width: 100% !important;
+}
+
+#pmpro_form .pmpro_checkout h3 {
+    font-size: 22px;
+    text-transform: capitalize;
+    font-weight: 500;
+    margin: 0px;
+}
+
+#pmpro_checkout_box-personal_particulars {
+    border: 1px solid #f1e1e1;
+    background: #fafafa;
+    margin: 2em 0;
+    padding: 1rem;
+    box-shadow: 0px 0px 20px #f5f3f3;
+}
+
+#pmpro_checkout_box-professional_profile {
+    border: 1px solid #f1e1e1;
+    background: #fafafa;
+    margin: 2em 0;
+    padding: 1rem;
+    box-shadow: 0px 0px 20px #f5f3f3;
+}
+
+#pmpro_checkout_box-qualifications_profile {
+    border: 1px solid #f1e1e1;
+    background: #fafafa;
+    margin: 2em 0;
+    padding: 1rem;
+    box-shadow: 0px 0px 20px #f5f3f3;
+}
+
+#pmpro_checkout_box-works_profile {
+    border: 1px solid #f1e1e1;
+    background: #fafafa;
+    margin: 2em 0;
+    padding: 1rem;
+    box-shadow: 0px 0px 20px #f5f3f3;
+}
+
+#pmpro_checkout_box-experiences_profile {
+    border: 1px solid #f1e1e1;
+    background: #fafafa;
+    margin: 2em 0;
+    padding: 1rem;
+    box-shadow: 0px 0px 20px #f5f3f3;
+}
+
+.pmpro_checkout {
+    border: 1px solid #f1e1e1;
+    background: #fafafa;
+    margin: 2em 0;
+    padding: 1rem;
+    box-shadow: 0px 0px 20px #f5f3f3;
+}
+
+#pmpro_checkout_box-experiences_profile div {
+    width: 100%;
+}
+
+#pmpro_checkout_box-services_particulars div {
+    width: 100%;
+}
+
+#pmpro_checkout_box-experiences_profile div textarea {
+    height: 8em;
+}
+#pmpro_checkout_box-services_particulars div textarea {
+    height: 8em;
+}
+
+#professional_details_div {
+    width: 100%;
+}
+
+#pmpro_checkout_box-statement_particulars div {
+    width: 100%;
+}
+
+#pmpro_checkout_box-statement_particulars textarea {
+    height: 8em;
+}
+
+#professional_details_div textarea {
+    height: 8em;
+}
+
+#remarks_div {
+    width: 100%;
+}
+#remarks_div textarea {
+    height: 8em;
+}
+
+.pmpro-checkout form.pmpro_form .select2-container,
+.pmpro-checkout form.pmpro_form input,
+.pmpro-checkout form.pmpro_form textarea,
+.pmpro-checkout form.pmpro_form select {
+    margin-bottom: 0px !important;
+}
+
+form.pmpro_form input[readonly],
+form.pmpro_form select[readonly],
+form.pmpro_form textarea[readonly] {
+    opacity: 1 !important;
+}
+
+#date_of_birth_div {
+    position: relative;
+}
+
+#cal_field {
+    position: relative;
+}
+
+.ui-datepicker-trigger {
+    position: absolute;
+    right: 20px;
+    top: 42px;
+    background: #fff;
+    border: 0px;
+    outline: 0;
+}
+
+button:focus {
+    outline: none !important;
+}
+
+.pmpro-checkout form.pmpro_form label {
+    color: #000;
+    font-size: 14px;
+    font-family: 'Roboto';
+    font-weight: 500 !important;
+}
+
+.pmpro_checkout-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.pmpro_checkout-field {
+    position: relative;
+    width: 50%;
+    padding-right: 10px;
+}
+
+.pmpro_change_password-field {
+    position: relative;
+}
+
+.pmpro_checkout input[type="checkbox"] {
+    height: 18px !important;
+    line-height: 18px !important;
+    min-height: 18px !important;
+}
+
+input[type="file"] {
+    border: 0px !important;
+    padding: 0px !important;
+    margin-top: 15px !important;
+}
+
+#documents_div {
+    width: 100%;
+}
+
+.pmpro_checkout hr {
+    display: none;
+}
+
+form h3 {
+    font-size: 22px;
+    text-transform: capitalize;
+    font-weight: 500;
+    margin: 0px;
+}
+
+div[class^="pmpro_checkout_box"] {
+    border: 1px solid #f1e1e1;
+    background: #fafafa;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    box-shadow: 0px 0px 20px #f5f3f3;
+}
+
+.pmpro_member_profile_edit-fields {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+input {
+    border: 1px solid #e7e7e7;
+    width: 100%;
+    margin: 0;
+    margin-bottom: 20px;
+    padding: 0 20px;
+    height: 50px;
+    line-height: 50px;
+}
+
+label {
+    font-weight: 400 !important;
+    margin-bottom: 10px !important;
+    color: #000;
+}
+
+select {
+    border: 1px solid #e7e7e7;
+    width: 100%;
+    margin: 0;
+    margin-bottom: 20px;
+    padding: 0 20px;
+    height: 50px;
+    line-height: 50px;
+}
+
+textarea {
+    border: 1px solid #e7e7e7;
+    width: 100%;
+    margin: 0;
+    margin-bottom: 20px;
+    padding: 0 20px;
+    height: 150px;
+    line-height: 30px;
+}
+
+.pmpro_member_profile_edit_wrap .pmpro_checkout_box-user {
+    display: none !important;
+}
+
+.pmpro_checkout_box-experiences_profile .pmpro_checkout-field,
+.pmpro_checkout_box-services_particulars .pmpro_checkout-field,
+.pmpro_checkout_box-statement_particulars .pmpro_checkout-field {
+    width: 100%;
+}
+.pmprorh_grouped_checkboxes {
+    margin-bottom: 0 !important;
+}
+.pmprorh_grouped_checkboxes ul {
+    margin: 15px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+.pmprorh_grouped_checkboxes ul li {
+    margin: 5px 0;
+    width: 50%;
+    padding-right: 10px;
+}
+.pmprorh_grouped_checkboxes ul li label {
+    margin-bottom: 3px !important;
+}
+
+.pmpro_submit {
+    display: flex;
+}
+
+.pmpro_checkout label,
+.pmpro_change_password-field label {
+    margin-left: 10px !important;
+}
+
+.elementor-element-692f5e81 h2 {
+    display: none;
+}
+
+.pmpro_member_directory {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.pmpro_member_directory .pmpro_member_directory-item {
+    border: 1px solid #fbefef;
+    box-shadow: 0px 5px 15px #fbf6f6;
+    margin: 1%;
+    text-align: center;
+    /* flex: 1 1 0;*/
+    background: #f9f7f7;
+    padding: 1em;
+    display: block;
+    color: #333;
+    width: 31%;
+}
+
+.pmpro_member_directory_avatar img {
+    border-radius: 50%;
+    border: 0.5em solid #fff;
+}
+div.pmpro_member_directory div h3 {
+    clear: none;
+    font-size: 14px;
+    margin-top: 20px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.pmpro_member_directory_practioner_role strong {
+    display: none;
+}
+
+.pmpro_member_directory_link {
+    display: none;
+}
+
+form.pmpro_member_directory_search input[type="submit"] {
+    position: relative;
+    text-indent: inherit;
+}
+
+form.pmpro_member_directory_search {
+    float: left;
+    margin-bottom: 1rem;
+    clear: both;
+    width: 100%;
+    background: #fdfdfd;
+    padding: 0px 20px;
+    box-shadow: 0px 0px 10px #fff7f7;
+}
+
+form.pmpro_member_directory_search .pmpro_sfields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+form.pmpro_member_directory_search .pmpro_sfields .pmpro-field {
+    width: 50%;
+    padding: 10px;
+}
+
+form.pmpro_member_directory_search .pmpro_sfields .pmpro-field.full-width {
+    width: 100%;
+    padding: 10px;
+}
+
+form.pmpro_member_directory_search .pmpro_sfields .pmpro-field label {
+    margin-bottom: 0px !important;
+    display: block;
+}
+
+.gchkboxes {
+    margin: 0px;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.gchkboxes li {
+    width: 50%;
+}
+
+.cchkbox {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.cchkbox label {
+    margin-left: 10px !important;
+}
+
+form.pmpro_member_directory_search input[type="submit"] {
+    background: #89191b;
+    border: none;
+    padding: 0;
+    position: relative;
+    text-indent: inherit;
+    max-width: 300px;
+    font-size: 15px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+h3#pmpro_member_directory_subheading {
+    clear: both;
+    font-size: 20px;
+    margin: 20px 0px;
+    display: block;
+    float: left;
+    text-align: center;
+    width: 100%;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.pmpro-declarations {
+    position: relative;
+}
+
+.pmprorh_checkbox_span span.pmpro_asterisk {
+    position: relative;
+}
+
+#profile_biography_div {
+    width: 100%;
+}
+#pmpro_cancel h2 {
+    display: none;
+}
+.elementor-34258 .elementor-element.elementor-element-1ccc720d .elementor-nav-menu--main .elementor-item.elementor-item-active {
+    color: #fff !important;
+    background: #9b1b4b;
+}
+
+.search-form {
+    line-height: 32px !important;
+}
+
+.pmpro_member_profile {
+    padding: 20px;
+    background: #89191b url(/wp-content/uploads/2022/07/pattern-1.png) repeat-x left bottom / 30px auto;
+}
+
+.pmpro_member_directory_name {
+    font-size: 1.3em;
+    color: #fff;
+    text-transform: capitalize;
+}
+
+.pmpro_member_directory_email {
+    color: #fff;
+    display: flex;
+}
+
+.pmpro_member_directory_email strong {
+    margin-right: 10px;
+}
+
+.pmpro_member_directory_email a {
+    color: #fff;
+}
+
+.member-details {
+    display: flex;
+    width: 100%;
+    margin-top: 80px;
+    background: #fffcfc;
+    border: 1px solid #fff9f9;
+}
+
+.pmpro_member_directory_email a:hover {
+    color: #fff;
+}
+
+.mem_bio {
+    padding: 20px;
+    width: 60%;
+}
+.mem_bio p {
+    color: #000;
+}
+
+.mem_sum_sep {
+    padding: 20px;
+    width: 40%;
+    background: #fff;
+}
+.mem_sum_sep p {
+    color: #000;
+    margin-bottom: 8px;
+}
+
+.mem_sum_sep h4 {
+    font-size: 1.3em;
+    border-bottom: 4px double #000;
+    margin-bottom: 15px;
+}
+
+.specialisation {
+    margin-top: 30px;
+}
+
+.specialisation ul {
+    margin: 0px;
+}
+
+.specialisation ul li {
+    list-style: none;
+    color: #000;
+    line-height: 25px;
+}
+
+.pmpro_actions_nav {
+    display: none;
+}
+
+.practitioner-role {
+    margin-bottom: 0.5em;
+    font-style: italic;
+    color: #fff;
+}
+.header .practitioner-role > span:after {
+    content: ",";
+}
+.header .practitioner-role > span:last-child:after {
+    display: none;
+}
+
+.select2-container--default .select2-selection--multiple {
+    border: 1px solid #e7e7e7 !important;
+    border-radius: 0px !important;
+}
+
+.select2-selection input {
+    margin: 0;
+    margin-bottom: 0;
+
+    height: auto;
+    line-height: initial;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #9b1b4b;
+    border: 1px solid #9b1b4b;
+
+    color: #fff;
+    padding-left: 5px !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    color: #fff;
+}
+
+.pmpro_billing_wrap ul {
+    margin-left: 0px;
+}
+
+.pmpro_billing_wrap ul li {
+    list-style: none;
+}
+
+.pmpro_member_directory_message {
+    text-align: center;
+    float: left;
+    width: 100%;
+}
+
+#pmpro_level_cost {
+    margin-top: 0px !important;
+    width: 100% !important;
+    padding: 0px !important;
+}
+
+form.pmpro_form input[type="checkbox"] {
+    box-shadow: none !important;
+    height: 16px !important;
+    margin-top: -1px !important;
+    display: inline-block;
+    min-height: 16px !important;
+}
+
+.page-id-34564 .elementor-col-33 {
+    display: none;
+}
+.page-id-34564 .elementor-col-66 {
+    width: 100%;
+}
+
+#pmpro_checkout_box-other_information .pmpro_checkout-field {width: 100%;}
+
+#courses_by_aiadr_div li {padding-left:0px !important;}
+
+.pmpro_checkout-field-radio-item {display: flex !important;
+    align-items: flex-start;}
+
+
+.pmpro_form input[type="radio"] {
+    margin: 2px 0px 0 0 !important;
+    min-height: 16px !important;
+}
+
+.pmpro_checkout-field-checkbox > label:not(.pmprorh_checkbox_label) {
+    display: block !important;
+}
+
+#writing_exams_div .pmprorh_grouped_checkboxes ul li {
+	width: 100%;}
+
+#writing_exams_div .pmprorh_grouped_checkboxes ul li span { display:flex; align-items: flex-start;}
+
+#qulfc_remarks_div { width:100%;}
+
+.lp-profile-right .lp-profile-username { display:none;}
+#profile-sidebar { margin-top:270px !important;}
+/*.lp-profile-left  {display:none;}
+*/
+
+#profile-nav .settings {display:none;}
+#profile-nav .logout {display:none;}
+.lp-list-table thead tr th {
+  
+    color: #fff !important;
+}
+
+
+.elementor-33951 .elementor-element.elementor-element-2a76a6af > .elementor-widget-container {
+    box-shadow:none !important;
+    border: 1px solid rgba(204,204,204,0.3);
+}
+
+.learnpress .site-content {
+    padding-top: 50px !important;
+    padding-bottom: 50px;
+}
+
+#learn-press-profile.lp-user-profile #profile-content .learn-press-profile-course__progress .lp_profile_course_progress__header {
+   
+    color: #000;
+    font-weight: 400;
+}
+
+ #loginform p {
+    margin: 0;
+}
+
+#loginform .wrap-fields {
+  
+    margin-top: 10px !important;
+}
+
+
+.login-password #show_pass {
+    line-height: 1;
+    top: 30px;
+}
+
+/*#shaon-pricing-table-plus .minimal .features ul li {
+ 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}*/
+
+
+
+.page-id-33954 label {
+    padding-left: 0px !important;
+    margin-left: 0px !important;
+}
+
+
+.page-id-33954 .pmpro_checkout-field-required label{ padding-left: 10px !important;  margin-left: 0px !important;}
+
+.pmpro_payment-account-number {
+    margin-bottom: 0px;
+}
+
+.page-id-33954 #pmpro_billing_address_fields label{ padding-left: 10px !important;  margin-left: 0px !important;}
+
+.page-id-33954 #pmpro_billing_address_fields .pmpro_asterisk {left: 10px;}
+
+
+.page-id-33954 #pmpro_payment_information_fields label{ padding-left: 0px !important;  margin-left: 0px !important;}
+.page-id-33954 #pmpro_payment_information_fields .pmpro_asterisk {left: 10px;}
+
+.pmpro_payment-cvv small {
+   left: 16%;
+}
+
+.responsive .thim-sc-events.events-layer-2 {
+    width: 100%;
+}
+
+.events-layer-2 .owl-nav {
+   
+    right: -30px;
+	left:auto !important;
+}
+
+.event-wrapper-shortcode {
+    margin-bottom: 0px;
+    margin-top: 0px;
+   
+}
+
+.event-wrapper-shortcode th { font-size:15px !important;}
+
+.elementor-34258 .elementor-element.elementor-element-1ccc720d .elementor-nav-menu--main .elementor-item {
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+    border-top: 1px solid rgba(204,204,204,0.3);
+}
+
+.sidebar-events .widget_book-event .event_register_area .info-event li input[type="number"] {
+    
+    border: 0px;
+   
+}
+
+.tp-event-notice.error {
+    padding: 0 !important;
+    background-color: #fff;
+    color: #ff0000;
+    border-left: 0px;
+}
+
+.tp-event-notice {
+    margin: 0px 0 0em!important;
+   
+}
+
+#shaon-pricing-table-plus .minimal .detail .amount {
+    font-size: 30px;
+}
+
+#shaon-pricing-table-plus .minimal .highlight.featured .detail .amount {
+    font-size: 35px;
+}
+
+#shaon-pricing-table-plus .minimal .detail .title {
+   
+    font-size: 16px;
+   
+}
+
+.sidebar-events .widget_book-event .event_auth_register_message_error {
+   
+    padding: 0px;
+    
+}
+
+
+.jet-tabs__control-wrapper {justify-content: center !important;}
+#learn-press-profile.lp-user-profile #profile-sidebar {
+    margin-top: 0px !important;
+}
+
+
+
+
+#shaon-pricing-table-plus .minimal .highlight {
+  
+	width: 20%;}
+
+#shaon-pricing-table-plus .minimal .highlight.featured {
+
+	width: 20%;}
+
+.highlight.plan .features ul { display:none;}
+
+.highlight.plan.p1 .features ul.l-1 { display:block;}
+.highlight.plan.p2 .features ul.l-2 { display:block;}
+.highlight.plan.p3 .features ul.l-3 { display:block;}
+.highlight.plan.p4 .features ul.l-4 { display:block;}
+.highlight.plan.p6 .features ul.l-6 { display:block;}
+
+#shaon-pricing-table-plus .minimal .features ul li {
+    
+    font-size: 15px;
+}
+
+#shaon-pricing-table-plus .minimal .features ul {
+   
+    padding: 0 5px !important;
+}
+
+.list-resources .entry-content .entry-title {
+ 
+    font-size: 18px; margin-top: 0px;
+   
+}
+
+.resource .content-inner{border: 1px solid #f3eded;
+    box-shadow: 0px 10px 10px #f3eded;}
+
+.resource .content-inner a {background: rgb(137, 25, 27);
+    color: #fff;
+    border: 0px;}
+
+.resource .entry-date {
+   
+    background: rgb(137, 25, 27) !important;
+   
+    color: #fff !important;
+    font-weight: 500;
+    font-family: 'Roboto';
+}
+
+
+.course-item-meta .lp-icon.item-status {
+   
+    border: none !important;
+    
+}
+
+.lesson-logo { display:none !important;}
+
+.list-tab-event .tab-content .tab-pane .tp_event {
+   
+    padding: 40px;
+}
+
+.list-tab-event .tab-content .tab-pane .tp_event .time-from {
+   
+    background: #89191b;
+   
+    width: 150px;
+    height: 150px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center; padding:20px; justify-content: center;
+}
+
+.tp_event .date {
+    color: #fff !important; text-transform: uppercase;
+}
+
+
+
+.home5 .newsletter-form input {
+  
+    margin: 0px;
+}
+
+
+.list-articles.style-list .content-inner {
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+}
+
+
+#shaon-pricing-table-plus .minimal .highlight.featured .detail h4 {
+   
+    margin-bottom: 12px;
+}
+
+.ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year {
+    width: 45%;
+    padding: 5px;
+    height: auto;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
+  
+    text-align: center;
+}
+
+.pmpro-checkout form.pmpro_form input {line-height: inherit !important;}
+
+div[id^=qulfc_add_rmbtn],
+div[id^=work_add_rmbtn],
+div[id^=license_membership_add_rmbtn],
+div[id^=langskill_add_rmbtn] {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+div[id^=qulfc_remarks] { width: 100%;}
+
+.pmpro_checkout {
+   
+    margin-top: 0px;
+   
+}
+
+#pmpro_form {color: #423a3a;
+    font-size: 15px;
+    font-weight: 400; line-height:22px;}
+
+#pmpro_form table td {
+   
+    color: #000;
+}
+
+.pmpro-checkout .ui-datepicker td {
+    padding: 3px !important;
+}
+
+input[type="file"] {line-height: 35px !important;}
+form.pmpro_member_directory_search {
+   
+    padding-bottom: 20px;
+}
+
+.pmpro_error {
+  
+    border: 1px solid #a94442 !important; background-color: transparent !important;
+}
+
+.pmpro_error + label { color:#a94442 !important;}
+.pmpro_error + span + label { color:#a94442 !important;}
+
+.pmpro_form input[type="radio"].pmpro_error {
+  
+    border: 1px solid #a94442 !important; background-color: transparent !important;
+}
+
+.pmpro_form input[type="radio"].pmpro_error + span + label { color:#a94442 !important;}
+
+.ui-datepicker-trigger {
+   
+    background: transparent !important;
+    
+}
+
+@media screen and (min-device-width: 319px) and (max-device-width: 640px) { 
+    #shaon-pricing-table-plus .minimal .highlight.featured {
+    width: 100%;
+}
+	
+
+}
+
+#learn-press-profile.lp-user-profile #profile-content {
+    border-top: 0px;
+  
+    margin-top: -300px;
+}
+
+.lp-guest-checkout-output input {height: 16px !important;}
+
+.learnpress-checkout .learn-press-message.error {position: absolute;}
+
+#pmpro_account-links { display:none;}
+
+.widget-area .thim_widget_categories ul li a {
+   
+    text-transform: capitalize;
+    font-size: 16px;
+}
+
+#pmpro_pricing_fields ul {margin: 20px 0px;
+    padding-left: 18px !important;}
+
+#pmpro_pricing_fields ul li {list-style: circle; margin-bottom: 8px;}
+
+
+#lostpasswordform #user_login { margin-bottom:15px;}
+
+#resetpassform #resetpass-button {margin-top:15px;}
+
+/*.thim-login input[type="submit"] {
+   
+    margin-top: 15px;
+}*/
+
+
+.button_app a { display:block; margin-top:15px;}
+.button_app a img {margin-right:5px;}
+
+#writing_exams_div input[type="checkbox"] {margin-top: 4px !important; margin-right:5px !important;}
+
+#courses_by_aiadr_div .pmprorh_checkbox_span label {padding-left: 0px !important;}
+
+#eqv_membership_div .pmprorh_checkbox_label {padding-left: 0px !important;}
+
+#pmpro_checkout_box-checkout_image_docs .pmpro_checkout-fields {flex-direction: column;}
+
+#pmpro_payment_information_fields .pmpro_checkout-field-payment-request-button { width:100%;}
+
+#pmpro_payment_information_fields iframe {
+	
+    height: 50px !important; 
+}
+#pmpro_payment_information_fields iframe .CardNumberField-input-wrapper {background: #fff; border: 1px solid #e7e7e7;
+    padding: 15px;
+    height: 50px;}
+
+#Expiry { width:100% !important;}
+.pmpro_payment-expiration {
+  
+    display: inline-block;
+   
+}
+
+
+.ext-info {width:100% !important; padding:0px !important; padding: 0px 20px !important;}
+#pmpro_level_cost {display: flex;
+    gap: 20px; padding: 10px 20px !important;}
+#pmpro_level_cost p {margin: 0px;
+    font-weight: 600;}
+
+
+.pmpro_thead-msg a { margin-left: 50px;
+    text-transform: capitalize;
+    background: #fff;
+    padding: 6px;
+    border-radius: 10px;
+    font-size: 14px;}
+
+
+
+.lp-form-fields .loading {
+    display: block !important;
+}
+
+.event-template-default .post-image {display:none;}
+
+.event-template-default .social-share {display:none;}
+.event-template-default .entry-date {display:none;}
+
+.pmpro-checkout .nav-tabs {
+   
+    margin-left: 0px;
+    margin-bottom: 20px;
+    margin-top: 15px; border: 0px;
+}
+
+.pmpro-checkout .nav-tabs .nav-link.active {
+    color: #fff;
+    background-color: #89191b;
+    border-color: #89191b;
+}
+
+.pmpro-checkout .nav-tabs .nav-item {
+    margin-bottom: -1px;
+    background: #fff5f5;
+    margin-right: 5px; border-top-right-radius: 0.25rem;
+    border-top-left-radius: 0.25rem;
+}
+
+#user_avatar_div {width: 100%;}
+
+.pmprorh_file_preview {background: #89191b;
+    display: inline-block;
+    padding: 20px;
+    margin-right: 20px !important;
+    border-radius: 5px;}
+
+.s-note{color: #89191b;
+    margin: 0px;
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 600;}
+
+
+.course-author .teacher {
+   
+    align-items: center;
+}
+
+.question .answer-option .option-title {
+    
+    border: 0px;
+   
+    margin-bottom: 0px !important;
+}
+
+.question .btn-show-hint {
+  
+    border: 0px;
+}
+
+.quiz-questions input[type="checkbox"]:checked:before, .quiz-questions input[type="radio"]:checked:before {margin-top: -22px;}
+
+
+#popup-course .quiz-questions .lp-fib-content {
+   border:0px;
+    padding: 0;
+}
+
+.course-item-meta .lp-icon.item-status {
+    
+    background-color: #542020!important;
+    
+}
+
+.course-item-meta .lp-icon.item-status::before { color:#fff !important;}
+
+.single-zoom-meetings .sticky-sidebar{ display:none;}
+
+.single-zoom-meetings .site-main { max-width:100%; padding-bottom:50px;}
+
+.post-type-archive-zoom-meetings .sticky-sidebar{ display:none;}
+
+.post-type-archive-zoom-meetings .site-main { max-width:100%; padding-bottom:50px;}
+
+.post-type-archive-zoom-meetings .site-main .vczapi-searching { display:none;}
+.post-type-archive-zoom-meetings .site-main .vczapi-btn-link {display:none;}
+
+.vczapi-list-zoom-meetings--item {padding: 10px;
+    border: 1px solid #f7f2f2;
+    box-shadow: 0px 0px 10px #fdf3f3;}
+
+.zoom-meetings-template-default footer {display: none;}
+
+.zoom-meetings-template-default .page-title  {display: none;}
+.zoom-meetings-template-default .elementor-37051 {display: none;}
+
+
+
+.zoom-meetings-template-default .sticky-sidebar{ display:none;}
+
+.zoom-meetings-template-default .site-main { max-width:100%; padding-bottom:50px; flex:100% !important; padding-top:50px;}
+
+#vczapi-zoom-browser-meeting--container {
+   
+    padding: 20px;
+    box-shadow: 0px 0px 15px #e7d5d5;
+    text-align: center;
+}
+
+
+header#masthead.template-layout-1 .widget_thim-login .avatar {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #89191b;
+}
+
+.pmprorh_documents_file_nmd {background: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;}
+
+input[type="file"] {
+    
+    margin-top: 5px !important;
+	
+}
+
+
+#gtranslate_wrapper {
+	top: 26px !important;
+    left: 10% !important;
+}
+
+.footer {
+    padding: 80px 0px;
+    background: #202121;
+   
+}
+
+.copyright-area {background: #202121;}
+.copyright-area .copyright-content {
+    color: #fff;
+    padding: 0px 0 47px !important;
+    text-align: center;
+}
+
+.footer .widget-title { color:#fff !important;}
+
+footer#colophon .copyright-content .copyright-text {
+   
+    margin-top: 50px;
+}

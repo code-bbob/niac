@@ -36,7 +36,7 @@ const navLinks = [
       { label: "Mediation Panelist", href: "/mediation-panelist" },
     ],
   },
-  { label: "Events", href: "#" },
+  { label: "Events", href: "/events" },
   { label: "Blogs", href: "/blogs" },
   { label: "Fee Calculator", href: "/fee-calculator" },
   {

@@ -97,11 +97,11 @@ function Header() {
                 key={i}
                 href={link.href}
                 className={`relative text-[13px] tracking-[1.2px] uppercase no-underline transition-colors ${
-                  link.active ? "text-gold" : "text-white/70 hover:text-white"
+                  link.active ? "text-[#9F8320]" : "text-white/70 hover:text-white"
                 }`}
               >
                 {link.label}
-                {link.active && <span className="absolute -bottom-1 left-0 right-0 h-[2px] bg-gold rounded-full" />}
+                {link.active && <span className="absolute -bottom-1 left-0 right-0 h-[2px] bg-[#9F8320] rounded-full" />}
               </a>
             ))}
           </nav>
@@ -122,7 +122,7 @@ function Header() {
         <div className="lg:hidden bg-navy-light border-t border-white/10">
           <div className="mx-auto max-w-[1200px] px-6 py-4 flex flex-col gap-1">
             {navLinks.map((link, i) => (
-              <a key={i} href={link.href} className={`py-2 text-sm tracking-wider uppercase no-underline ${link.active ? "text-gold" : "text-white/70"}`}>
+              <a key={i} href={link.href} className={`py-2 text-sm tracking-wider uppercase no-underline ${link.active ? "text-[#9F8320]" : "text-white/70"}`}>
                 {link.label}
               </a>
             ))}
@@ -145,12 +145,12 @@ function Hero() {
       <div className="absolute inset-0 bg-gradient-to-r from-navy/85 via-navy/60 to-navy/40" />
       <div className="relative z-10 w-full">
         <div className="mx-auto max-w-[1200px] px-6 py-24 md:py-32">
-          <span className="inline-block text-gold text-sm tracking-[5px] uppercase mb-8 font-sans">
+          <span className="inline-block text-[#9F8320] text-sm tracking-[5px] uppercase mb-8 font-sans">
             Nepal International ADR Center
           </span>
           <h1 className="font-serif text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1] font-medium max-w-4xl">
             Accessible &amp; Credible<br />
-            <span className="text-gold">Arbitration &amp; Mediation</span>
+            <span className="text-[#9F8320]">Arbitration &amp; Mediation</span>
           </h1>
           <p className="text-white/60 text-base md:text-lg max-w-xl mt-8 leading-relaxed font-light">
             Premier dispute resolution forum serving the Asia-Pacific region with
@@ -159,7 +159,7 @@ function Hero() {
           <div className="flex flex-wrap items-center gap-4 mt-10">
             <a
               href="https://niac.asia/contact-us/"
-              className="inline-flex items-center gap-3 bg-gold text-navy font-semibold text-sm tracking-[1.5px] uppercase px-8 py-4 no-underline hover:bg-white transition-colors"
+              className="inline-flex items-center gap-3 bg-[#9F8320] text-navy font-semibold text-sm tracking-[1.5px] uppercase px-8 py-4 no-underline hover:bg-white transition-colors"
             >
               Get in Touch <ArrowRight />
             </a>
@@ -181,20 +181,20 @@ function Hero() {
 function CtaBanner() {
   return (
     <section className="bg-navy relative">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#9F8320]/30 to-transparent" />
       <div className="mx-auto max-w-[900px] px-6 py-20 text-center">
-        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="currentColor" className="mx-auto mb-8 text-gold/30">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="currentColor" className="mx-auto mb-8 text-[#9F8320]/30">
           <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z"/>
         </svg>
         <h2 className="font-serif text-white text-2xl md:text-3xl leading-snug font-medium">
           &ldquo;Accessible and Credible Arbitration and Mediation forum in the Asia-Pacific region&rdquo;
         </h2>
-        <p className="text-gold/80 text-sm tracking-[3px] uppercase mt-6 mb-10 font-sans">
+        <p className="text-[#9F8320]/80 text-sm tracking-[3px] uppercase mt-6 mb-10 font-sans">
           Looking for a Credible ADR Service Provider?
         </p>
         <a
           href="https://niac.asia/contact-us/"
-          className="inline-flex items-center gap-3 bg-gold text-navy font-semibold text-sm tracking-[1.5px] uppercase px-8 py-4 no-underline hover:bg-white transition-colors"
+          className="inline-flex items-center gap-3 bg-[#9F8320] text-navy font-semibold text-sm tracking-[1.5px] uppercase px-8 py-4 no-underline hover:bg-white transition-colors"
         >
           Get In Touch <ArrowRight />
         </a>
@@ -210,9 +210,9 @@ function Services() {
     <section className="py-28 bg-white">
       <div className="mx-auto max-w-[1200px] px-6">
         <div className="text-center mb-20">
-          <span className="text-gold text-sm tracking-[5px] uppercase font-sans">What We Do</span>
+          <span className="text-[#9F8320] text-sm tracking-[5px] uppercase font-sans">What We Do</span>
           <h2 className="font-serif text-4xl md:text-5xl text-navy mt-4 mb-6 leading-tight">Our Services</h2>
-          <div className="w-12 h-[2px] bg-gold mx-auto" />
+          <div className="w-12 h-[2px] bg-[#9F8320] mx-auto" />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -227,9 +227,9 @@ function Services() {
                 <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/10 transition-colors duration-500" />
               </div>
               <div className="p-7">
-                <h3 className="font-serif text-xl text-navy mb-3 group-hover:text-gold transition-colors duration-300">{s.title}</h3>
+                <h3 className="font-serif text-xl text-navy mb-3 group-hover:text-[#9F8320] transition-colors duration-300">{s.title}</h3>
                 <p className="text-[#777] text-sm leading-relaxed mb-5">{s.desc}</p>
-                <span className="inline-flex items-center gap-2 text-gold text-xs tracking-[2px] uppercase font-medium">
+                <span className="inline-flex items-center gap-2 text-[#9F8320] text-xs tracking-[2px] uppercase font-medium">
                   Read More
                   <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
                     <ArrowRight />
@@ -251,9 +251,9 @@ function Bulletin() {
     <section className="py-28 bg-cream">
       <div className="mx-auto max-w-[1200px] px-6">
         <div className="text-center mb-16">
-          <span className="text-gold text-sm tracking-[5px] uppercase font-sans">Publications</span>
+          <span className="text-[#9F8320] text-sm tracking-[5px] uppercase font-sans">Publications</span>
           <h2 className="font-serif text-4xl md:text-5xl text-navy mt-4 mb-6 leading-tight">NIAC Bulletin</h2>
-          <div className="w-12 h-[2px] bg-gold mx-auto" />
+          <div className="w-12 h-[2px] bg-[#9F8320] mx-auto" />
         </div>
         <div className="flex justify-center">
           <div className="relative shadow-2xl">
@@ -280,15 +280,15 @@ function WhyChooseUs() {
     <section className="py-28 bg-white">
       <div className="mx-auto max-w-[1200px] px-6">
         <div className="text-center mb-20">
-          <span className="text-gold text-sm tracking-[5px] uppercase font-sans">Why NIAC</span>
+          <span className="text-[#9F8320] text-sm tracking-[5px] uppercase font-sans">Why NIAC</span>
           <h2 className="font-serif text-4xl md:text-5xl text-navy mt-4 mb-6 leading-tight">Why Choose Us</h2>
-          <div className="w-12 h-[2px] bg-gold mx-auto" />
+          <div className="w-12 h-[2px] bg-[#9F8320] mx-auto" />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
           {features.map((item, i) => (
             <div key={i} className="text-center">
-              <div className="w-16 h-16 mx-auto mb-8 rounded-full border border-gold/40 flex items-center justify-center text-gold">
+              <div className="w-16 h-16 mx-auto mb-8 rounded-full border border-[#9F8320]/40 flex items-center justify-center text-[#9F8320]">
                 {featureIcons[i]}
               </div>
               <h3 className="font-serif text-2xl text-navy mb-4">{item.title}</h3>
@@ -308,9 +308,9 @@ function LatestNews() {
     <section className="py-28 bg-cream">
       <div className="mx-auto max-w-[1200px] px-6">
         <div className="text-center mb-20">
-          <span className="text-gold text-sm tracking-[5px] uppercase font-sans">Updates</span>
+          <span className="text-[#9F8320] text-sm tracking-[5px] uppercase font-sans">Updates</span>
           <h2 className="font-serif text-4xl md:text-5xl text-navy mt-4 mb-6 leading-tight">Latest News</h2>
-          <div className="w-12 h-[2px] bg-gold mx-auto" />
+          <div className="w-12 h-[2px] bg-[#9F8320] mx-auto" />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -324,8 +324,8 @@ function LatestNews() {
                 <img src={item.img} alt={item.title} width={350} height={233} className="w-full aspect-[3/2] object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
               <div className="p-7">
-                <span className="text-gold text-[11px] tracking-[2px] uppercase font-medium">{item.date}</span>
-                <h3 className="font-serif text-lg text-navy mt-3 leading-snug group-hover:text-gold transition-colors duration-300">{item.title}</h3>
+                <span className="text-[#9F8320] text-[11px] tracking-[2px] uppercase font-medium">{item.date}</span>
+                <h3 className="font-serif text-lg text-navy mt-3 leading-snug group-hover:text-[#9F8320] transition-colors duration-300">{item.title}</h3>
               </div>
             </a>
           ))}
@@ -346,14 +346,14 @@ function QuoteSection() {
       />
       <div className="absolute inset-0 bg-gradient-to-r from-navy/95 to-navy/85" />
       <div className="relative z-10 mx-auto max-w-[800px] px-6 text-center">
-        <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="currentColor" className="mx-auto mb-10 text-gold/20">
+        <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="currentColor" className="mx-auto mb-10 text-[#9F8320]/20">
           <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z"/>
         </svg>
         <blockquote className="font-serif text-white/90 text-xl md:text-2xl leading-relaxed font-light">
           &ldquo;Discourage litigation. Persuade your neighbours to compromise whenever you can. Point out to them how the nominal winner is often the real loser &ndash; in fees, and expenses, and waste of time. As a peace-maker, the lawyer has a superior opportunity of being a good man. There will still be business enough.&rdquo;
         </blockquote>
         <div className="mt-10 pt-8 border-t border-white/10 inline-block px-16">
-          <cite className="text-gold not-italic text-sm tracking-[3px] uppercase">&mdash; Abraham Lincoln</cite>
+          <cite className="text-[#9F8320] not-italic text-sm tracking-[3px] uppercase">&mdash; Abraham Lincoln</cite>
         </div>
       </div>
     </section>
@@ -367,9 +367,9 @@ function ApcamSection() {
     <section className="py-28 bg-white">
       <div className="mx-auto max-w-[1200px] px-6">
         <div className="text-center mb-16">
-          <span className="text-gold text-sm tracking-[5px] uppercase font-sans">Our Network</span>
+          <span className="text-[#9F8320] text-sm tracking-[5px] uppercase font-sans">Our Network</span>
           <h2 className="font-serif text-4xl md:text-5xl text-navy mt-4 mb-6 leading-tight">APCAM</h2>
-          <div className="w-12 h-[2px] bg-gold mx-auto" />
+          <div className="w-12 h-[2px] bg-[#9F8320] mx-auto" />
         </div>
 
         <div className="flex flex-col md:flex-row items-start gap-14">
@@ -417,7 +417,7 @@ function Footer() {
             <ul className="space-y-3">
               {["About Us", "Services", "Panelists", "Rules", "Contact"].map((l) => (
                 <li key={l}>
-                  <a href="#" className="text-white/40 hover:text-gold transition-colors no-underline text-sm">{l}</a>
+                  <a href="#" className="text-white/40 hover:text-[#9F8320] transition-colors no-underline text-sm">{l}</a>
                 </li>
               ))}
             </ul>
@@ -425,13 +425,13 @@ function Footer() {
           <div className="md:col-span-4">
             <h4 className="text-white/80 font-semibold tracking-[2px] uppercase text-xs mb-6">Connect</h4>
             <div className="flex gap-3">
-              <a href="https://www.facebook.com/niac.asia" target="_blank" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/40 hover:text-gold hover:border-gold transition-colors" aria-label="Facebook">
+              <a href="https://www.facebook.com/niac.asia" target="_blank" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/40 hover:text-[#9F8320] hover:border-[#9F8320] transition-colors" aria-label="Facebook">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
               </a>
-              <a href="https://twitter.com/adr_nepal" target="_blank" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/40 hover:text-gold hover:border-gold transition-colors" aria-label="Twitter">
+              <a href="https://twitter.com/adr_nepal" target="_blank" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/40 hover:text-[#9F8320] hover:border-[#9F8320] transition-colors" aria-label="Twitter">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
               </a>
-              <a href="https://www.linkedin.com/company/nepal-international-adr-center/" target="_blank" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/40 hover:text-gold hover:border-gold transition-colors" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/company/nepal-international-adr-center/" target="_blank" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/40 hover:text-[#9F8320] hover:border-[#9F8320] transition-colors" aria-label="LinkedIn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
               </a>
             </div>
