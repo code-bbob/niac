@@ -46,6 +46,23 @@ function ScrollReveal() {
   return null;
 }
 
+
+function Banner() {
+  return (
+   <div className="text-center bg-[#9F8320] mt-8 py-4">
+          {/* <p className="reveal text-stone-600 text-lg font-light italic max-w-2xl mx-auto leading-relaxed">
+            Join us in Nepal, where professional excellence meets the spirit of
+            wonders of Nepal.
+          </p> */}
+          <p className="reveal font-serif text-xl md:text-4xl text-white font-bold mt-6">
+            Nepal is <span className="text-[#1e3a8a]">calling</span> !
+          </p>
+          <p className="reveal text-stone-500 text-white text-xl mt-2">
+            Join NIAC and AIADR for the Asia ADR Summit and Nepal ADR Week 2026.
+          </p>
+        </div>
+  );}
+
 /* ── Counter ────────────────────────────────────────────────────────────── */
 
 function Counter({ end, label, suffix }) {
@@ -78,7 +95,7 @@ function Counter({ end, label, suffix }) {
   }, [end]);
   return (
     <div ref={ref} className="text-center">
-      <div className="font-serif text-4xl md:text-5xl text-white font-bold tracking-tight">
+      <div className="font-serif text-4xl md:text-5xl text-[#9F8320] font-bold tracking-tight">
         {v}
         {suffix || "+"}
       </div>
@@ -98,8 +115,8 @@ function SectionHeading({ children, subtitle }) {
         {children}
       </h2> */}
       <h2 className="relative font-serif text-3xl md:text-4xl lg:text-5xl text-[#1e3a8a] mb-4 pb-4 tracking-tight leading-tight inline-block after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-2 after:w-12 after:bg-[#9F8320] after:rounded-full">
-  {children}
-</h2>
+        {children}
+      </h2>
       {subtitle && (
         <p className="text-stone-500 text-sm md:text-base max-w-2xl mx-auto font-light leading-relaxed">
           {subtitle}
@@ -136,7 +153,7 @@ function Hero() {
     <section className="relative min-h-screen flex items-center overflow-hidden bg-blue-900">
       <div className="absolute inset-0 z-0">
         <img
-          src="/images/possibility4.png"
+          src="/images/possibility3.jpg"
           alt="Nepal Himalayas"
           className="w-full h-full object-top object-cover"
         />
@@ -144,7 +161,7 @@ function Hero() {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to bottom, rgba(10,22,40,0.4), rgba(10,22,40,0.2))",
+              "linear-gradient(to right, rgba(10,22,40,0.5), rgba(10,22,40,0.2))",
           }}
         />
         <div
@@ -160,36 +177,40 @@ function Hero() {
 
       <div className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-8 w-full py-32 md:py-40">
         <div className="max-w-3xl">
-          <div className="reveal flex items-center gap-3 text-xs tracking-[0.2em] uppercase text-[#9F8320] font-medium mb-6">
-            <span className="h-px w-8 bg-[#9F8320]/50" />
-            A Warm Invitation from the Heart of the Himalayas
-          </div>
+          {/* <div className="reveal flex items-center gap-3 text-xs tracking-[0.2em] uppercase text-[#9F8320] font-medium mb-6"> */}
+          {/*   <span className="h-px w-8 bg-[#9F8320]/50" /> */}
+          {/*   A Warm Invitation from the Heart of the Himalayas */}
+          {/* </div> */}
 
-          <h1 className="reveal font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight text-white font-bold mb-4">
+          <p className="reveal font-serif text-5xl sm:text-6xl md:text-[100px] leading-[1.05] tracking-tight text-white font-bold mb-4">
             Asia ADR Summit 2026
-          </h1>
+          </p>
 
-          <div className="reveal font-serif text-xl md:text-2xl text-[#9F8320] font-semibold italic border-t border-b border-[#9F8320]/30 py-3 inline-block">
+          <div className="reveal font-serif text-xl md:text-6xl text-[#9F8320] font-semibold italic border-t border-b border-[#9F8320]/30 py-3 inline-block">
             &amp; 2nd Nepal ADR Week
           </div>
 
-          <p className="reveal font-serif text-2xl md:text-3xl text-white font-bold mt-8">
-            Nepal is <span className="text-[#9F8320]">calling</span> !
-          </p>
+          {/* <p className="reveal font-serif text-2xl md:text-3xl text-white font-bold mt-8"> */}
+          {/*   Nepal is <span className="text-[#9F8320]">calling</span> ! */}
+          {/* </p> */}
 
           <p className="reveal text-base md:text-lg text-white/70 max-w-xl font-light leading-relaxed mt-4">
             Join NIAC and AIADR for the Asia ADR Summit and Nepal ADR Week 2026.
           </p>
 
-          <p className="reveal text-base md:text-lg text-white/50 max-w-xl font-light italic mt-2">
-            &ldquo;Reaching the Pinnacle of ADR in a Changing World&rdquo;
-          </p>
+          {/* <p className="reveal text-base md:text-lg text-white/50 max-w-xl font-light italic mt-2"> */}
+          {/*   &ldquo;Reaching the Pinnacle of ADR in a Changing World&rdquo; */}
+          {/* </p> */}
 
           <div className="reveal flex flex-wrap items-center gap-4 mt-10">
-            <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2.5 rounded-lg text-sm text-white">
-              <Calendar className="w-4 h-4 text-[#9F8320]" />4 – 6 December 2026
+            {/* <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2.5 rounded-full text-sm text-white"> */}
+            {/*   <Calendar className="w-4 h-4 text-[#9F8320]" />4 – 6 December 2026 */}
+            {/* </span> */}
+            <span className="inline-flex items-center gap-2 bg-white/[0.08] backdrop-blur-sm border border-white/15 px-8 py-4 rounded-full text-xl font-extrabold text-white/85">
+              <Calendar className="w-4 h-4 text-[#c9a227] font-extrabold" />4 –
+              6 December 2026
             </span>
-            <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2.5 rounded-lg text-sm text-white">
+            <span className="inline-flex items-center gap-2 bg-white/[0.08] backdrop-blur-sm border border-white/20 px-8 py-4  rounded-3xl text-xl font-extrabold text-white">
               <MapPin className="w-4 h-4 text-[#9F8320]" />
               Kathmandu, Nepal
             </span>
@@ -197,7 +218,7 @@ function Hero() {
 
           <div className="reveal flex flex-wrap gap-4 mt-12">
             <Link
-              href="https://aiadr.world/events/asia-adr-summit-2026-2nd-nepal-adr-week/"
+              href=""
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-3 bg-[#9F8320] hover:bg-[#9F8320]/90 text-white font-semibold px-8 py-4 text-sm tracking-wider uppercase transition-all duration-500 shadow-lg shadow-[#9F8320]/20 rounded-lg"
@@ -205,13 +226,13 @@ function Hero() {
               Register Now
               <ArrowUpRight className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
-            <a
-              href="#about"
-              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 text-white px-8 py-4 text-sm tracking-wider uppercase transition-all duration-500 rounded-lg"
-            >
-              Learn More
-              <ChevronRight className="w-4 h-4" />
-            </a>
+            {/* <a */}
+            {/*   href="#about" */}
+            {/*   className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 text-white px-8 py-4 text-sm tracking-wider uppercase transition-all duration-500 rounded-lg" */}
+            {/* > */}
+            {/*   Learn More */}
+            {/*   <ChevronRight className="w-4 h-4" /> */}
+            {/* </a> */}
           </div>
         </div>
       </div>
@@ -220,7 +241,7 @@ function Hero() {
         <svg viewBox="0 0 1440 72" fill="none" className="w-full h-auto">
           <path
             d="M0 72V0C240 48 480 72 720 72C960 72 1200 48 1440 0V72H0Z"
-            fill="#9F8320"
+            fill="#10245f"
             className="drop-shadow-sm"
           />
         </svg>
@@ -233,7 +254,7 @@ function Hero() {
 
 function Stats() {
   return (
-    <section className="bg-[#9F8320] py-14 md:py-16">
+    <section className="bg-[#10245f] py-14 md:py-16">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
           <Counter end={30} label="Expert Speakers" />
@@ -310,18 +331,7 @@ function Invitation() {
           })}
         </div>
 
-        <div className="text-center mt-16">
-          <p className="reveal text-stone-600 text-lg font-light italic max-w-2xl mx-auto leading-relaxed">
-            Join us in Nepal, where professional excellence meets the spirit of
-            wonders of Nepal.
-          </p>
-          <p className="reveal font-serif text-xl md:text-4xl text-[#9F8320] font-bold mt-6">
-            Nepal is <span className="text-[#1e3a8a]">calling</span> !
-          </p>
-          <p className="reveal text-stone-500 text-base text-xl mt-2">
-            Join NIAC and AIADR for the Asia ADR Summit and Nepal ADR Week 2026.
-          </p>
-        </div>
+        <Banner />
       </div>
     </section>
   );
@@ -350,9 +360,8 @@ function About() {
         <div className="grid grid-cols-1 mt-16 lg:grid-cols-2 gap-16 lg:gap-20 items-start">
           <div className="space-y-6">
             <p className="reveal text-stone-600 leading-relaxed text-base lg:text-lg">
-              The summit will take place from{" "}
-              <strong>4–6 December 2026</strong> in{" "}
-              <strong>Kathmandu, Nepal</strong>, under the theme{" "}
+              The summit will take place from <strong>4–6 December 2026</strong>{" "}
+              in <strong>Kathmandu, Nepal</strong>, under the theme{" "}
               <strong className="text-[#1e3a8a]">
                 &ldquo;Reaching the Pinnacle of ADR in a Changing World.&rdquo;
               </strong>
@@ -409,14 +418,15 @@ function About() {
           </div>
         </div>
 
-        <div className="text-center mt-16">
+        {/* <div className="text-center mt-16">
           <p className="reveal font-serif text-xl md:text-2xl text-[#9F8320] font-bold">
             Nepal is <span className="text-[#1e3a8a]">calling</span> !
           </p>
           <p className="reveal text-stone-500 text-base mt-2">
             Join NIAC and AIADR for the Asia ADR Summit and Nepal ADR Week 2026.
           </p>
-        </div>
+        </div> */}
+        <Banner />
       </div>
     </section>
   );
@@ -445,7 +455,7 @@ function Summit2025Carousel() {
   const next = () => setCurrent((c) => (c + 1) % len);
 
   return (
-    <section className="py-12 bg-stone-50/60 relative overflow-hidden">
+    <section className="py-12 bg-amber-50/60 relative overflow-hidden">
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
@@ -535,7 +545,7 @@ function NepalGallery() {
   ];
 
   return (
-    <section className="pb-12 md:pb-24 bg-stone-50/60">
+    <section className="py-12 md:pb-24 bg-stone-50/60">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-8">
         <SectionHeading subtitle="Nepal — a land of peace, natural beauty, and cultural richness, hosting the world for the Asia ADR Summit 2026.">
           Welcome to Nepal
@@ -736,8 +746,7 @@ function Theme() {
       <div
         className="absolute inset-0 opacity-[0.2]"
         style={{
-          backgroundImage:
-            "url('images/possibility1.jpg')",
+          backgroundImage: "url('images/possibility1.jpg')",
         }}
       />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-[0.08] pointer-events-none">
@@ -858,12 +867,7 @@ function Topics() {
 /* ── Venue ───────────────────────────────────────────────────────────────── */
 
 function Venue() {
-  const slides = [
-    "https://images.unsplash.com/photo-1585837153813-6a50ae6f3a71?w=800&q=80",
-    "https://images.unsplash.com/photo-1605721911519-3beb0e8b7d4b?w=800&q=80",
-    "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80",
-    "https://images.unsplash.com/photo-1600789952916-9365431b66b9?w=800&q=80",
-  ];
+  const slides = ["images/hotel1.jpg", "images/hotel2.jpg"];
 
   const [current, setCurrent] = useState(0);
   const len = slides.length;
@@ -874,7 +878,7 @@ function Venue() {
   }, [len]);
 
   return (
-    <section className="py-24 md:py-32 bg-navy relative overflow-hidden">
+    <section className="py-12 bg-amber-50 relative overflow-hidden">
       <div
         className="absolute inset-0 opacity-[0.06]"
         style={{
@@ -887,11 +891,11 @@ function Venue() {
           className="inline-block text-[#9F8320] text-5xl mb-6"
           size={48}
         />
-        <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-white font-bold mb-2">
+        <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-[#1e3a8a] font-bold mb-2">
           The Official Venue
         </h2>
         <p className="font-serif text-2xl md:text-3xl text-[#9F8320] mb-8">
-          Best Western Plus Kathmandu Hotel
+          {/* Best Western Plus Kathmandu Hotel */}
         </p>
         <div className="inline-flex items-center gap-2 text-white/60 hover:text-[#9F8320] cursor-pointer transition-colors group">
           <MapPin className="w-4 h-4" />
@@ -900,7 +904,7 @@ function Venue() {
           </span>
         </div>
 
-        <div className="mt-12 max-w-3xl mx-auto relative w-full h-[300px] md:h-[400px] overflow-hidden rounded-xl border border-white/10">
+        <div className="mt-12 max-w-7xl mx-auto relative w-full h-[600px] md:h-[600px] overflow-hidden rounded-xl border border-white/10">
           {slides.map((src, i) => (
             <div
               key={i}
@@ -975,37 +979,11 @@ function LookingAhead() {
               in Asia and beyond.
             </p>
           </div>
-
-          <div className="bg-[#1e3a8a] text-white p-8 rounded-xl">
-            <p className="font-serif text-lg mb-4 font-semibold">
-              Organized by
-            </p>
-            <p className="text-white/90 text-sm leading-relaxed">
-              <strong>
-                Asian Institute of Alternative Dispute Resolution (AIADR)
-              </strong>
-              <br />
-              <strong>Nepal International ADR Centre (NIAC)</strong>
-            </p>
-            <div className="mt-6 pt-6 border-t border-white/20 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-              <div>
-                <span className="text-[#9F8320] font-semibold">Date:</span>
-                <br />
-                <span className="text-white/80">4–6 December 2026</span>
-              </div>
-              <div>
-                <span className="text-[#9F8320] font-semibold">Location:</span>
-                <br />
-                <span className="text-white/80">Kathmandu, Nepal</span>
-              </div>
-            </div>
-          </div>
         </div>
 
         <div className="mt-16">
           <p className="reveal font-serif text-2xl md:text-3xl text-[#9F8320] font-bold">
-            Nepal is{" "}
-            <span className="text-[#1e3a8a]">calling</span> !
+            Nepal is <span className="text-[#1e3a8a]">calling</span> !
           </p>
           <p className="reveal text-stone-500 text-base mt-2">
             Join NIAC and AIADR for the Asia ADR Summit and Nepal ADR Week 2026.
@@ -1046,7 +1024,7 @@ function Cta() {
 
         <div className="reveal flex flex-wrap justify-center gap-4">
           <Link
-            href="https://aiadr.world/events/asia-adr-summit-2026-2nd-nepal-adr-week/"
+            href=""
             target="_blank"
             rel="noopener noreferrer"
             className="group inline-flex items-center gap-3 bg-[#9F8320] hover:bg-[#9F8320]/90 text-white font-semibold px-10 py-5 text-sm tracking-wider uppercase transition-all duration-500 shadow-lg shadow-[#9F8320]/20 rounded-lg"
@@ -1071,9 +1049,9 @@ export default function EventsPage() {
       <SectionDivider />
       <Invitation />
       <SectionDivider />
+      <Summit2025Carousel />
       <About />
       <SectionDivider />
-      <Summit2025Carousel />
       <NepalGallery />
       <WhyNiac />
       <SectionDivider />
