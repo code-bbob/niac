@@ -243,6 +243,7 @@ class Bulletin(models.Model):
 class Event(models.Model):
 
     title = models.CharField(max_length=500)
+    slug = models.SlugField(max_length=255, unique=True, help_text="URL-friendly identifier")
     description = CKEditor5Field()
     featured_image = models.ImageField(upload_to='events/')
     order = models.IntegerField(null=True,blank=True)
@@ -250,12 +251,29 @@ class Event(models.Model):
     event_end_date = models.DateField(null=True, blank=True)
     early_bird_price = models.FloatField(blank=True,null=True)
     ticket_price = models.FloatField(blank=True,null=True)
+
     def __str__(self):
         return self.title
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base_slug = slugify(self.title)
+            slug = base_slug
+            
+            # Handle duplicates by adding a number suffix
+            counter = 1
+            while Event.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                slug = f"{base_slug}-{counter}"
+                counter += 1
+            
+            self.slug = slug
+        
+        super().save(*args, **kwargs)
 
 
 class EventBooking(models.Model):
 
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
     spaces = models.PositiveIntegerField()
     name = models.CharField(max_length=255)
     email = models.CharField(max_length=255)

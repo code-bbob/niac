@@ -96,7 +96,7 @@ export default function ApcamPage() {
       <section className="max-w-[1200px] mx-auto px-8 py-[50px]">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
           <div className="md:col-span-4 fade-up opacity-0 translate-y-10 transition-all duration-700">
-            <a href="https://www.arbitrationindia.com/" target="_blank" rel="noopener noreferrer">
+            <a href="https://apcam.asia/" target="_blank" rel="noopener noreferrer">
               <img
                 src="/images/apcam/niac8.png"
                 alt="APCAM - Asia Pacific Centre for Arbitration & Mediation"

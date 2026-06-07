@@ -2,11 +2,12 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from datetime import datetime, timedelta
-from .models import Service, ContactMessage, Appointment, AppointmentDay, AvailableHours, Team, Bulletin
+import uuid
+from .models import Service, ContactMessage, Appointment, AppointmentDay, AvailableHours, Team, Bulletin, EventBooking, Event
 from .serializers import (
     ServiceSerializer, ContactMessageSerializer, 
     AppointmentSerializer, AppointmentDaySerializer, AvailableHoursSerializer, TeamSerializer,
-    BulletinSerializer, EventSerializer
+    BulletinSerializer, EventSerializer, EventBookingSerializer
 )
 from .utils import send_contact_email_async, send_appointment_confirmation_email, get_available_time_slots
 
@@ -233,6 +234,7 @@ from django.db.models.functions import Now
 
 class EventViewSet(viewsets.ModelViewSet):
     serializer_class = EventSerializer
+    lookup_field = 'slug'
 
     def get_queryset(self):
         return Event.objects.annotate(
@@ -244,4 +246,14 @@ class EventViewSet(viewsets.ModelViewSet):
         ).order_by(
             'sort_group',          # future first, then past
             'event_start_date'     # within each group
+        )
+
+
+class EventBookingViewSet(viewsets.ModelViewSet):
+    queryset = EventBooking.objects.all()
+    serializer_class = EventBookingSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(
+            payment_reference_no=f"NIAC-{uuid.uuid4().hex[:8].upper()}"
         )

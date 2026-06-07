@@ -84,7 +84,13 @@ export default function KCMCPage() {
             <h2 class="relative text-blue-900 inline-block after:content-[''] mb-8 after:absolute after:left-0 after:-bottom-2 after:w-10 after:h-2 after:bg-[#b08d2a] after:rounded-full">
               About KCMC
             </h2>
-            <div className="space-y-6 text-sm sm:text-base leading-relaxed text-on-surface-variant">
+<div className="
+  text-[16px]
+  leading-[1.65]
+  text-black
+  space-y-4
+  font-normal
+">
               <p>
                 Cutthroat competition among businesses has led to number of
                 rising disputes which get settled on a regular basis through

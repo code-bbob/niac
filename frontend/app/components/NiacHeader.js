@@ -175,17 +175,28 @@ export default function NiacHeader() {
       .then((data) => setServices(data.results || data))
       .catch(() => {});
   }, []);
+
+
+const serviceOrder = {
+  Arbitrations: 1,
+  Mediation: 2,
+};
+
 const serviceItems = [
-  ...services.map((s) => ({
-    label: s.name,
-    href: `/services/${s.slug}`,
-  })),
+  ...services
+    .sort(
+      (a, b) =>
+        (serviceOrder[a.name] ?? 999) - (serviceOrder[b.name] ?? 999)
+    )
+    .map((s) => ({
+      label: s.name,
+      href: `/services/${s.slug}`,
+    })),
   {
-    label: 'Mediation Fee Calculation',
-    href: '/fee-calculator',
+    label: "Mediation Fee Calculation",
+    href: "/fee-calculator",
   },
 ];
-
   const pathname = usePathname();
 
   const isLinkActive = (link) => {
@@ -262,7 +273,7 @@ const serviceItems = [
           </Link>
 
           {/* Nav */}
-          <nav className="hidden lg:flex items-center gap-3">
+          <nav className="hidden lg:flex items-center gap">
             {navLinks.map((link) =>
               link.dropdown ? (
                 <Dropdown key={link.label} link={link} active={isLinkActive(link)} />
@@ -281,11 +292,71 @@ const serviceItems = [
                 </a>
               )
             )}
+
+            {/* Social icons */}
+          <div className="flex items-center gap-2 ml-2 pl-2 border-l border-gray-300">
+  {/* Facebook */}
+  <a
+    href="https://www.facebook.com/niac.asia"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-gray-500 hover:text-[#1877F2] transition-colors p-1"
+    aria-label="Facebook"
+  >
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      width="18" 
+      height="18" 
+      viewBox="0 0 320 512" 
+      fill="currentColor"
+    >
+      <path d="M80 299.3V256H12v-54.7h68v-39.8c0-67.3 41.1-104 101.1-104 28.8 0 53.5 2.1 60.7 3v70.4h-41.7c-32.7 0-39 15.5-39 38.3V201h78l-10.2 54.7H161v192.3H80z"/>
+    </svg>
+  </a>
+
+  {/* Twitter / X */}
+  <a
+    href="https://twitter.com"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-gray-500 hover:text-sky-500 transition-colors p-1"
+    aria-label="Twitter"
+  >
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      width="18" 
+      height="18" 
+      viewBox="0 0 512 512" 
+      fill="currentColor"
+    >
+      <path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/>
+    </svg>
+  </a>
+
+  {/* LinkedIn */}
+  <a
+    href="https://linkedin.com"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-gray-500 hover:text-[#0077B5] transition-colors p-1"
+    aria-label="LinkedIn"
+  >
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      width="18" 
+      height="18" 
+      viewBox="0 0 448 512" 
+      fill="currentColor"
+    >
+      <path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 1 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"/>
+    </svg>
+  </a>
+</div>
           </nav>
 
           {/* Actions */}
           <div className="flex items-center gap-4">
-         
+          
             <button
               onClick={() => setOpen(!open)}
               className="lg:hidden p-2 text-gray-700 hover:text-black transition-colors"
@@ -302,7 +373,7 @@ const serviceItems = [
             open ? "max-h-[80vh] opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="bg-white border-t border-gray-200 px-4 sm:px-10 py-6 sm:py-8 flex flex-col gap-4 shadow-2xl max-h-[calc(100vh-8rem)] overflow-y-auto">
+          <div className="bg-white border-t border-gray-200 px-4 sm:px-10 py-6 sm:py-8 flex flex-col gap-2 shadow-2xl max-h-[calc(100vh-8rem)] overflow-y-auto">
             {navLinks.map((link) =>
               link.dropdown ? (
                 <MobileDropdown key={link.label} link={link} active={isLinkActive(link)} />
@@ -320,7 +391,37 @@ const serviceItems = [
                 </a>
               )
             )}
-            
+
+            {/* Mobile social icons */}
+            <div className="flex items-center gap-4 pt-4 mt-4 border-t border-gray-200">
+              <a
+                href="https://www.facebook.com/people/Nepal-International-ADR-Center-NIAC/61572742353544/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-500 hover:text-[#1877F2] transition-colors"
+                aria-label="Facebook"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              </a>
+              <a
+                href="https://x.com/niac_nepal"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-500 hover:text-black transition-colors"
+                aria-label="Twitter / X"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </a>
+              <a
+                href="https://www.linkedin.com/company/nepal-international-adr-center/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-500 hover:text-[#0A66C2] transition-colors"
+                aria-label="LinkedIn"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </a>
+            </div>
           </div>
         </div>
       </header>

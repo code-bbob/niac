@@ -122,7 +122,7 @@ export default async function BlogsPage({ searchParams }) {
   return (
     <div className="bg-white">
       {/* Hero */}
-      <section className="relative overflow-hidden bg-[#0F1B4B] pt-[100px]">
+      <section className="relative overflow-hidden bg-[#0F1B4B] pt-[200px]">
         <div className="relative z-10 max-w-[1200px] mx-auto px-8 pb-[50px]">
           <nav className="flex items-center gap-2 mb-4 text-white/60 text-[11px] font-semibold tracking-[0.1em] uppercase">
             <Link href="/" className="text-white hover:text-tertiary-fixed transition-colors">Home</Link>

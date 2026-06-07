@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Service, ServiceImage, ContactMessage, Appointment, AppointmentDay, AvailableHours, Team, Bulletin, Event
+from .models import Service, ServiceImage, ContactMessage, Appointment, AppointmentDay, AvailableHours, Team, Bulletin, Event, EventBooking
 
 
 class ServiceImageSerializer(serializers.ModelSerializer):
@@ -115,12 +115,25 @@ class EventSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Event 
-        fields = ['__all__']
+        fields = ['id', 'title', 'slug', 'description', 'featured_image', 'image_url', 'order', 'event_start_date', 'event_end_date', 'early_bird_price', 'ticket_price']
 
     def get_image_url(self,obj):
-        if obj.image:
+        if obj.featured_image:
             request = self.context.get('request')
             if request:
-                return request.build_absolute_uri(obj.image.url)
-            return obj.image.url
-        return none
+                return request.build_absolute_uri(obj.featured_image.url)
+            return obj.featured_image.url
+        return None
+
+
+class EventBookingSerializer(serializers.ModelSerializer):
+    event_title = serializers.CharField(source='event.title', read_only=True)
+
+    class Meta:
+        model = EventBooking
+        fields = [
+            'id', 'event', 'event_title', 'spaces', 'name', 'email',
+            'address', 'city', 'state', 'zip_code', 'country', 'phone',
+            'comment', 'company', 'payment_reference_no', 'is_verified'
+        ]
+        read_only_fields = ['id', 'payment_reference_no', 'is_verified']
