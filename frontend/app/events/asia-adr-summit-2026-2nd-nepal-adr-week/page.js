@@ -21,6 +21,10 @@ import {
   Mountain,
   Users,
   ChevronLeft,
+  Sun,
+  TreePine,
+  Sailboat,
+  Plane,
 } from "lucide-react";
 import Image from "next/image";
 
@@ -440,6 +444,10 @@ function Summit2025Carousel() {
   const images = [
     "/images/adr-2025-1.webp",
     "/images/adr-2025-2.webp",
+    "/images/past-events-2024.jpeg",
+    "/images/past-events-2024-2.jpeg",
+    "/images/past-events-2024-3.jpeg",
+    "/images/past-events-2024-4.jpeg",
     "/images/adr-2025-3.webp",
     "/images/adr-2025-4.webp",
     "/images/adr-2025-5.webp",
@@ -578,6 +586,116 @@ function NepalGallery() {
               </div>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Explore Nepal ─────────────────────────────────────────────────────────── */
+
+function ExploreNepal() {
+  const categories = [
+    {
+      title: "Short Trips Near Kathmandu",
+      duration: "1\u20132 Days",
+      cards: [
+        { icon: Mountain, title: "Chandragiri Hills", desc: "Take a scenic cable car ride just outside Kathmandu to get panoramic views of the Himalayan range and walk through lush, forested walking trails." },
+        { icon: Sun, title: "Nagarkot Sunrise", desc: "Travel to this famous hilltop village for an overnight stay to witness the sun rising over Mount Everest and the surrounding snow-capped peaks." },
+        { icon: TreePine, title: "Shivapuri Nagarjun National Park", desc: "Embark on a day hike through peaceful subtropical forests, hidden waterfalls, and active monasteries right on the northern edge of the valley." },
+      ],
+    },
+    {
+      title: "Multi-Day Post-Summit Adventures",
+      duration: "3\u20135 Days",
+      cards: [
+        { icon: Sailboat, title: "Pokhara Lakeside", desc: "Take a short 25-minute flight to Nepal\u2019s tourism capital to relax by Phewa Lake and see the iconic, mirror-like reflection of Mount Machhapuchhre (Fishtail)." },
+        { icon: TreePine, title: "Chitwan National Park", desc: "Travel south to the tropical lowlands to experience a jungle safari, where you can spot endangered one-horned rhinos, Royal Bengal tigers, and exotic bird species." },
+        { icon: Mountain, title: "Dhulikhel Panorama", desc: "Visit this ancient Newari town to enjoy unobstructed views of the high Himalayas, terraced fields, and traditional rural mountain life." },
+      ],
+    },
+  ];
+
+  return (
+    <section className="py-24 md:py-32 bg-white relative overflow-hidden">
+      <div
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage:
+            "url('https://www.transparenttextures.com/patterns/simple-dashed.png')",
+        }}
+      />
+      <div className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-8">
+        <SectionHeading subtitle="Here are the best ways to see and feel the natural beauty of Nepal during your trip.">
+          Explore the Wonders of Nepal
+        </SectionHeading>
+
+        <p className="reveal text-stone-600 text-center text-base md:text-lg max-w-4xl mx-auto leading-relaxed mb-16">
+          To fully experience the breathtaking landscapes and deep serenity of
+          Nepal while attending the Asia ADR Summit and Nepal ADR Week 2026, you
+          can easily blend professional networking with world-class nature
+          excursions.
+        </p>
+
+        {categories.map((cat, ci) => (
+          <div key={ci} className="mb-16 last:mb-0">
+            <div className="reveal text-center mb-10">
+              <span className="inline-block text-xs tracking-[0.2em] uppercase text-[#9F8320]/70 font-medium mb-2">
+                {cat.duration}
+              </span>
+              <h3 className="font-serif text-2xl md:text-3xl text-[#1e3a8a] font-semibold">
+                {cat.title}
+              </h3>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {cat.cards.map((card, i) => {
+                const Icon = card.icon;
+                return (
+                  <div
+                    key={card.title}
+                    className="reveal bg-white p-8 border-t-4 border-[#9F8320] shadow-sm hover:shadow-md transition-all duration-500 hover:-translate-y-1 rounded-lg"
+                    style={{ transitionDelay: `${i * 100}ms` }}
+                  >
+                    <div className="w-12 h-12 bg-stone-100 rounded-lg flex items-center justify-center mb-6 text-[#9F8320]">
+                      <Icon className="w-6 h-6" />
+                    </div>
+                    <h4 className="font-serif text-xl text-[#1e3a8a] mb-4 font-semibold">
+                      {card.title}
+                    </h4>
+                    <p className="text-stone-500 text-sm leading-relaxed">
+                      {card.desc}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+
+        <div className="reveal">
+          <div className="text-center mb-10">
+            <span className="inline-block text-xs tracking-[0.2em] uppercase text-[#9F8320]/70 font-medium mb-2">
+              1 Hour
+            </span>
+            <h3 className="font-serif text-2xl md:text-3xl text-[#1e3a8a] font-semibold">
+              Flight Excursions
+            </h3>
+          </div>
+          <div className="max-w-2xl mx-auto">
+            <div className="bg-white p-8 border-t-4 border-[#9F8320] shadow-sm hover:shadow-md transition-all duration-500 hover:-translate-y-1 rounded-lg text-center">
+              <div className="w-12 h-12 bg-stone-100 rounded-lg flex items-center justify-center mb-6 text-[#9F8320] mx-auto">
+                <Plane className="w-6 h-6" />
+              </div>
+              <h4 className="font-serif text-xl text-[#1e3a8a] mb-4 font-semibold">
+                Everest Mountain Flight
+              </h4>
+              <p className="text-stone-500 text-sm leading-relaxed">
+                Take an early morning scenic flight from Kathmandu&apos;s airport
+                to fly directly past Mount Everest and the highest peaks on Earth
+                if your schedule is tight.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1055,6 +1173,7 @@ export default function EventsPage() {
       <About />
       <SectionDivider />
       <NepalGallery />
+      <ExploreNepal />
       <WhyNiac />
       <SectionDivider />
       <Organizers />
