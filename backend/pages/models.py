@@ -238,3 +238,38 @@ class Bulletin(models.Model):
     class Meta:
         verbose_name_plural = "Bulletins"
         ordering = ['-created_at']
+
+
+class Event(models.Model):
+
+    title = models.CharField(max_length=500)
+    description = CKEditor5Field()
+    featured_image = models.ImageField(upload_to='events/')
+    order = models.IntegerField(null=True,blank=True)
+    event_start_date = models.DateField(null=True,blank=True)
+    event_end_date = models.DateField(null=True, blank=True)
+    early_bird_price = models.FloatField(blank=True,null=True)
+    ticket_price = models.FloatField(blank=True,null=True)
+    def __str__(self):
+        return self.title
+
+
+class EventBooking(models.Model):
+
+    spaces = models.PositiveIntegerField()
+    name = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    state = models.CharField(max_length=255)
+    zip_code = models.CharField(max_length=255)
+    country = models.CharField(max_length=255)
+    phone = models.CharField(max_length=255)
+    comment = models.TextField(null=True, blank=True)
+    company = models.CharField(null=True, blank=True)
+    payment_reference_no = models.CharField(max_length=255)
+    is_verified = models.BooleanField(default=False)
+
+
+    def __str__(self):
+        return f"{self.name} - {self.phone}"

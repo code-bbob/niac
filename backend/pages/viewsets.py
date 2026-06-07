@@ -6,7 +6,7 @@ from .models import Service, ContactMessage, Appointment, AppointmentDay, Availa
 from .serializers import (
     ServiceSerializer, ContactMessageSerializer, 
     AppointmentSerializer, AppointmentDaySerializer, AvailableHoursSerializer, TeamSerializer,
-    BulletinSerializer
+    BulletinSerializer, EventSerializer
 )
 from .utils import send_contact_email_async, send_appointment_confirmation_email, get_available_time_slots
 
@@ -228,3 +228,20 @@ class BulletinViewSet(viewsets.ModelViewSet):
     serializer_class = BulletinSerializer
     ordering = ['-created_at']
 
+from django.db.models import Case, When, Value, IntegerField
+from django.db.models.functions import Now
+
+class EventViewSet(viewsets.ModelViewSet):
+    serializer_class = EventSerializer
+
+    def get_queryset(self):
+        return Event.objects.annotate(
+            sort_group=Case(
+                When(event_start_date__gte=Now(), then=Value(0)),  # future
+                When(event_start_date__lt=Now(), then=Value(1)),   # past
+                output_field=IntegerField(),
+            )
+        ).order_by(
+            'sort_group',          # future first, then past
+            'event_start_date'     # within each group
+        )
