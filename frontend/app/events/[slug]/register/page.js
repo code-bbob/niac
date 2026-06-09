@@ -78,7 +78,6 @@ export default function EventRegistrationPage() {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(null);
-  const [bookingRef, setBookingRef] = useState(null);
 
   const [form, setForm] = useState({
     spaces: 1,
@@ -92,6 +91,7 @@ export default function EventRegistrationPage() {
     country: "",
     company: "",
     comment: "",
+    reference_code: "",
   });
 
   useEffect(() => {
@@ -134,7 +134,6 @@ export default function EventRegistrationPage() {
         throw new Error(data.error || data.message || "Submission failed. Please try again.");
       }
 
-      setBookingRef(data.payment_reference_no);
       setSuccess(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err) {
@@ -171,26 +170,22 @@ export default function EventRegistrationPage() {
               Registration Submitted!
             </h1>
             <p className="reveal text-stone-500 text-lg mb-8 max-w-lg mx-auto">
-              Thank you for registering for the <strong>{event?.title}</strong>. Your payment reference number is:
+              Thank you for registering for the <strong>{event?.title}</strong>. Your registration has been received.
             </p>
-            <div className="reveal inline-block bg-stone-50 border border-stone-200 rounded-xl px-8 py-5 mb-8">
-              <span className="text-xs tracking-[0.2em] uppercase text-stone-400 font-medium">Reference No.</span>
-              <p className="font-mono text-2xl text-[#9F8320] font-bold tracking-wider mt-1">{bookingRef}</p>
-            </div>
             <div className="reveal bg-amber-50/60 border border-amber-200/60 rounded-xl p-6 mb-10 text-left">
               <h3 className="font-serif text-[#1e3a8a] font-semibold mb-2">What happens next?</h3>
               <ul className="space-y-2 text-sm text-stone-600">
                 <li className="flex items-start gap-2">
                   <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#9F8320] flex-shrink-0" />
-                  Our team will review your registration within 24–48 hours.
+                  Please transfer the ticket amount to the bank account provided below.
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#9F8320] flex-shrink-0" />
-                  You will receive a confirmation email with payment instructions.
+                  Include your reference code in the wire transfer for easy identification.
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#9F8320] flex-shrink-0" />
-                  Please quote your reference number in all correspondence.
+                  Our team will verify your payment and confirm your registration within 24–48 hours.
                 </li>
               </ul>
             </div>
@@ -332,9 +327,17 @@ export default function EventRegistrationPage() {
 
               <div className="reveal bg-[#9F8320]/5 border border-[#9F8320]/20 rounded-xl p-6">
                 <h3 className="font-serif text-[#1e3a8a] font-semibold mb-2">Payment Info</h3>
-                <p className="text-stone-500 text-sm leading-relaxed">
-                  A payment reference number will be generated upon submission. Our team will follow up with payment instructions within 24–48 hours.
+                <p className="text-stone-500 text-sm leading-relaxed mb-3">
+                  Please wire the ticket amount to the bank account below and include your reference code in the transfer.
                 </p>
+                {event?.bank_number && (
+                  <div className="text-sm space-y-1">
+                    <p className="text-stone-700"><span className="font-semibold">Bank Account:</span> {event.bank_number}</p>
+                    {event?.swift_code && (
+                      <p className="text-stone-700"><span className="font-semibold">SWIFT Code:</span> {event.swift_code}</p>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
 
@@ -531,6 +534,24 @@ export default function EventRegistrationPage() {
                         <option key={c} value={c}>{c}</option>
                       ))}
                     </select>
+                  </div>
+
+                  {/* Reference Code */}
+                  <div>
+                    <label className="block text-sm font-semibold text-stone-800 mb-2">
+                      Payment Reference Code
+                    </label>
+                    <input
+                      type="text"
+                      name="reference_code"
+                      value={form.reference_code}
+                      onChange={handleChange}
+                      placeholder="Enter your wire transfer reference (optional)"
+                      className="w-full px-4 py-3.5 border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#9F8320]/40 focus:border-[#9F8320] bg-white text-stone-900 placeholder-stone-400 text-sm transition-all"
+                    />
+                    <p className="text-xs text-stone-400 mt-1.5">
+                      If you have already transferred the amount, enter the reference code from your bank transfer.
+                    </p>
                   </div>
 
                   {/* Comment */}

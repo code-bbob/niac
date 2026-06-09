@@ -194,7 +194,7 @@ class EventBookingAdmin(admin.ModelAdmin):
         'spaces',
         'country',
         'phone',
-        'payment_reference_no',
+        'reference_code',
         'verification_status',
     ]
 
@@ -208,7 +208,7 @@ class EventBookingAdmin(admin.ModelAdmin):
         'email',
         'company',
         'phone',
-        'payment_reference_no',
+        'reference_code',
         'city',
         'state',
         'country',
@@ -227,12 +227,23 @@ class EventBookingAdmin(admin.ModelAdmin):
         'zip_code',
         'country',
         'comment',
-        'payment_reference_no',
+        'reference_code',
         'is_verified',
     ]
 
     readonly_fields = [
-        'payment_reference_no',
+        'spaces',
+        'name',
+        'email',
+        'company',
+        'phone',
+        'address',
+        'city',
+        'state',
+        'zip_code',
+        'country',
+        'comment',
+        'reference_code',
     ]
 
     list_per_page = 25

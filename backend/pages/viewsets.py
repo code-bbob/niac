@@ -2,7 +2,6 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from datetime import datetime, timedelta
-import uuid
 from .models import Service, ContactMessage, Appointment, AppointmentDay, AvailableHours, Team, Bulletin, EventBooking, Event
 from .serializers import (
     ServiceSerializer, ContactMessageSerializer, 
@@ -252,8 +251,3 @@ class EventViewSet(viewsets.ModelViewSet):
 class EventBookingViewSet(viewsets.ModelViewSet):
     queryset = EventBooking.objects.all()
     serializer_class = EventBookingSerializer
-
-    def perform_create(self, serializer):
-        serializer.save(
-            payment_reference_no=f"NIAC-{uuid.uuid4().hex[:8].upper()}"
-        )

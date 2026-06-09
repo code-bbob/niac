@@ -115,7 +115,7 @@ class EventSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Event 
-        fields = ['id', 'title', 'slug', 'description', 'featured_image', 'image_url', 'order', 'event_start_date', 'event_end_date', 'early_bird_price', 'ticket_price']
+        fields = ['id', 'title', 'slug', 'description', 'featured_image', 'image_url', 'order', 'event_start_date', 'event_end_date', 'early_bird_price', 'ticket_price', 'bank_number', 'swift_code']
 
     def get_image_url(self,obj):
         if obj.featured_image:
@@ -134,6 +134,6 @@ class EventBookingSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'event', 'event_title', 'spaces', 'name', 'email',
             'address', 'city', 'state', 'zip_code', 'country', 'phone',
-            'comment', 'company', 'payment_reference_no', 'is_verified'
+            'comment', 'company', 'reference_code', 'is_verified'
         ]
-        read_only_fields = ['id', 'payment_reference_no', 'is_verified']
+        read_only_fields = ['id', 'is_verified']

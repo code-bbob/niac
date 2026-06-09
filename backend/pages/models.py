@@ -251,6 +251,8 @@ class Event(models.Model):
     event_end_date = models.DateField(null=True, blank=True)
     early_bird_price = models.FloatField(blank=True,null=True)
     ticket_price = models.FloatField(blank=True,null=True)
+    bank_number = models.CharField(max_length=255, blank=True, null=True)
+    swift_code = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -285,7 +287,7 @@ class EventBooking(models.Model):
     phone = models.CharField(max_length=255)
     comment = models.TextField(null=True, blank=True)
     company = models.CharField(null=True, blank=True)
-    payment_reference_no = models.CharField(max_length=255)
+    reference_code = models.CharField(max_length=255, blank=True, null=True)
     is_verified = models.BooleanField(default=False)
 
 
