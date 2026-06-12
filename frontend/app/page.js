@@ -49,16 +49,16 @@ function HeroSection() {
     <section className="relative min-h-screen w-full flex flex-col justify-center overflow-hidden">
       <div className="absolute hidden md:block inset-x-0 bottom-0 z-0 top-[120px]">
 
-        <div className="absolute w-xl left-1/2 -translate-x-1/2 bottom-1/8 flex gap-4 justify-center">
+        <div className="absolute w-xl left-1/2 -translate-x-1/2 xl:bottom-14 flex gap-4 justify-center">
           <a
             href="/events/asia-adr-summit-2026-2nd-nepal-adr-week/register"
-            className="inline-flex items-center justify-center border border-white/40 text-md tracking-[0.2em] uppercase px-8 py-4 bg-red-900 text-white font-extrabold hover:bg-white hover:text-primary-container transition-all"
+            className="inline-flex items-center justify-center border border-white/40 text-lg tracking-[0.2em] uppercase px-8 py-4 bg-red-900 text-white font-extrabold hover:bg-white hover:text-primary-container transition-all"
           >
             Register Now
           </a>
           <a
             href="/events/asia-adr-summit-2026-2nd-nepal-adr-week/"
-            className="inline-flex items-center justify-center bg-tertiary-fixed text-md font-extrabold tracking-[0.2em] uppercase px-8 py-4 text-primary-container hover:bg-tertiary-fixed-dim transition-all"
+            className="inline-flex items-center justify-center bg-tertiary-fixed text-lg font-extrabold tracking-[0.2em] uppercase px-8 py-4 text-primary-container hover:bg-tertiary-fixed-dim transition-all"
           >
             Learn More
           </a>
@@ -511,7 +511,7 @@ function ApcamSection() {
 
 function RequestCallback() {
   const [formData, setFormData] = useState({
-    service: "Mediation",
+    service: "Arbitration",
     name: "",
     phone: "",
   });

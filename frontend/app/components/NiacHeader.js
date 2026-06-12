@@ -38,7 +38,7 @@ const navLinks = [
   },
   { label: "Events", href: "/events" },
   { label: "Blogs", href: "/blogs" },
-  { label: "Fee Calculator", href: "/fee-calculator" },
+  // { label: "Fee Calculator", href: "/fee-calculator" },
   {
     label: "Rules",
     href: "#",
@@ -192,10 +192,10 @@ const serviceItems = [
       label: s.name,
       href: `/services/${s.slug}`,
     })),
-  {
-    label: "Mediation Fee Calculation",
-    href: "/fee-calculator",
-  },
+  // {
+  //   label: "Mediation Fee Calculation",
+  //   href: "/fee-calculator",
+  // },
 ];
   const pathname = usePathname();
 

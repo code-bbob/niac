@@ -179,19 +179,19 @@ function Hero() {
 
       <div className="absolute top-0 right-0 w-1/3 h-1 bg-[#9F8320] z-10" />
 
-      <div className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-8 w-full py-32 md:py-40">
+      <div className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-8 w-full py-40 md:py-40">
         <div className="max-w-3xl">
           {/* <div className="reveal flex items-center gap-3 text-xs tracking-[0.2em] uppercase text-[#9F8320] font-medium mb-6"> */}
           {/*   <span className="h-px w-8 bg-[#9F8320]/50" /> */}
           {/*   A Warm Invitation from the Heart of the Himalayas */}
           {/* </div> */}
 
-          <p className="reveal font-serif text-5xl sm:text-6xl md:text-[100px] leading-[1.05] tracking-tight text-white font-bold mb-4">
+          <p className="reveal font-serif text-5xl sm:text-6xl md:text-[80px] leading-[1.05] tracking-tight text-white font-bold mb-4">
             Asia ADR Summit 2026
           </p>
 
-          <div className="reveal font-serif text-xl md:text-6xl text-[#9F8320] font-semibold italic border-t border-b border-[#9F8320]/30 py-3 inline-block">
-            &amp; 2nd Nepal ADR Week
+          <div className="reveal font-serif text-5xl md:text-[80px] text-white font-semibold italic border-t border-b border-[#9F8320]/30 py-3 inline-block">
+            2nd Nepal ADR Week
           </div>
 
           {/* <p className="reveal font-serif text-2xl md:text-3xl text-white font-bold mt-8"> */}
@@ -263,10 +263,10 @@ function Stats() {
     <section className="bg-[#10245f] py-14 md:py-16">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-          <Counter end={30} label="Expert Speakers" />
-          <Counter end={15} label="Countries" />
+          <Counter end={40} label="Expert Speakers" />
+          <Counter end={30} label="Countries" />
           <Counter end={3} label="Conference Days" />
-          <Counter end={200} label="Delegates" />
+          <Counter end={300} label="Delegates" />
         </div>
       </div>
     </section>
@@ -444,13 +444,13 @@ function Summit2025Carousel() {
   const images = [
     "/images/adr-2025-1.webp",
     "/images/adr-2025-2.webp",
-    "/images/past-events-2024.jpeg",
     "/images/past-events-2024-2.jpeg",
     "/images/past-events-2024-3.jpeg",
     "/images/past-events-2024-4.jpeg",
     "/images/adr-2025-3.webp",
     "/images/adr-2025-4.webp",
     "/images/adr-2025-5.webp",
+    "/images/past-events-2024.jpeg",
   ];
 
   const [current, setCurrent] = useState(0);
@@ -987,7 +987,7 @@ function Topics() {
 /* ── Venue ───────────────────────────────────────────────────────────────── */
 
 function Venue() {
-  const slides = ["/images/hotel1.jpg", "/images/hotel2.jpg", "/images/hotel3.jpg"];
+  const slides = ["/images/hotel1.jpg", "/images/hotel2.jpg",  "/images/hotelbw.jpg", "/images/hotelbw2.jpg", "/images/hotelbw3.jpg"];
 
   const [current, setCurrent] = useState(0);
   const len = slides.length;
@@ -1011,11 +1011,14 @@ function Venue() {
           className="inline-block text-[#9F8320] text-5xl mb-6"
           size={48}
         />
-        <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-[#1e3a8a] font-bold mb-2">
+        <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-[#1e3a8a] font-bold mb-6">
           The Official Venue
         </h2>
-        <p className="font-serif text-2xl md:text-3xl text-[#9F8320] mb-8">
+        <p className="font-serif text-2xl md:text-3xl text-[#9F8320] mb-2">
           Hotel View Bhrikuti, Kathmandu, Nepal
+        </p>
+        <p className="font-serif text-2xl md:text-3xl text-[#9F8320] mb-12">
+          Best Western Plus Hotel, Kathmandu, Nepal
         </p>
         <div className="inline-flex items-center gap-2 text-white/60 hover:text-[#9F8320] cursor-pointer transition-colors group">
           <MapPin className="w-4 h-4" />
@@ -1134,7 +1137,7 @@ function Cta() {
         </div>
 
         <h2 className="reveal font-serif text-3xl md:text-4xl lg:text-5xl text-white font-bold leading-tight mb-6">
-          Secure Your Place at the Asia ADR Summit 2026
+          Secure Your Place at the Asia ADR Summit 2026 &amp; 2nd Nepal ADR Week 
         </h2>
 
         <p className="reveal text-white/60 text-base md:text-lg max-w-xl mx-auto mb-10 leading-relaxed">
