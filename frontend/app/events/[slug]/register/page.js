@@ -339,6 +339,43 @@ export default function EventRegistrationPage() {
                   </div>
                 )}
               </div>
+
+              <div className="reveal bg-stone-50 border border-stone-200 rounded-xl p-6">
+                <h3 className="font-serif text-[#1e3a8a] font-semibold mb-3">Hotel Accommodation</h3>
+                <p className="text-stone-500 text-sm leading-relaxed mb-4">
+                  We recommend the following hotels for your stay during the event:
+                </p>
+                <div className="space-y-4">
+                  <div>
+                    <p className="font-semibold text-sm text-stone-800 mb-2">Hotel View Bhrikuti</p>
+                    <div className="rounded-lg overflow-hidden">
+                      <iframe
+                        src="https://maps.google.com/maps?q=Hotel%20View%20Bhrikuti%20Kathmandu&output=embed"
+                        width="100%"
+                        height="160"
+                        style={{ border: 0 }}
+                        allowFullScreen
+                        loading="lazy"
+                        title="Hotel View Bhrikuti location"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-sm text-stone-800 mb-2">Best Western Plus Hotel</p>
+                    <div className="rounded-lg overflow-hidden">
+                      <iframe
+                        src="https://maps.google.com/maps?q=Best%20Western%20Plus%20Hotel%20Kathmandu&output=embed"
+                        width="100%"
+                        height="160"
+                        style={{ border: 0 }}
+                        allowFullScreen
+                        loading="lazy"
+                        title="Best Western Plus Hotel location"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Form */}

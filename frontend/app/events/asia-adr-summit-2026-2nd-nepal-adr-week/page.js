@@ -1020,11 +1020,37 @@ function Venue() {
         <p className="font-serif text-2xl md:text-3xl text-[#9F8320] mb-12">
           Best Western Plus Hotel, Kathmandu, Nepal
         </p>
-        <div className="inline-flex items-center gap-2 text-white/60 hover:text-[#9F8320] cursor-pointer transition-colors group">
-          <MapPin className="w-4 h-4" />
-          <span className="text-sm tracking-wide underline underline-offset-4 group-hover:no-underline transition-all">
-            View on Google Maps
-          </span>
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="rounded-xl overflow-hidden shadow-lg">
+            <p className="text-sm font-semibold text-stone-700 mb-2 text-left">
+              Hotel View Bhrikuti
+            </p>
+            <iframe
+              src="https://maps.google.com/maps?q=Hotel%20View%20Bhrikuti%20Kathmandu&output=embed"
+              width="100%"
+              height="220"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              title="Hotel View Bhrikuti location"
+              className="rounded-lg"
+            />
+          </div>
+          <div className="rounded-xl overflow-hidden shadow-lg">
+            <p className="text-sm font-semibold text-stone-700 mb-2 text-left">
+              Best Western Plus Hotel
+            </p>
+            <iframe
+              src="https://maps.google.com/maps?q=Best%20Western%20Plus%20Hotel%20Kathmandu&output=embed"
+              width="100%"
+              height="220"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              title="Best Western Plus Hotel location"
+              className="rounded-lg"
+            />
+          </div>
         </div>
 
         <div className="mt-12 max-w-7xl mx-auto relative w-full h-[600px] md:h-[600px] overflow-hidden rounded-xl border border-white/10">

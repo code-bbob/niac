@@ -481,18 +481,14 @@ export default function AboutPage() {
             <h2 class="relative text-blue-900 inline-block after:content-[''] after:absolute after:left-0 after:-bottom-2 after:w-10 after:h-2 after:bg-[#b08d2a] after:rounded-full">
               Our Objectives
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 mt-8 gap-8">
+            <ul className="mt-8 space-y-4">
               {objectives.map((obj, i) => (
-                <div key={i} className="space-y-2">
-                  <span className="text-black font-bold text-xl block">
-                    {(i + 1).toString().padStart(2, "0")}
-                  </span>
-                  <p className="text-black text-base leading-relaxed tracking-wide">
-                    {obj}
-                  </p>
-                </div>
+                <li key={i} className="flex items-start gap-3 text-black text-base leading-relaxed tracking-wide">
+                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#b08d2a] flex-shrink-0" />
+                  {obj}
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Vision */}
@@ -529,7 +525,7 @@ export default function AboutPage() {
       {/* Contact CTA */}
 
       {/* Core Values */}
-      <section className=" bg-surface px-8 mb-16">
+      <section className=" bg-surface px-8 pb-16">
         <h2 className="font-serif text-3xl sm:text-4xl text-black text-center mb-16">
           Core Institutional Values
         </h2>
