@@ -520,14 +520,13 @@ function RequestCallback() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`${API_URL}/contact/`, {
+      const res = await fetch(`${API_URL}/callback-requests/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: formData.name,
-          email: `${formData.name.toLowerCase().replace(/\s+/g, ".")}@temp.com`,
           phone: formData.phone,
-          message: `Callback request for ${formData.service} service from ${formData.name}`,
+          service: formData.service,
         }),
       });
       if (res.ok) {

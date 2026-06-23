@@ -273,6 +273,20 @@ class Event(models.Model):
         super().save(*args, **kwargs)
 
 
+class CallbackRequest(models.Model):
+    name = models.CharField(max_length=255)
+    phone = models.CharField(max_length=20)
+    service = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_contacted = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"Callback for {self.name} ({self.phone})"
+
+    class Meta:
+        ordering = ['-created_at']
+
+
 class EventBooking(models.Model):
 
     event = models.ForeignKey(Event, on_delete=models.CASCADE)

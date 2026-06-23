@@ -2,13 +2,13 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from datetime import datetime, timedelta
-from .models import Service, ContactMessage, Appointment, AppointmentDay, AvailableHours, Team, Bulletin, EventBooking, Event
+from .models import Service, ContactMessage, Appointment, AppointmentDay, AvailableHours, Team, Bulletin, EventBooking, Event, CallbackRequest
 from .serializers import (
     ServiceSerializer, ContactMessageSerializer, 
     AppointmentSerializer, AppointmentDaySerializer, AvailableHoursSerializer, TeamSerializer,
-    BulletinSerializer, EventSerializer, EventBookingSerializer
+    BulletinSerializer, EventSerializer, EventBookingSerializer, CallbackRequestSerializer
 )
-from .utils import send_contact_email_async, send_appointment_confirmation_email, get_available_time_slots
+from .utils import send_contact_email_async, send_appointment_confirmation_email, send_callback_email_async, send_event_booking_email_async, get_available_time_slots
 
 
 class ServiceViewSet(viewsets.ModelViewSet):
@@ -248,6 +248,40 @@ class EventViewSet(viewsets.ModelViewSet):
         )
 
 
+class CallbackRequestViewSet(viewsets.ModelViewSet):
+    queryset = CallbackRequest.objects.all()
+    serializer_class = CallbackRequestSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        send_callback_email_async(
+            name=serializer.validated_data['name'],
+            phone=serializer.validated_data['phone'],
+            service=serializer.validated_data['service']
+        )
+
+        return Response(
+            {"message": "Thank you for your callback request. We will get back to you soon."},
+            status=status.HTTP_201_CREATED
+        )
+
+
 class EventBookingViewSet(viewsets.ModelViewSet):
     queryset = EventBooking.objects.all()
     serializer_class = EventBookingSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        booking = serializer.instance
+        send_event_booking_email_async(booking)
+
+        return Response(
+            {"message": "Thank you for registering! We have sent you a confirmation email."},
+            status=status.HTTP_201_CREATED
+        )

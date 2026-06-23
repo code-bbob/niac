@@ -22,7 +22,7 @@ from rest_framework.routers import DefaultRouter
 from pages.viewsets import (
     ServiceViewSet, ContactMessageViewSet, 
     AppointmentViewSet, AppointmentDayViewSet, AvailableHoursViewSet, TeamViewSet,
-    BulletinViewSet, EventViewSet, EventBookingViewSet
+    BulletinViewSet, EventViewSet, EventBookingViewSet, CallbackRequestViewSet
 )
 from blogs.viewsets import BlogViewSet
 
@@ -37,6 +37,7 @@ router.register(r'blogs', BlogViewSet, basename='blog')
 router.register(r'bulletins', BulletinViewSet, basename='bulletin')
 router.register(r'events', EventViewSet, basename='event')
 router.register(r'event-bookings', EventBookingViewSet, basename='event-booking')
+router.register(r'callback-requests', CallbackRequestViewSet, basename='callback-request')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

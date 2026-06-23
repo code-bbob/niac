@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Service, ServiceImage, ContactMessage, Appointment, AppointmentDay, AvailableHours, Team, Bulletin, Event, EventBooking
+from .models import Service, ServiceImage, ContactMessage, Appointment, AppointmentDay, AvailableHours, Team, Bulletin, Event, EventBooking, CallbackRequest
 
 
 class ServiceImageSerializer(serializers.ModelSerializer):
@@ -126,6 +126,13 @@ class EventSerializer(serializers.ModelSerializer):
         return None
 
 
+class CallbackRequestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CallbackRequest
+        fields = ['id', 'name', 'phone', 'service', 'created_at', 'is_contacted']
+        read_only_fields = ['id', 'created_at', 'is_contacted']
+
+
 class EventBookingSerializer(serializers.ModelSerializer):
     event_title = serializers.CharField(source='event.title', read_only=True)
 
@@ -134,6 +141,6 @@ class EventBookingSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'event', 'event_title', 'spaces', 'name', 'email',
             'address', 'city', 'state', 'zip_code', 'country', 'phone',
-            'comment', 'company', 'reference_code', 'is_verified'
+            'comment', 'company', 'reference_code', 'hotel', 'is_verified'
         ]
         read_only_fields = ['id', 'is_verified']

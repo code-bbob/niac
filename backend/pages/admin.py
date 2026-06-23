@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Service, ServiceImage, ContactMessage, Appointment, AppointmentDay, AvailableHours, Team, Blog, Bulletin, Event
+from .models import Service, ServiceImage, ContactMessage, Appointment, AppointmentDay, AvailableHours, Team, Blog, Bulletin, Event, CallbackRequest
 
 
 admin.site.site_header = "NIAC Admin"
@@ -83,6 +83,21 @@ class ContactMessageAdmin(admin.ModelAdmin):
     def has_add_permission(self, request):
         return False
     
+    def has_delete_permission(self, request, obj=None):
+        return request.user.is_superuser
+
+
+@admin.register(CallbackRequest)
+class CallbackRequestAdmin(admin.ModelAdmin):
+    list_display = ['name', 'phone', 'service', 'created_at', 'is_contacted']
+    list_filter = ['service', 'is_contacted', 'created_at']
+    search_fields = ['name', 'phone', 'service']
+    readonly_fields = ['name', 'phone', 'service', 'created_at']
+    fields = ['name', 'phone', 'service', 'created_at', 'is_contacted']
+
+    def has_add_permission(self, request):
+        return False
+
     def has_delete_permission(self, request, obj=None):
         return request.user.is_superuser
 
