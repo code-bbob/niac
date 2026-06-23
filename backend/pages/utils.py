@@ -84,7 +84,7 @@ def send_contact_email_async(name, email, message):
             """
 
             send_brevo_email(
-                settings.DEFAULT_FROM_EMAIL_ADDRESS,
+                settings.secretariatniac@gmail.com,
                 admin_subject,
                 admin_html_message,
             )

@@ -192,7 +192,7 @@ USE_TZ = True
 
 # Brevo API v3 (direct API calls, no SMTP)
 BREVO_API_KEY = os.getenv("SENDINBLUE_API_KEY")
-DEFAULT_FROM_EMAIL_ADDRESS = "secretariatniac@gmail.com"
+DEFAULT_FROM_EMAIL_ADDRESS = "secretariat@niac.org.np"
 DEFAULT_FROM_EMAIL_NAME = "Nepal International ADR Center"
 
 
