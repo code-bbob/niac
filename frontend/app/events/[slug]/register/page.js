@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import {
@@ -11,7 +11,6 @@ import {
   ChevronRight,
   CheckCircle,
   Loader2,
-  Ticket,
   Upload,
   FileText,
   Banknote,
@@ -212,6 +211,7 @@ export default function EventRegistrationPage() {
 
   const [form, setForm] = useState({
     spaces: 1,
+    participant_type: "nepali",
     name: "",
     email: "",
     phone: "",
@@ -224,6 +224,29 @@ export default function EventRegistrationPage() {
     comment: "",
     reference_code: "",
   });
+
+  const pricing = useMemo(() => {
+    if (!event) return null;
+    const { participant_type, spaces } = form;
+    let label, unit, totalDisplay;
+    if (participant_type === "nepali") {
+      const price = event.nepali_price_npr || 25000;
+      label = `NPR ${price.toLocaleString()}`;
+      unit = `NPR ${price.toLocaleString()}`;
+      totalDisplay = `NPR ${(price * spaces).toLocaleString()}`;
+    } else if (participant_type === "foreign_early_bird") {
+      const price = event.foreign_early_bird_usd || 200;
+      label = `USD ${price.toLocaleString()}`;
+      unit = `USD ${price.toLocaleString()}`;
+      totalDisplay = `USD ${(price * spaces).toLocaleString()}`;
+    } else {
+      const price = event.foreign_standard_usd || 250;
+      label = `USD ${price.toLocaleString()}`;
+      unit = `USD ${price.toLocaleString()}`;
+      totalDisplay = `USD ${(price * spaces).toLocaleString()}`;
+    }
+    return { label, unit, totalDisplay };
+  }, [event, form.participant_type, form.spaces]);
 
   // Success state
   const [bookingData, setBookingData] = useState(null);
@@ -306,10 +329,15 @@ export default function EventRegistrationPage() {
     setError(null);
 
     try {
+      const payload = {
+        ...form,
+        event: event.id,
+        total_amount_display: pricing?.totalDisplay || "",
+      };
       const res = await fetch(`${API_URL}/event-bookings/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, event: event.id }),
+        body: JSON.stringify(payload),
       });
 
       const data = await res.json();
@@ -487,6 +515,30 @@ export default function EventRegistrationPage() {
               </p>
             </div>
 
+            {/* Pricing Summary on Success */}
+            {bookingData?.total_amount_display && (
+              <div className="bg-[#1e3a8a]/5 border border-[#1e3a8a]/15 rounded-xl p-5 mb-8">
+                <h4 className="font-semibold text-[#1e3a8a] text-sm mb-3">Registration Fee Summary</h4>
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between text-stone-600">
+                    <span>Participant Type</span>
+                    <span className="font-medium text-stone-800">
+                      {bookingData.participant_type === "nepali" ? "Nepali Participant" :
+                       bookingData.participant_type === "foreign_early_bird" ? "Foreign (Early Bird)" : "Foreign (Standard)"}
+                    </span>
+                  </div>
+                  <div className="flex justify-between text-stone-600">
+                    <span>Number of Participants</span>
+                    <span className="font-medium text-stone-800">{bookingData.spaces}</span>
+                  </div>
+                  <div className="border-t border-stone-200 pt-2 flex justify-between">
+                    <span className="font-semibold text-stone-800">Total Amount</span>
+                    <span className="font-bold text-lg text-[#1e3a8a]">{bookingData.total_amount_display}</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Next Steps */}
             <div className="bg-amber-50/80 border border-amber-200/60 rounded-xl p-6 mb-8">
               <h3 className="font-serif text-[#1e3a8a] font-semibold mb-4 text-lg">Complete Your Registration – 3 Simple Steps</h3>
@@ -496,7 +548,7 @@ export default function EventRegistrationPage() {
                   <div>
                     <p className="font-semibold text-stone-800 text-sm">Send Wire Transfer to Sanima Bank</p>
                     <p className="text-stone-500 text-xs mt-1">
-                      Instruct your bank to wire the USD ticket amount. You <strong className="text-red-600">MUST</strong> put{" "}
+                      Instruct your bank to wire <strong>{bookingData?.total_amount_display || "the ticket amount"}</strong>. You <strong className="text-red-600">MUST</strong> put{" "}
                       <span className="font-mono font-bold text-[#1e3a8a] bg-[#1e3a8a]/10 px-1.5 py-0.5 rounded">
                         {bookingData?.registration_id}
                       </span>{" "}
@@ -681,19 +733,21 @@ export default function EventRegistrationPage() {
                 Kathmandu, Nepal
               </span>
             </div>
-            {event?.ticket_price && (
-              <div className="reveal mt-6 inline-flex items-center gap-3 bg-[#9F8320]/15 border border-[#9F8320]/30 px-6 py-3 rounded-xl">
-                <Ticket className="w-5 h-5 text-[#9F8320]" />
-                <div>
-                  <span className="text-white/60 text-xs tracking-wider uppercase">Ticket Price</span>
-                  <p className="text-white font-semibold text-lg">${event.ticket_price.toLocaleString()}</p>
+            {(event?.nepali_price_npr || event?.foreign_early_bird_usd || event?.foreign_standard_usd) && (
+              <div className="reveal mt-6 inline-flex flex-wrap items-stretch gap-0 bg-[#9F8320]/15 border border-[#9F8320]/30 rounded-xl overflow-hidden">
+                <div className="px-5 py-3 border-r border-[#9F8320]/20">
+                  <span className="text-white/60 text-xs tracking-wider uppercase">Nepali</span>
+                  <p className="text-white font-semibold text-base">NPR {event.nepali_price_npr?.toLocaleString() || "25,000"}</p>
                 </div>
-                {event?.early_bird_price && (
-                  <div className="pl-4 ml-4 border-l border-white/20">
-                    <span className="text-white/60 text-xs tracking-wider uppercase">Early Bird</span>
-                    <p className="text-[#9F8320] font-semibold text-lg">${event.early_bird_price.toLocaleString()}</p>
-                  </div>
-                )}
+                <div className="px-5 py-3 border-r border-[#9F8320]/20">
+                  <span className="text-white/60 text-xs tracking-wider uppercase">Foreign (Early Bird)</span>
+                  <p className="text-[#9F8320] font-semibold text-base">USD {event.foreign_early_bird_usd?.toLocaleString() || "200"}</p>
+                  <span className="text-white/40 text-[10px]">until Aug 2026</span>
+                </div>
+                <div className="px-5 py-3">
+                  <span className="text-white/60 text-xs tracking-wider uppercase">Foreign (Standard)</span>
+                  <p className="text-white font-semibold text-base">USD {event.foreign_standard_usd?.toLocaleString() || "250"}</p>
+                </div>
               </div>
             )}
           </div>
@@ -747,6 +801,28 @@ export default function EventRegistrationPage() {
               {/* Payment Workflow Sidebar */}
               <div className="reveal">
                 <WorkflowSidebar />
+              </div>
+
+              {/* Registration Fees */}
+              <div className="reveal bg-white border border-stone-200 rounded-xl p-5">
+                <h3 className="font-serif text-[#1e3a8a] font-semibold mb-3 text-base">Registration Fees</h3>
+                <div className="space-y-3 text-sm">
+                  <div className="flex items-center justify-between pb-2 border-b border-stone-100">
+                    <span className="text-stone-600">Nepali Participant</span>
+                    <span className="font-bold text-stone-800">NPR {event?.nepali_price_npr?.toLocaleString() || "25,000"}</span>
+                  </div>
+                  <div className="flex items-center justify-between pb-2 border-b border-stone-100">
+                    <div>
+                      <span className="text-stone-600">Foreign Participant</span>
+                      <span className="text-[#9F8320] text-[10px] ml-1.5 font-medium">Early Bird</span>
+                    </div>
+                    <span className="font-bold text-stone-800">USD {event?.foreign_early_bird_usd?.toLocaleString() || "200"}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-stone-600">Foreign Participant <span className="text-stone-400 text-[10px]">(Standard)</span></span>
+                    <span className="font-bold text-stone-800">USD {event?.foreign_standard_usd?.toLocaleString() || "250"}</span>
+                  </div>
+                </div>
               </div>
 
               {/* Payment Info / Bank Details */}
@@ -851,6 +927,42 @@ export default function EventRegistrationPage() {
                       >
                         +
                       </button>
+                    </div>
+                  </div>
+
+                  {/* Participant Type */}
+                  <div>
+                    <label className="block text-sm font-semibold text-stone-800 mb-3">
+                      Participant Type <span className="text-red-400">*</span>
+                    </label>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                      {[
+                        { value: "nepali", label: "Nepali Participant", price: event?.nepali_price_npr ? `NPR ${event.nepali_price_npr.toLocaleString()}` : "NPR 25,000" },
+                        { value: "foreign_early_bird", label: "Foreign (Early Bird)", price: event?.foreign_early_bird_usd ? `USD ${event.foreign_early_bird_usd.toLocaleString()}` : "USD 200", subtitle: "until Aug 2026" },
+                        { value: "foreign_standard", label: "Foreign (Standard)", price: event?.foreign_standard_usd ? `USD ${event.foreign_standard_usd.toLocaleString()}` : "USD 250" },
+                      ].map((opt) => (
+                        <button
+                          key={opt.value}
+                          type="button"
+                          onClick={() => setForm((p) => ({ ...p, participant_type: opt.value }))}
+                          className={`relative text-left p-4 rounded-xl border-2 transition-all ${
+                            form.participant_type === opt.value
+                              ? "border-[#9F8320] bg-[#9F8320]/5 shadow-sm"
+                              : "border-stone-200 bg-white hover:border-stone-300"
+                          }`}
+                        >
+                          <p className="text-sm font-semibold text-stone-800">{opt.label}</p>
+                          <p className="text-lg font-bold text-[#1e3a8a] mt-1">{opt.price}</p>
+                          {opt.subtitle && (
+                            <p className="text-xs text-[#9F8320] font-medium mt-0.5">{opt.subtitle}</p>
+                          )}
+                          {form.participant_type === opt.value && (
+                            <div className="absolute top-2 right-2 w-5 h-5 bg-[#9F8320] rounded-full flex items-center justify-center">
+                              <CheckCircle className="w-3 h-3 text-white" />
+                            </div>
+                          )}
+                        </button>
+                      ))}
                     </div>
                   </div>
 
@@ -1017,8 +1129,35 @@ export default function EventRegistrationPage() {
                     />
                   </div>
 
+                  {/* Pricing Summary */}
+                  {pricing && (
+                    <div className="bg-[#1e3a8a]/5 border border-[#1e3a8a]/15 rounded-xl p-5">
+                      <h4 className="font-semibold text-[#1e3a8a] text-sm mb-3">Registration Fee Summary</h4>
+                      <div className="space-y-2 text-sm">
+                        <div className="flex justify-between text-stone-600">
+                          <span>Participant Type</span>
+                          <span className="font-medium text-stone-800">
+                            {form.participant_type === "nepali" ? "Nepali Participant" : form.participant_type === "foreign_early_bird" ? "Foreign (Early Bird)" : "Foreign (Standard)"}
+                          </span>
+                        </div>
+                        <div className="flex justify-between text-stone-600">
+                          <span>Unit Price</span>
+                          <span className="font-medium text-stone-800">{pricing.unit}</span>
+                        </div>
+                        <div className="flex justify-between text-stone-600">
+                          <span>Number of Participants</span>
+                          <span className="font-medium text-stone-800">{form.spaces}</span>
+                        </div>
+                        <div className="border-t border-stone-200 pt-2 flex justify-between">
+                          <span className="font-semibold text-stone-800">Total Amount</span>
+                          <span className="font-bold text-lg text-[#1e3a8a]">{pricing.totalDisplay}</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
                   {/* Submit */}
-                  <div className="pt-4">
+                  <div>
                     <button
                       type="submit"
                       disabled={submitting}

@@ -252,6 +252,11 @@ class Event(models.Model):
     early_bird_price = models.FloatField(blank=True,null=True)
     ticket_price = models.FloatField(blank=True,null=True)
 
+    # Tiered pricing
+    nepali_price_npr = models.FloatField(blank=True, null=True, help_text="NPR price for Nepali participants")
+    foreign_early_bird_usd = models.FloatField(blank=True, null=True, help_text="USD early-bird price for foreign participants (until August 2026)")
+    foreign_standard_usd = models.FloatField(blank=True, null=True, help_text="USD standard price for foreign participants")
+
     # Registration / Payment
     registration_prefix = models.CharField(max_length=10, default="ADR", help_text="Prefix for registration IDs (e.g., ADR → ADR-001)")
     bank_name = models.CharField(max_length=255, blank=True, default="Sanima Bank Ltd.")
@@ -302,9 +307,17 @@ class EventBooking(models.Model):
         ('confirmed', 'Confirmed'),
     ]
 
+    PARTICIPANT_TYPE_CHOICES = [
+        ('nepali', 'Nepali Participant'),
+        ('foreign_early_bird', 'Foreign Participant - Early Bird'),
+        ('foreign_standard', 'Foreign Participant - Standard'),
+    ]
+
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     registration_id = models.CharField(max_length=50, unique=True, blank=True, editable=False, help_text="Unique registration ID (e.g., ADR-502)")
     spaces = models.PositiveIntegerField()
+    participant_type = models.CharField(max_length=30, choices=PARTICIPANT_TYPE_CHOICES, default='nepali')
+    total_amount_display = models.CharField(max_length=100, blank=True, help_text="Human-readable total (e.g. NPR 50,000 or USD 400)")
     name = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     address = models.CharField(max_length=255)

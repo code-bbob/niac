@@ -278,6 +278,23 @@ class EventBookingViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+
+        total_from_client = serializer.validated_data.get('total_amount_display', '')
+        if not total_from_client:
+            participant_type = serializer.validated_data.get('participant_type', 'nepali')
+            spaces = serializer.validated_data.get('spaces', 1)
+            event = serializer.validated_data['event']
+            if participant_type == 'nepali':
+                price = event.nepali_price_npr or 25000
+                total_amount_display = f"NPR {price * spaces:,.0f}"
+            elif participant_type == 'foreign_early_bird':
+                price = event.foreign_early_bird_usd or 200
+                total_amount_display = f"USD {price * spaces:,.0f}"
+            else:
+                price = event.foreign_standard_usd or 250
+                total_amount_display = f"USD {price * spaces:,.0f}"
+            serializer.validated_data['total_amount_display'] = total_amount_display
+
         self.perform_create(serializer)
 
         booking = serializer.instance

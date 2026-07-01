@@ -474,6 +474,9 @@ def send_event_booking_email_async(booking):
             bank = booking.event
             lookup_url = f"{settings.FRONTEND_URL}/events/{booking.event.slug}/register?token={booking.lookup_token}"
 
+            participant_type_label = dict(booking.PARTICIPANT_TYPE_CHOICES).get(booking.participant_type, 'Nepali Participant')
+            total_display = booking.total_amount_display or '—'
+
             # Email to admin
             admin_subject = f"New Reg #{registration_id} - {booking.name} for {event_title}"
             admin_html_message = f"""
@@ -531,6 +534,16 @@ def send_event_booking_email_async(booking):
                             <div class="info-block">
                                 <div class="info-label">Spaces</div>
                                 <div class="info-value">{booking.spaces}</div>
+                            </div>
+
+                            <div class="info-block">
+                                <div class="info-label">Participant Type</div>
+                                <div class="info-value">{participant_type_label}</div>
+                            </div>
+
+                            <div class="info-block">
+                                <div class="info-label">Total Amount</div>
+                                <div class="info-value" style="font-size:22px;font-weight:bold;color:#1e3a8a;">{total_display}</div>
                             </div>
 
                             <div class="info-block">
@@ -604,6 +617,12 @@ def send_event_booking_email_async(booking):
                                     <span class="detail-label">Spaces Booked:</span> {booking.spaces}
                                 </div>
                                 <div class="detail-row">
+                                    <span class="detail-label">Participant Type:</span> {participant_type_label}
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Total Amount:</span> <strong style="color:#1e3a8a;font-size:18px;">{total_display}</strong>
+                                </div>
+                                <div class="detail-row">
                                     <span class="detail-label">Registration ID:</span> {registration_id}
                                 </div>
                             </div>
@@ -624,8 +643,8 @@ def send_event_booking_email_async(booking):
                                         </td>
                                         <td style="padding:12px 12px 12px 8px;vertical-align:top;font-size:14px;color:#444;line-height:1.6;">
                                             <strong>Send Wire Transfer</strong><br>
-                                            Instruct your bank to wire the ticket amount to our Sanima Bank account (details below).<br>
-                                            <strong>Important:</strong> Put <strong>{registration_id}</strong> in the wire transfer memo/remarks field.
+                                             Instruct your bank to wire <strong>{total_display}</strong> to our Sanima Bank account (details below).<br>
+                                             <strong>Important:</strong> Put <strong>{registration_id}</strong> in the wire transfer memo/remarks field.
                                         </td>
                                     </tr>
                                 </table>

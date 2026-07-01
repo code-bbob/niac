@@ -119,6 +119,7 @@ class EventSerializer(serializers.ModelSerializer):
             'id', 'title', 'slug', 'description', 'featured_image', 'image_url',
             'order', 'event_start_date', 'event_end_date',
             'early_bird_price', 'ticket_price',
+            'nepali_price_npr', 'foreign_early_bird_usd', 'foreign_standard_usd',
             'registration_prefix',
             'bank_name', 'bank_address', 'bank_account_name',
             'bank_number', 'swift_code', 'bank_account_type',
@@ -148,6 +149,7 @@ class EventBookingSerializer(serializers.ModelSerializer):
         model = EventBooking
         fields = [
             'id', 'event', 'event_title', 'registration_id', 'spaces',
+            'participant_type', 'total_amount_display',
             'name', 'email', 'address', 'city', 'state', 'zip_code',
             'country', 'phone', 'comment', 'company', 'reference_code',
             'status', 'is_verified', 'proof_file', 'proof_file_url',
