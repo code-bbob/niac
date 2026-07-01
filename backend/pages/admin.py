@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.html import format_html
 from .models import Service, ServiceImage, ContactMessage, Appointment, AppointmentDay, AvailableHours, Team, Blog, Bulletin, Event, CallbackRequest
 
 
@@ -203,22 +204,25 @@ def mark_unverified(modeladmin, request, queryset):
 @admin.register(EventBooking)
 class EventBookingAdmin(admin.ModelAdmin):
     list_display = [
+        'registration_id',
         'name',
         'email',
         'company',
         'spaces',
         'country',
-        'phone',
-        'reference_code',
-        'verification_status',
+        'status_badge',
+        'proof_status',
     ]
 
     list_filter = [
+        'status',
         'is_verified',
         'country',
+        'event',
     ]
 
     search_fields = [
+        'registration_id',
         'name',
         'email',
         'company',
@@ -231,6 +235,8 @@ class EventBookingAdmin(admin.ModelAdmin):
     ]
 
     fields = [
+        'registration_id',
+        'event',
         'spaces',
         'name',
         'email',
@@ -243,10 +249,16 @@ class EventBookingAdmin(admin.ModelAdmin):
         'country',
         'comment',
         'reference_code',
+        'status',
         'is_verified',
+        'proof_file',
+        'proof_uploaded_at',
+        'admin_notes',
     ]
 
     readonly_fields = [
+        'registration_id',
+        'event',
         'spaces',
         'name',
         'email',
@@ -259,16 +271,30 @@ class EventBookingAdmin(admin.ModelAdmin):
         'country',
         'comment',
         'reference_code',
+        'proof_uploaded_at',
     ]
 
     list_per_page = 25
+    ordering = ['-id']
 
     actions = [
         mark_verified,
         mark_unverified,
     ]
 
-    def verification_status(self, obj):
-        return "✓ Verified" if obj.is_verified else "✗ Pending"
+    def status_badge(self, obj):
+        colors = {
+            'pending': 'orange',
+            'pending_verification': 'blue',
+            'confirmed': 'green',
+        }
+        color = colors.get(obj.status, 'gray')
+        return format_html('<span style="color:{};font-weight:bold;">{}</span>', color, obj.get_status_display())
+    status_badge.short_description = "Status"
 
-    verification_status.short_description = "Status"
+    def proof_status(self, obj):
+        if obj.proof_file:
+            url = obj.proof_file.url
+            return format_html('<a href="{}" target="_blank">View Receipt</a>', url)
+        return "—"
+    proof_status.short_description = "Proof"

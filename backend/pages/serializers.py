@@ -115,7 +115,14 @@ class EventSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Event 
-        fields = ['id', 'title', 'slug', 'description', 'featured_image', 'image_url', 'order', 'event_start_date', 'event_end_date', 'early_bird_price', 'ticket_price', 'bank_number', 'swift_code']
+        fields = [
+            'id', 'title', 'slug', 'description', 'featured_image', 'image_url',
+            'order', 'event_start_date', 'event_end_date',
+            'early_bird_price', 'ticket_price',
+            'registration_prefix',
+            'bank_name', 'bank_address', 'bank_account_name',
+            'bank_number', 'swift_code', 'bank_account_type',
+        ]
 
     def get_image_url(self,obj):
         if obj.featured_image:
@@ -135,12 +142,32 @@ class CallbackRequestSerializer(serializers.ModelSerializer):
 
 class EventBookingSerializer(serializers.ModelSerializer):
     event_title = serializers.CharField(source='event.title', read_only=True)
+    proof_file_url = serializers.SerializerMethodField()
 
     class Meta:
         model = EventBooking
         fields = [
-            'id', 'event', 'event_title', 'spaces', 'name', 'email',
-            'address', 'city', 'state', 'zip_code', 'country', 'phone',
-            'comment', 'company', 'reference_code', 'hotel', 'is_verified'
+            'id', 'event', 'event_title', 'registration_id', 'spaces',
+            'name', 'email', 'address', 'city', 'state', 'zip_code',
+            'country', 'phone', 'comment', 'company', 'reference_code',
+            'status', 'is_verified', 'proof_file', 'proof_file_url',
+            'proof_uploaded_at', 'admin_notes',
         ]
-        read_only_fields = ['id', 'is_verified']
+        read_only_fields = ['id', 'registration_id', 'status', 'is_verified', 'proof_file_url', 'proof_uploaded_at']
+
+    def get_proof_file_url(self, obj):
+        if obj.proof_file:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.proof_file.url)
+            return obj.proof_file.url
+        return None
+
+
+class ProofUploadSerializer(serializers.Serializer):
+    proof_file = serializers.FileField(required=True, help_text="Upload wire transfer receipt / MT103")
+
+
+class AdminVerifySerializer(serializers.Serializer):
+    action = serializers.ChoiceField(choices=['confirm', 'unconfirm'], required=True)
+    admin_notes = serializers.CharField(required=False, allow_blank=True)

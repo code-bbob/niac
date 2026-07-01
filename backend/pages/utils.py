@@ -428,15 +428,53 @@ def send_callback_email_async(name, phone, service):
     thread.start()
 
 
+def send_proof_received_email_async(booking):
+    """Send proof-of-payment confirmation email"""
+    def send_email():
+        try:
+            event_title = booking.event.title
+            registration_id = booking.registration_id
+            subject = f"Payment Proof Received - {registration_id} - {event_title} - NIAC"
+            html = f"""
+            <html><head><style>
+                body {{ font-family: 'Noto Sans', Arial, sans-serif; color: #333; line-height: 1.8; }}
+                .container {{ max-width: 600px; margin: 0 auto; padding: 20px; }}
+                .header {{ background: linear-gradient(135deg, #0a1628 0%, #1e3a8a 100%); color: white; padding: 30px; border-radius: 8px 8px 0 0; text-align: center; }}
+                .header h1 {{ margin: 0; font-size: 28px; }}
+                .content {{ background: #fff; padding: 30px; border: 2px solid #c9a961; border-radius: 0 0 8px 8px; }}
+            </style></head><body>
+            <div class="container">
+                <div class="header"><h1>Proof Received</h1></div>
+                <div class="content">
+                    <p>Dear {booking.name},</p>
+                    <p>We have received your proof of payment for <strong>{event_title}</strong>.</p>
+                    <p><strong>Registration ID:</strong> {registration_id}</p>
+                    <p>Your registration status has been updated to <strong>"Pending Verification"</strong>.</p>
+                    <p>Our team will verify your payment against our bank records and confirm your registration within 2–3 business days.</p>
+                    <p>If you have any questions, please contact us at <a href="mailto:secretariatniac@gmail.com">secretariatniac@gmail.com</a>.</p>
+                    <p>Best regards,<br><strong>The NIAC Team</strong></p>
+                </div>
+            </div>
+            </body></html>
+            """
+            send_brevo_email(booking.email, subject, html)
+        except Exception as e:
+            print(f"Error sending proof email: {str(e)}")
+    thread = threading.Thread(target=send_email, daemon=True)
+    thread.start()
+
+
 def send_event_booking_email_async(booking):
     """Send event booking email asynchronously in a background thread"""
     def send_email():
         try:
             event_title = booking.event.title
             event_date = booking.event.event_start_date.strftime('%B %d, %Y') if booking.event.event_start_date else 'TBD'
+            registration_id = booking.registration_id
+            bank = booking.event
 
             # Email to admin
-            admin_subject = f"New Event Registration - {booking.name} for {event_title}"
+            admin_subject = f"New Reg #{registration_id} - {booking.name} for {event_title}"
             admin_html_message = f"""
             <html>
                 <head>
@@ -459,6 +497,11 @@ def send_event_booking_email_async(booking):
                             <h1>New Event Registration</h1>
                         </div>
                         <div class="content">
+                            <div class="info-block">
+                                <div class="info-label">Registration ID</div>
+                                <div class="info-value" style="font-size:24px;">{registration_id}</div>
+                            </div>
+
                             <div class="info-block">
                                 <div class="info-label">Event</div>
                                 <div class="info-value">{event_title}</div>
@@ -515,7 +558,7 @@ def send_event_booking_email_async(booking):
             )
 
             # Confirmation email to user
-            user_subject = f"Registration Confirmed - {event_title} - NIAC"
+            user_subject = f"Registration #{registration_id} - {event_title} - NIAC"
             user_html_message = f"""
             <html>
                 <head>
@@ -526,10 +569,14 @@ def send_event_booking_email_async(booking):
                         .header h1 {{ margin: 0; font-size: 40px; font-weight: bold; }}
                         .header p {{ margin: 15px 0 0 0; font-size: 20px; opacity: 0.95; }}
                         .content {{ background: #ffffff; padding: 40px; border: 2px solid #c9a961; border-radius: 0 0 8px 8px; }}
+                        .reg-badge {{ display: inline-block; background: #c9a961; color: white; padding: 12px 24px; border-radius: 6px; font-size: 24px; font-weight: bold; letter-spacing: 2px; margin: 10px 0; }}
                         .message {{ color: #333; margin: 20px 0; font-size: 16px; line-height: 1.8; }}
                         .message p {{ font-size: 18px; margin: 15px 0; }}
                         .highlight {{ background: #f0f4ff; padding: 20px; border-left: 4px solid #c9a961; margin: 25px 0; border-radius: 4px; font-size: 16px; line-height: 1.8; }}
                         .highlight strong {{ font-size: 18px; color: #1e3a8a; }}
+                        .step {{ display: flex; gap: 12px; margin: 12px 0; padding: 12px; background: #f8f9fa; border-radius: 6px; }}
+                        .step-num {{ width: 28px; height: 28px; background: #1e3a8a; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: bold; flex-shrink: 0; }}
+                        .step-content {{ font-size: 14px; color: #444; }}
                         .footer {{ text-align: center; color: #666; font-size: 14px; margin-top: 30px; padding-top: 20px; border-top: 1px solid #c9a961; }}
                         .contact-info {{ background: #f8f9fa; padding: 25px; border-radius: 6px; margin: 20px 0; }}
                         .contact-item {{ margin: 15px 0; font-size: 16px; }}
@@ -537,18 +584,19 @@ def send_event_booking_email_async(booking):
                         .event-details {{ background: #f8f9fa; padding: 25px; border: 2px solid #c9a961; border-radius: 6px; margin: 25px 0; }}
                         .detail-row {{ padding: 8px 0; }}
                         .detail-label {{ color: #1e3a8a; font-weight: bold; }}
+                        .bank-details {{ background: #fff8e7; padding: 20px; border: 1px solid #c9a961; border-radius: 6px; margin: 15px 0; }}
                     </style>
                 </head>
                 <body>
                     <div class="container">
                         <div class="header">
-                            <h1>Registration Confirmed!</h1>
+                            <h1>Registration Received!</h1>
                             <p>You're registered for {event_title}</p>
                         </div>
                         <div class="content">
-                            <div class="message">
-                                <p>Dear {booking.name},</p>
-                                <p>Thank you for registering for <strong>{event_title}</strong> with <strong>NIAC</strong>. Your registration has been received successfully.</p>
+                            <div style="text-align:center;margin:20px 0;">
+                                <div class="reg-badge">{registration_id}</div>
+                                <p style="font-size:14px;color:#666;margin-top:4px;">Your unique Registration ID</p>
                             </div>
 
                             <div class="event-details">
@@ -561,11 +609,51 @@ def send_event_booking_email_async(booking):
                                 <div class="detail-row">
                                     <span class="detail-label">Spaces Booked:</span> {booking.spaces}
                                 </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Registration ID:</span> {registration_id}
+                                </div>
                             </div>
 
-                            <div class="highlight">
-                                <strong>What happens next?</strong><br>
-                                We will send you further details about the event including venue information and any materials you may need. If you have any questions, please don't hesitate to contact us.
+                            <div style="background:#f0f4ff;padding:25px;border-radius:8px;margin:25px 0;">
+                                <h3 style="color:#1e3a8a;margin:0 0 15px 0;font-size:18px;">How to Complete Your Payment – Step by Step</h3>
+
+                                <div class="step">
+                                    <div class="step-num">1</div>
+                                    <div class="step-content">
+                                        <strong>Send Wire Transfer</strong><br>
+                                        Instruct your bank to wire the ticket amount to our Sanima Bank account (details below).<br>
+                                        <strong>Important:</strong> Put <strong>{registration_id}</strong> in the wire transfer memo/remarks field.
+                                    </div>
+                                </div>
+
+                                <div class="step">
+                                    <div class="step-num">2</div>
+                                    <div class="step-content">
+                                        <strong>Upload Your Receipt</strong><br>
+                                        Return to our registration page and upload your wire transfer receipt / MT103. Your status will change to "Pending Verification".
+                                    </div>
+                                </div>
+
+                                <div class="step">
+                                    <div class="step-num">3</div>
+                                    <div class="step-content">
+                                        <strong>We Verify & Confirm</strong><br>
+                                        Our team matches your transfer against our bank statement and flips your status to "Confirmed". You'll receive a confirmation email.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bank-details">
+                                <h4 style="color:#1e3a8a;margin:0 0 12px 0;">Sanima Bank Wire Details</h4>
+                                <p style="margin:4px 0;font-size:14px;"><strong>Bank:</strong> {bank.bank_name or 'Sanima Bank Ltd.'}</p>
+                                <p style="margin:4px 0;font-size:14px;"><strong>Account Name:</strong> {bank.bank_account_name or 'Nepal International A.D.R. Center'}</p>
+                                <p style="margin:4px 0;font-size:14px;"><strong>Account Number:</strong> {bank.bank_number or 'N/A'}</p>
+                                <p style="margin:4px 0;font-size:14px;"><strong>Account Type:</strong> {bank.bank_account_type or 'Savings Account'}</p>
+                                <p style="margin:4px 0;font-size:14px;"><strong>SWIFT Code:</strong> {bank.swift_code or 'N/A'}</p>
+                                <p style="margin:4px 0;font-size:14px;"><strong>Bank Address:</strong> {bank.bank_address or 'Kathmandu, Nepal'}</p>
+                                <p style="margin-top:12px;padding-top:12px;border-top:1px solid #c9a961;font-size:13px;color:#c0392b;">
+                                    <strong>⚠ MEMO REQUIRED:</strong> You MUST include <strong>{registration_id}</strong> in the wire transfer memo/remarks. Otherwise we cannot match your payment.
+                                </p>
                             </div>
 
                             <div class="message">

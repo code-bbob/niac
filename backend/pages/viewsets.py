@@ -1,4 +1,4 @@
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, parsers
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from datetime import datetime, timedelta
@@ -6,9 +6,10 @@ from .models import Service, ContactMessage, Appointment, AppointmentDay, Availa
 from .serializers import (
     ServiceSerializer, ContactMessageSerializer, 
     AppointmentSerializer, AppointmentDaySerializer, AvailableHoursSerializer, TeamSerializer,
-    BulletinSerializer, EventSerializer, EventBookingSerializer, CallbackRequestSerializer
+    BulletinSerializer, EventSerializer, EventBookingSerializer, CallbackRequestSerializer,
+    ProofUploadSerializer, AdminVerifySerializer,
 )
-from .utils import send_contact_email_async, send_appointment_confirmation_email, send_callback_email_async, send_event_booking_email_async, get_available_time_slots
+from .utils import send_contact_email_async, send_appointment_confirmation_email, send_callback_email_async, send_event_booking_email_async, send_proof_received_email_async, get_available_time_slots
 
 
 class ServiceViewSet(viewsets.ModelViewSet):
@@ -282,6 +283,64 @@ class EventBookingViewSet(viewsets.ModelViewSet):
         send_event_booking_email_async(booking)
 
         return Response(
-            {"message": "Thank you for registering! We have sent you a confirmation email."},
+            {
+                "message": "Registration successful!",
+                "registration_id": booking.registration_id,
+                "booking": self.get_serializer(booking).data,
+            },
             status=status.HTTP_201_CREATED
         )
+
+    @action(detail=True, methods=['post'], parser_classes=[parsers.MultiPartParser, parsers.FormParser])
+    def upload_proof(self, request, pk=None):
+        booking = self.get_object()
+        serializer = ProofUploadSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        booking.proof_file = serializer.validated_data['proof_file']
+        booking.proof_uploaded_at = datetime.now()
+        booking.status = 'pending_verification'
+        booking.save(update_fields=['proof_file', 'proof_uploaded_at', 'status'])
+
+        send_proof_received_email_async(booking)
+
+        return Response(
+            {
+                "message": "Proof of payment uploaded successfully. Your registration is now pending verification.",
+                "registration_id": booking.registration_id,
+                "status": booking.status,
+            },
+            status=status.HTTP_200_OK
+        )
+
+    @action(detail=True, methods=['post'])
+    def verify(self, request, pk=None):
+        booking = self.get_object()
+        serializer = AdminVerifySerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        action_type = serializer.validated_data['action']
+        notes = serializer.validated_data.get('admin_notes', '')
+
+        if action_type == 'confirm':
+            booking.status = 'confirmed'
+            booking.is_verified = True
+            if notes:
+                booking.admin_notes = notes
+            booking.save(update_fields=['status', 'is_verified', 'admin_notes'])
+            return Response({
+                "message": f"Registration {booking.registration_id} confirmed.",
+                "registration_id": booking.registration_id,
+                "status": booking.status,
+            })
+        else:
+            booking.status = 'pending_verification' if booking.proof_file else 'pending'
+            booking.is_verified = False
+            if notes:
+                booking.admin_notes = notes
+            booking.save(update_fields=['status', 'is_verified', 'admin_notes'])
+            return Response({
+                "message": f"Registration {booking.registration_id} unconfirmed.",
+                "registration_id": booking.registration_id,
+                "status": booking.status,
+            })

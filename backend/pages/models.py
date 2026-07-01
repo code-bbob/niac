@@ -251,8 +251,15 @@ class Event(models.Model):
     event_end_date = models.DateField(null=True, blank=True)
     early_bird_price = models.FloatField(blank=True,null=True)
     ticket_price = models.FloatField(blank=True,null=True)
+
+    # Registration / Payment
+    registration_prefix = models.CharField(max_length=10, default="ADR", help_text="Prefix for registration IDs (e.g., ADR → ADR-001)")
+    bank_name = models.CharField(max_length=255, blank=True, default="Sanima Bank Ltd.")
+    bank_address = models.CharField(max_length=500, blank=True, default="Sanima Bank, Kathmandu, Nepal")
+    bank_account_name = models.CharField(max_length=255, blank=True, default="Nepal International A.D.R. Center")
     bank_number = models.CharField(max_length=255, blank=True, null=True)
     swift_code = models.CharField(max_length=255, blank=True, null=True)
+    bank_account_type = models.CharField(max_length=100, blank=True, default="Savings Account")
 
     def __str__(self):
         return self.title
@@ -289,7 +296,14 @@ class CallbackRequest(models.Model):
 
 class EventBooking(models.Model):
 
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('pending_verification', 'Pending Verification'),
+        ('confirmed', 'Confirmed'),
+    ]
+
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    registration_id = models.CharField(max_length=50, unique=True, blank=True, editable=False, help_text="Unique registration ID (e.g., ADR-502)")
     spaces = models.PositiveIntegerField()
     name = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
@@ -301,9 +315,29 @@ class EventBooking(models.Model):
     phone = models.CharField(max_length=255)
     comment = models.TextField(null=True, blank=True)
     company = models.CharField(null=True, blank=True)
-    reference_code = models.CharField(max_length=255, blank=True, null=True)
+    reference_code = models.CharField(max_length=255, blank=True, null=True, help_text="Wire transfer reference number")
+    status = models.CharField(max_length=30, choices=STATUS_CHOICES, default='pending')
     is_verified = models.BooleanField(default=False)
+    proof_file = models.FileField(upload_to='proofs/', blank=True, null=True, help_text="Upload wire transfer receipt / MT103")
+    proof_uploaded_at = models.DateTimeField(null=True, blank=True)
+    admin_notes = models.TextField(blank=True, help_text="Admin notes for bank matching")
 
+    def save(self, *args, **kwargs):
+        if not self.registration_id:
+            prefix = self.event.registration_prefix or "REG"
+            last = EventBooking.objects.filter(
+                event=self.event,
+                registration_id__startswith=f"{prefix}-"
+            ).order_by('registration_id').last()
+            if last and last.registration_id:
+                try:
+                    last_num = int(last.registration_id.split('-')[-1])
+                except (ValueError, IndexError):
+                    last_num = 0
+            else:
+                last_num = 0
+            self.registration_id = f"{prefix}-{last_num + 1:03d}"
+        super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.name} - {self.phone}"
+        return f"{self.registration_id} - {self.name}"

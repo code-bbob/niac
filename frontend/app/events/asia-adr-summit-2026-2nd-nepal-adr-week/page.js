@@ -50,22 +50,24 @@ function ScrollReveal() {
   return null;
 }
 
-
 function Banner() {
   return (
-   <div className="text-center bg-[#9F8320] mt-8 py-4">
-          {/* <p className="reveal text-stone-600 text-lg font-light italic max-w-2xl mx-auto leading-relaxed">
+    <div className="text-center bg-[#9F8320] mt-8 py-4">
+      {/* <p className="reveal text-stone-600 text-lg font-light italic max-w-2xl mx-auto leading-relaxed">
             Join us in Nepal, where professional excellence meets the spirit of
             wonders of Nepal.
           </p> */}
-          <p className="reveal font-serif text-xl md:text-4xl text-white font-bold mt-6">
-            Nepal is <span className="text-[#1e3a8a]">calling</span> !
-          </p>
-          <p className="reveal text-stone-500 text-white text-xl mt-2">
-            Join NIAC and AIADR for the Asia ADR Summit and Nepal ADR Week 2026.
-          </p>
-        </div>
-  );}
+      <p className="reveal font-serif text-xl md:text-4xl text-white font-bold px-4 mt-6">
+        Nepal is <span className="text-[#1e3a8a]">calling</span> !
+      </p>
+      <p className="reveal text-stone-500 text-white text-xl px-4 mt-2">
+        AIADR and NIAC cordially invites abritrators, mediators, jurists,
+        lawyers, engineers, management personnels, chartered accountants and
+        academics to participate in this historic event.
+      </p>
+    </div>
+  );
+}
 
 /* ── Counter ────────────────────────────────────────────────────────────── */
 
@@ -154,104 +156,80 @@ function SectionDivider() {
 
 function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-blue-900">
+    <section className="relative h-screen min-h-[800px] flex items-center justify-center overflow-hidden">
+      {/* Full-width Background */}
       <div className="absolute inset-0 z-0">
-        <img
-          src="/images/possibility3.jpg"
-          alt="Nepal Himalayas"
-          className="w-full h-full object-top object-cover"
-        />
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 z-10"
           style={{
             background:
-              "linear-gradient(to right, rgba(10,22,40,0.5), rgba(10,22,40,0.2))",
+              "linear-gradient(to bottom, rgba(0,6,102,0.2) 0%, rgba(0,6,102,0.4) 50%, rgba(0,6,102,0.7) 100%)",
           }}
         />
-        <div
-          className="absolute inset-0 opacity-[0.06]"
-          style={{
-            backgroundImage:
-              "url('https://www.transparenttextures.com/patterns/simple-dashed.png')",
-          }}
+        <img
+          alt="Kathmandu cityscape with mountains"
+          className="w-full h-full object-cover"
+          src="/images/screen.png"
         />
       </div>
 
-      <div className="absolute top-0 right-0 w-1/3 h-1 bg-[#9F8320] z-10" />
+      <div className="relative z-20 text-center px-5 md:px-16 max-w-5xl mx-auto pt-24">
+        {/* Badge */}
+        <div className="mb-6 inline-flex items-center space-x-3 bg-white/10 px-4 py-2 rounded-full border border-white/20 backdrop-blur-sm">
+          <span className="w-2 h-2 rounded-full bg-[#c9a961] animate-pulse"></span>
+          <span className="text-white font-sans text-md uppercase tracking-widest font-bold">
+             Reaching the Pinnacle of ADR in a Changing World. 
+          </span>
+        </div>
 
-      <div className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-8 w-full py-40 md:py-40">
-        <div className="max-w-3xl">
-          {/* <div className="reveal flex items-center gap-3 text-xs tracking-[0.2em] uppercase text-[#9F8320] font-medium mb-6"> */}
-          {/*   <span className="h-px w-8 bg-[#9F8320]/50" /> */}
-          {/*   A Warm Invitation from the Heart of the Himalayas */}
-          {/* </div> */}
+        {/* Title */}
+        <p id="title" className="text-white font-serif font-bold text-7xl md:text-7xl mb-6 leading-tight">
+          Asia ADR Summit & <br />
+          <span className="text-[#c9a961] italic">Nepal ADR Week 2026</span>
+        </p>
 
-          <p className="reveal font-serif text-5xl sm:text-6xl md:text-[80px] leading-[1.05] tracking-tight text-white font-bold mb-4">
-            Asia ADR Summit 2026
-          </p>
+        {/* Subtitle */}
+        <p className="text-white font-sans text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+        AIADR and NIAC cordially invites abritrators, mediators, jurists, lawyers, engineers, management personnels, chartered accountants and academics to participate in this historic event.
 
-          <div className="reveal font-serif text-5xl md:text-[80px] text-white font-semibold italic border-t border-b border-[#9F8320]/30 py-3 inline-block">
-            2nd Nepal ADR Week
+        </p>
+
+        {/* Hero CTAs */}
+        <div id="register" className="flex flex-col md:flex-row items-center justify-center gap-6 mb-16">
+          <Link
+            href="/events/asia-adr-summit-2026-2nd-nepal-adr-week/register"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-gradient-to-b from-[#D4AF37] to-[#C5A059] text-white px-10 py-5 rounded font-sans text-sm hover:scale-105 transition-all uppercase tracking-widest min-w-[220px] shadow-lg shadow-[#C5A059]/30 font-semibold text-center"
+          >
+            Register Now
+          </Link>
+          <span className="border-2 border-white/40 text-white px-10 py-5 rounded font-sans text-sm hover:bg-white/10 hover:border-white transition-all uppercase tracking-widest min-w-[220px] font-semibold text-center cursor-default">
+            Explore Events
+          </span>
+        </div>
+
+        {/* Event Highlights (Glass Cards) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-lg text-white">
+            <Calendar className="text-[#c9a961] mb-4 w-10 h-10 mx-auto" />
+            <h3 className="font-bold text-lg mb-1">4-6 December 2026</h3>
+            <p className="text-sm opacity-70">Main Summit & Workshops</p>
           </div>
-
-          {/* <p className="reveal font-serif text-2xl md:text-3xl text-white font-bold mt-8"> */}
-          {/*   Nepal is <span className="text-[#9F8320]">calling</span> ! */}
-          {/* </p> */}
-
-          <p className="reveal text-base md:text-lg text-white/70 max-w-xl font-light leading-relaxed mt-4">
-            Join NIAC and AIADR for the Asia ADR Summit and Nepal ADR Week 2026.
-          </p>
-
-          {/* <p className="reveal text-base md:text-lg text-white/50 max-w-xl font-light italic mt-2"> */}
-          {/*   &ldquo;Reaching the Pinnacle of ADR in a Changing World&rdquo; */}
-          {/* </p> */}
-
-          <div className="reveal flex flex-wrap items-center gap-4 mt-10">
-            {/* <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2.5 rounded-full text-sm text-white"> */}
-            {/*   <Calendar className="w-4 h-4 text-[#9F8320]" />4 – 6 December 2026 */}
-            {/* </span> */}
-            <span className="inline-flex items-center gap-2 bg-white/[0.08] backdrop-blur-sm border border-white/15 px-8 py-4 rounded-full text-xl font-extrabold text-white/85">
-              <Calendar className="w-4 h-4 text-[#c9a227] font-extrabold" />4 –
-              6 December 2026
-            </span>
-            <span className="inline-flex items-center gap-2 bg-white/[0.08] backdrop-blur-sm border border-white/20 px-8 py-4  rounded-3xl text-xl font-extrabold text-white">
-              <MapPin className="w-4 h-4 text-[#9F8320]" />
-              Kathmandu, Nepal
-            </span>
+          <div className="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-lg text-white">
+            <MapPin className="text-[#c9a961] mb-4 w-10 h-10 mx-auto" />
+            <h3 className="font-bold text-lg mb-1">Kathmandu, Nepal</h3>
+            <p className="text-sm opacity-70">The Gateway to the Himalayas</p>
           </div>
-
-          <div className="reveal flex flex-wrap gap-4 mt-12">
-            <Link
-              href="/events/asia-adr-summit-2026-2nd-nepal-adr-week/register"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 bg-[#9F8320] hover:bg-[#9F8320]/90 text-white font-semibold px-8 py-4 text-sm tracking-wider uppercase transition-all duration-500 shadow-lg shadow-[#9F8320]/20 rounded-lg"
-            >
-              Register Now
-              <ArrowUpRight className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </Link>
-             <Link
-              href="/events/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 bg-[#10245f] hover:bg-[#10245f]/90 text-white font-semibold px-8 py-4 text-sm tracking-wider uppercase transition-all duration-500 shadow-lg shadow-[#9F8320]/20 rounded-lg"
-            >
-              Other Events
-              <ArrowUpRight className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </Link>
+          <div className="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-lg text-white">
+            <Users className="text-[#c9a961] mb-4 w-10 h-10 mx-auto" />
+            <h3 className="font-bold text-lg mb-1">40+ Speakers</h3>
+            <p className="text-sm opacity-70">Elite Networking Opportunities</p>
           </div>
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 z-10 leading-none">
-        <svg viewBox="0 0 1440 72" fill="none" className="w-full h-auto">
-          <path
-            d="M0 72V0C240 48 480 72 720 72C960 72 1200 48 1440 0V72H0Z"
-            fill="#10245f"
-            className="drop-shadow-sm"
-          />
-        </svg>
-      </div>
+      {/* Bottom Fade */}
     </section>
   );
 }
@@ -260,7 +238,7 @@ function Hero() {
 
 function Stats() {
   return (
-    <section className="bg-[#10245f] py-14 md:py-16">
+    <section id="stats" className="bg-[#10245f] py-14 md:py-16">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
           <Counter end={40} label="Expert Speakers" />
@@ -600,18 +578,42 @@ function ExploreNepal() {
       title: "Short Trips Near Kathmandu",
       duration: "1\u20132 Days",
       cards: [
-        { icon: Mountain, title: "Chandragiri Hills", desc: "Take a scenic cable car ride just outside Kathmandu to get panoramic views of the Himalayan range and walk through lush, forested walking trails." },
-        { icon: Sun, title: "Nagarkot Sunrise", desc: "Travel to this famous hilltop village for an overnight stay to witness the sun rising over Mount Everest and the surrounding snow-capped peaks." },
-        { icon: TreePine, title: "Shivapuri Nagarjun National Park", desc: "Embark on a day hike through peaceful subtropical forests, hidden waterfalls, and active monasteries right on the northern edge of the valley." },
+        {
+          icon: Mountain,
+          title: "Chandragiri Hills",
+          desc: "Take a scenic cable car ride just outside Kathmandu to get panoramic views of the Himalayan range and walk through lush, forested walking trails.",
+        },
+        {
+          icon: Sun,
+          title: "Nagarkot Sunrise",
+          desc: "Travel to this famous hilltop village for an overnight stay to witness the sun rising over Mount Everest and the surrounding snow-capped peaks.",
+        },
+        {
+          icon: TreePine,
+          title: "Shivapuri Nagarjun National Park",
+          desc: "Embark on a day hike through peaceful subtropical forests, hidden waterfalls, and active monasteries right on the northern edge of the valley.",
+        },
       ],
     },
     {
       title: "Multi-Day Post-Summit Adventures",
       duration: "3\u20135 Days",
       cards: [
-        { icon: Sailboat, title: "Pokhara Lakeside", desc: "Take a short 25-minute flight to Nepal\u2019s tourism capital to relax by Phewa Lake and see the iconic, mirror-like reflection of Mount Machhapuchhre (Fishtail)." },
-        { icon: TreePine, title: "Chitwan National Park", desc: "Travel south to the tropical lowlands to experience a jungle safari, where you can spot endangered one-horned rhinos, Royal Bengal tigers, and exotic bird species." },
-        { icon: Mountain, title: "Dhulikhel Panorama", desc: "Visit this ancient Newari town to enjoy unobstructed views of the high Himalayas, terraced fields, and traditional rural mountain life." },
+        {
+          icon: Sailboat,
+          title: "Pokhara Lakeside",
+          desc: "Take a short 25-minute flight to Nepal\u2019s tourism capital to relax by Phewa Lake and see the iconic, mirror-like reflection of Mount Machhapuchhre (Fishtail).",
+        },
+        {
+          icon: TreePine,
+          title: "Chitwan National Park",
+          desc: "Travel south to the tropical lowlands to experience a jungle safari, where you can spot endangered one-horned rhinos, Royal Bengal tigers, and exotic bird species.",
+        },
+        {
+          icon: Mountain,
+          title: "Dhulikhel Panorama",
+          desc: "Visit this ancient Newari town to enjoy unobstructed views of the high Himalayas, terraced fields, and traditional rural mountain life.",
+        },
       ],
     },
   ];
@@ -690,9 +692,9 @@ function ExploreNepal() {
                 Everest Mountain Flight
               </h4>
               <p className="text-stone-500 text-sm leading-relaxed">
-                Take an early morning scenic flight from Kathmandu&apos;s airport
-                to fly directly past Mount Everest and the highest peaks on Earth
-                if your schedule is tight.
+                Take an early morning scenic flight from Kathmandu&apos;s
+                airport to fly directly past Mount Everest and the highest peaks
+                on Earth if your schedule is tight.
               </p>
             </div>
           </div>
@@ -987,7 +989,13 @@ function Topics() {
 /* ── Venue ───────────────────────────────────────────────────────────────── */
 
 function Venue() {
-  const slides = ["/images/hotel1.jpg", "/images/hotel2.jpg",  "/images/hotelbw.jpg", "/images/hotelbw2.jpg", "/images/hotelbw3.jpg"];
+  const slides = [
+    "/images/hotel1.jpg",
+    "/images/hotel2.jpg",
+    "/images/hotelbw.jpg",
+    "/images/hotelbw2.jpg",
+    "/images/hotelbw3.jpg",
+  ];
 
   const [current, setCurrent] = useState(0);
   const len = slides.length;
@@ -1163,7 +1171,7 @@ function Cta() {
         </div>
 
         <h2 className="reveal font-serif text-3xl md:text-4xl lg:text-5xl text-white font-bold leading-tight mb-6">
-          Secure Your Place at the Asia ADR Summit 2026 &amp; 2nd Nepal ADR Week 
+          Secure Your Place at the Asia ADR Summit 2026 &amp; 2nd Nepal ADR Week
         </h2>
 
         <p className="reveal text-white/60 text-base md:text-lg max-w-xl mx-auto mb-10 leading-relaxed">

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ChevronRight } from "lucide-react";
+import { ArrowRight, ChevronRight, Calendar, MapPin, Users } from "lucide-react";
 import { useServices } from "./hooks/usePracticeAreas";
 import { useBlogs } from "./hooks/useBlogs";
 import { useBulletins } from "./hooks/useBulletins";
@@ -46,87 +46,82 @@ function RevealObserver() {
 
 function HeroSection() {
   return (
-    <section className="relative min-h-screen w-full flex flex-col justify-center overflow-hidden">
-      <div className="absolute hidden md:block inset-x-0 bottom-0 z-0 top-[120px]">
-
-        <div className="absolute w-xl left-1/2 -translate-x-1/2 xl:bottom-14 flex gap-4 justify-center">
-          <a
-            href="/events/asia-adr-summit-2026-2nd-nepal-adr-week/register"
-            className="inline-flex items-center justify-center border border-white/40 text-lg tracking-[0.2em] uppercase px-8 py-4 bg-red-900 text-white font-extrabold hover:bg-white hover:text-primary-container transition-all"
-          >
-            Register Now
-          </a>
-          <a
-            href="/events/asia-adr-summit-2026-2nd-nepal-adr-week/"
-            className="inline-flex items-center justify-center bg-tertiary-fixed text-lg font-extrabold tracking-[0.2em] uppercase px-8 py-4 text-primary-container hover:bg-tertiary-fixed-dim transition-all"
-          >
-            Learn More
-          </a>
-        </div>
-
-        <div className="bg-blue-900 text-white font-serif font-bold text-center text-2xl py-4 w-full absolute top-0">
-          Nepal is calling the international community!
-        </div>
-
+    <section className="relative h-screen min-h-[800px] flex items-center justify-center overflow-hidden">
+      {/* Full-width Background */}
+      <div className="absolute inset-0 z-0">
+        <div
+          className="absolute inset-0 z-10"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(0,6,102,0.2) 0%, rgba(0,6,102,0.4) 50%, rgba(0,6,102,0.7) 100%)",
+          }}
+        />
         <img
-          className="w-full h-full object-cover object-top mt-8"
-          src="/images/herobg.png"
-          alt="NIAC Hero"
+          alt="Kathmandu cityscape with mountains"
+          className="w-full h-full object-cover"
+          src="/images/screen.png"
         />
       </div>
-      <div className="absolute block md:hidden inset-x-0 bottom-0 z-0 top-[80px]">
-                <div className="absolute w-lg left-1/2 -translate-x-1/2 bottom-1/4 flex gap-4 justify-center">
-          <a
-            href="/events/asia-adr-summit-2026-2nd-nepal-adr-week/register"
-            className="inline-flex items-center justify-center border border-white/40 text-xs tracking-[0.2em] uppercase px-4 py-2 bg-red-900 text-white font-extrabold hover:bg-white hover:text-primary-container transition-all"
-          >
-            Register Now
-          </a>
-          <a
-            href="/events/asia-adr-summit-2026-2nd-nepal-adr-week/"
-            className="inline-flex items-center justify-center bg-tertiary-fixed text-xs font-extrabold tracking-[0.2em] uppercase px-8 py-4 text-primary-container hover:bg-tertiary-fixed-dim transition-all"
-          >
-            Learn More
-          </a>
-        </div>
 
-        <div className="bg-blue-900 text-white font-serif font-bold text-center text-sm py-4 w-full absolute top-10">
-          Nepal is calling the international community!
-        </div>
-        <img
-          className="w-full h-full object-cover object-top"
-          src="/images/mobile-bg.jpeg"
-          alt="NIAC Hero"
-        />
-      </div>
-      {/* <div className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-8 w-full">
-        <div className="max-w-3xl reveal active">
-          <span className="inline-flex items-center gap-3 text-[10px] px-1 font-semibold tracking-[0.25em] uppercase text-tertiary-fixed mb-6">
-            NIAC
-            <span className="h-px w-8 bg-tertiary-fixed/50" />
-            Nepal International ADR Center
+      <div className="relative z-20 text-center px-5 md:px-16 max-w-5xl mx-auto pt-24">
+        {/* Badge */}
+        <div className="mb-6 inline-flex items-center space-x-3 bg-white/10 px-4 py-2 rounded-full border border-white/20 backdrop-blur-sm">
+          <span className="w-2 h-2 rounded-full bg-[#c9a961] animate-pulse"></span>
+          <span className="text-white font-sans text-md uppercase tracking-widest font-bold">
+             Reaching the Pinnacle of ADR in a Changing World. 
           </span>
-          <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl leading-[1.08] tracking-tight font-bold text-white mb-6">
-            Resolving Disputes. Preserving Relationships.
-          </h1>
-          <p className="text-base sm:text-lg lg:text-xl leading-relaxed text-white/85 mb-8 italic max-w-2xl">
-            Nepal&apos;s leading international arbitration and mediation center, fostering excellence in alternative dispute resolution.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <Link href="/contact">
-              <button className="bg-tertiary-container text-white px-8 py-4 text-[11px] font-semibold tracking-[0.15em] uppercase hover:bg-tertiary transition-all duration-300">
-                File a Dispute
-              </button>
-            </Link>
-            <Link href="/about">
-              <button className="border border-tertiary-container/70 text-tertiary-container px-8 py-4 text-[11px] font-semibold tracking-[0.15em] uppercase hover:bg-white/10 transition-all duration-300">
-                Learn More
-              </button>
-            </Link>
+        </div>
+
+        {/* Title */}
+        <p className="text-white font-serif font-bold text-7xl md:text-7xl mb-6 leading-tight">
+          Asia ADR Summit & <br />
+          <span className="text-[#c9a961] italic">Nepal ADR Week 2026</span>
+        </p>
+
+        {/* Subtitle */}
+        <p className="text-white font-sans text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+        AIADR and NIAC cordially invites abritrators, mediators, jurists, lawyers, engineers, management personnels, chartered accountants and academics to participate in this historic event.
+
+        </p>
+
+        {/* Hero CTAs */}
+        <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-16">
+          <Link
+            href="/events/asia-adr-summit-2026-2nd-nepal-adr-week/register"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-gradient-to-b from-[#D4AF37] to-[#C5A059] text-white px-10 py-5 rounded font-sans text-sm hover:scale-105 transition-all uppercase tracking-widest min-w-[220px] shadow-lg shadow-[#C5A059]/30 font-semibold text-center"
+          >
+            Register Now
+          </Link>
+          <Link href="/events/asia-adr-summit-2026-2nd-nepal-adr-week#register" target="_blank" className="border-2 border-white/40 text-white px-10 py-5 rounded font-sans text-sm hover:bg-white/10 hover:border-white transition-all uppercase tracking-widest min-w-[220px] font-semibold text-center cursor-default">
+           Learn More 
+          </Link>
+        </div>
+
+        {/* Event Highlights (Glass Cards) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-lg text-white">
+            <Calendar className="text-[#c9a961] mb-4 w-10 h-10 mx-auto" />
+            <h3 className="font-bold text-lg mb-1">4-6 December 2026</h3>
+            <p className="text-sm opacity-70">Main Summit & Workshops</p>
+          </div>
+          <div className="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-lg text-white">
+            <MapPin className="text-[#c9a961] mb-4 w-10 h-10 mx-auto" />
+            <h3 className="font-bold text-lg mb-1">Kathmandu, Nepal</h3>
+            <p className="text-sm opacity-70">The Gateway to the Himalayas</p>
+          </div>
+          <div className="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-lg text-white">
+            <Users className="text-[#c9a961] mb-4 w-10 h-10 mx-auto" />
+            <h3 className="font-bold text-lg mb-1">40+ Speakers</h3>
+            <p className="text-sm opacity-70">Elite Networking Opportunities</p>
           </div>
         </div>
-      </div> */}
+      </div>
+
+      {/* Bottom Fade */}
     </section>
+
   );
 }
 

@@ -12,6 +12,12 @@ import {
   CheckCircle,
   Loader2,
   Ticket,
+  Upload,
+  FileText,
+  Banknote,
+  Search,
+  Copy,
+  ExternalLink,
 } from "lucide-react";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
@@ -70,6 +76,131 @@ const COUNTRIES = [
   "Yemen", "Zambia", "Zimbabwe",
 ];
 
+const STEPS = [
+  { num: 1, label: "Fill Form", desc: "Complete your registration details" },
+  { num: 2, label: "Get ID", desc: "Receive your unique Registration ID" },
+  { num: 3, label: "Send Wire", desc: "Transfer USD with your ID in the memo" },
+  { num: 4, label: "Upload Proof", desc: "Submit your MT103 receipt" },
+  { num: 5, label: "Confirmed", desc: "We verify & confirm your seat" },
+];
+
+function WorkflowStepper() {
+  return (
+    <div className="bg-white border border-stone-200 rounded-xl p-6 md:p-8">
+      <div className="flex items-center gap-2 mb-6">
+        <div className="w-8 h-8 bg-[#1e3a8a]/10 rounded-lg flex items-center justify-center">
+          <FileText className="w-4 h-4 text-[#1e3a8a]" />
+        </div>
+        <h3 className="font-serif text-lg text-[#1e3a8a] font-semibold">How It Works</h3>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-5 gap-3">
+        {STEPS.map((step, i) => (
+          <div key={step.num} className="relative flex sm:flex-col items-start sm:items-center gap-3 sm:gap-2">
+            <div className="flex items-center gap-3 sm:flex-col sm:items-center">
+              <div className="w-9 h-9 bg-[#9F8320] text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
+                {step.num}
+              </div>
+              <div className="sm:text-center">
+                <p className="text-sm font-semibold text-stone-800">{step.label}</p>
+                <p className="text-xs text-stone-400 hidden sm:block">{step.desc}</p>
+              </div>
+            </div>
+            {i < STEPS.length - 1 && (
+              <div className="hidden sm:block absolute top-4 -right-2.5 text-stone-300">
+                <ChevronRight className="w-4 h-4" />
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function WorkflowSidebar() {
+  return (
+    <div className="bg-[#1e3a8a]/5 border border-[#1e3a8a]/15 rounded-xl p-6">
+      <h3 className="font-serif text-[#1e3a8a] font-semibold mb-4 text-base">Payment Workflow</h3>
+      <div className="space-y-4">
+        {[
+          { step: "1", icon: FileText, text: "Submit this registration form to get your unique Registration ID" },
+          { step: "2", icon: Banknote, text: "Send USD wire to Sanima Bank — put your Registration ID in the memo field" },
+          { step: "3", icon: Upload, text: "Upload your wire receipt / MT103 below to shift status to Pending Verification" },
+          { step: "4", icon: Search, text: "We match your transfer against our bank statement and Confirm your seat" },
+        ].map((item, i) => {
+          const Icon = item.icon;
+          return (
+            <div key={i} className="flex items-start gap-3">
+              <div className="w-6 h-6 bg-[#9F8320] text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
+                {item.step}
+              </div>
+              <p className="text-stone-600 text-xs leading-relaxed">{item.text}</p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function BankDetailsCard({ event }) {
+  const [copiedField, setCopiedField] = useState(null);
+  const copyToClipboard = (text, field) => {
+    navigator.clipboard.writeText(text);
+    setCopiedField(field);
+    setTimeout(() => setCopiedField(null), 2000);
+  };
+
+  const field = (label, value) => (
+    <div className="flex items-center justify-between py-2 border-b border-stone-100 last:border-0">
+      <div>
+        <span className="text-xs text-stone-400 uppercase tracking-wider">{label}</span>
+        <p className="text-sm font-semibold text-stone-800">{value || "—"}</p>
+      </div>
+      {value && (
+        <button
+          onClick={() => copyToClipboard(value, label)}
+          className="flex-shrink-0 w-7 h-7 hover:bg-stone-100 rounded flex items-center justify-center transition-colors"
+          title="Copy"
+        >
+          {copiedField === label ? (
+            <CheckCircle className="w-3.5 h-3.5 text-green-600" />
+          ) : (
+            <Copy className="w-3.5 h-3.5 text-stone-400" />
+          )}
+        </button>
+      )}
+    </div>
+  );
+
+  return (
+    <div>
+      <div className="bg-white border-2 border-[#9F8320]/30 rounded-xl overflow-hidden">
+        <div className="bg-[#9F8320] px-5 py-3">
+          <div className="flex items-center gap-2">
+            <Banknote className="w-4 h-4 text-white" />
+            <p className="text-white font-semibold text-sm">Sanima Bank Wire Details</p>
+          </div>
+        </div>
+        <div className="px-5 py-3">
+              {field("Bank Name", event?.bank_name || "Sanima Bank Ltd.")}
+              {field("Account Name", event?.bank_account_name || "Nepal International A.D.R. Center")}
+          {field("Account Number", event?.bank_number)}
+          {field("Account Type", event?.bank_account_type || "Savings Account")}
+          {field("SWIFT Code", event?.swift_code)}
+          {field("Bank Address", event?.bank_address || "Kathmandu, Nepal")}
+        </div>
+        <div className="bg-red-50 border-t-2 border-red-200 px-5 py-3">
+          <p className="text-xs text-red-700 font-semibold flex items-start gap-1.5">
+            <span className="text-base leading-none mt-0.5">⚠</span>
+            You MUST include your Registration ID in the wire transfer memo/remarks. Otherwise we cannot match your payment.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function EventRegistrationPage() {
   const params = useParams();
   const slug = params.slug;
@@ -93,6 +224,12 @@ export default function EventRegistrationPage() {
     comment: "",
     reference_code: "",
   });
+
+  // Success state
+  const [bookingData, setBookingData] = useState(null);
+  const [proofUploading, setProofUploading] = useState(false);
+  const [proofUploaded, setProofUploaded] = useState(false);
+  const [proofError, setProofError] = useState(null);
 
   useEffect(() => {
     if (!slug) return;
@@ -134,12 +271,43 @@ export default function EventRegistrationPage() {
         throw new Error(data.error || data.message || "Submission failed. Please try again.");
       }
 
+      setBookingData(data.booking || data);
       setSuccess(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err) {
       setError(err.message);
     } finally {
       setSubmitting(false);
+    }
+  };
+
+  const handleProofUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file || !bookingData?.id) return;
+
+    setProofUploading(true);
+    setProofError(null);
+
+    try {
+      const formData = new FormData();
+      formData.append("proof_file", file);
+
+      const res = await fetch(`${API_URL}/event-bookings/${bookingData.id}/upload_proof/`, {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Upload failed");
+      }
+
+      setProofUploaded(true);
+    } catch (err) {
+      setProofError(err.message);
+    } finally {
+      setProofUploading(false);
     }
   };
 
@@ -154,42 +322,127 @@ export default function EventRegistrationPage() {
     );
   }
 
+  // ── SUCCESS VIEW ──────────────────────────────────────────────────────────
+
   if (success) {
     return (
       <>
         <ScrollReveal />
-        <section className="min-h-screen bg-white pt-36 pb-24 relative overflow-hidden">
+        <section className="min-h-screen bg-white pt-28 pb-24 relative overflow-hidden">
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
             style={{ backgroundImage: "url('https://www.transparenttextures.com/patterns/simple-dashed.png')" }}
           />
-          <div className="relative z-10 max-w-2xl mx-auto px-4 sm:px-8 text-center">
-            <div className="reveal w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-8">
-              <CheckCircle className="w-10 h-10 text-green-600" />
+          <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-8">
+            {/* Success header */}
+            <div className="text-center mb-10">
+              <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                <CheckCircle className="w-10 h-10 text-green-600" />
+              </div>
+              <h1 className="font-serif text-3xl md:text-4xl text-[#1e3a8a] font-bold mb-2">
+                Registration Received!
+              </h1>
+              <p className="text-stone-500 text-base">
+                Thank you for registering for <strong className="text-stone-700">{event?.title}</strong>
+              </p>
             </div>
-            <h1 className="reveal font-serif text-4xl md:text-5xl text-[#1e3a8a] font-bold mb-4">
-              Registration Submitted!
-            </h1>
-            <p className="reveal text-stone-500 text-lg mb-8 max-w-lg mx-auto">
-              Thank you for registering for the <strong>{event?.title}</strong>. Your registration has been received.
-            </p>
-            <div className="reveal bg-amber-50/60 border border-amber-200/60 rounded-xl p-6 mb-10 text-left">
-              <h3 className="font-serif text-[#1e3a8a] font-semibold mb-2">What happens next?</h3>
-              <ul className="space-y-2 text-sm text-stone-600">
-                <li className="flex items-start gap-2">
-                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#9F8320] flex-shrink-0" />
-                  Please transfer the ticket amount to the bank account provided below.
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#9F8320] flex-shrink-0" />
-                  Include your reference code in the wire transfer for easy identification.
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#9F8320] flex-shrink-0" />
-                  Our team will verify your payment and confirm your registration within 24–48 hours.
-                </li>
-              </ul>
+
+            {/* Registration ID Badge */}
+            <div className="text-center mb-8">
+              <div className="inline-block bg-gradient-to-r from-[#9F8320] to-[#c9a961] text-white px-8 py-4 rounded-xl shadow-lg shadow-[#9F8320]/30">
+                <p className="text-xs tracking-[0.2em] uppercase opacity-80 mb-1">Your Registration ID</p>
+                <p className="font-mono text-3xl md:text-4xl font-bold tracking-wider">
+                  {bookingData?.registration_id || "—"}
+                </p>
+              </div>
+              <p className="text-xs text-stone-400 mt-3">
+                Save this ID — you will need it for your wire transfer.
+              </p>
             </div>
-            <div className="reveal flex flex-wrap justify-center gap-4">
+
+            {/* Next Steps */}
+            <div className="bg-amber-50/80 border border-amber-200/60 rounded-xl p-6 mb-8">
+              <h3 className="font-serif text-[#1e3a8a] font-semibold mb-4 text-lg">Complete Your Registration – 3 Simple Steps</h3>
+              <div className="space-y-4">
+                <div className="flex items-start gap-3 bg-white rounded-lg p-4 border border-amber-100">
+                  <div className="w-8 h-8 bg-[#9F8320] text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">1</div>
+                  <div>
+                    <p className="font-semibold text-stone-800 text-sm">Send Wire Transfer to Sanima Bank</p>
+                    <p className="text-stone-500 text-xs mt-1">
+                      Instruct your bank to wire the USD ticket amount. You <strong className="text-red-600">MUST</strong> put{" "}
+                      <span className="font-mono font-bold text-[#1e3a8a] bg-[#1e3a8a]/10 px-1.5 py-0.5 rounded">
+                        {bookingData?.registration_id}
+                      </span>{" "}
+                      in the wire memo/remarks field.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 bg-white rounded-lg p-4 border border-amber-100">
+                  <div className="w-8 h-8 bg-[#9F8320] text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">2</div>
+                  <div>
+                    <p className="font-semibold text-stone-800 text-sm">Upload Your MT103 / Wire Receipt</p>
+                    <p className="text-stone-500 text-xs mt-1">
+                      Upload your payment receipt below. Your status will change to <strong>"Pending Verification"</strong>.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 bg-white rounded-lg p-4 border border-amber-100">
+                  <div className="w-8 h-8 bg-[#9F8320] text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">3</div>
+                  <div>
+                    <p className="font-semibold text-stone-800 text-sm">We Match & Confirm</p>
+                    <p className="text-stone-500 text-xs mt-1">
+                      Our team checks your transfer against our Sanima Bank statement and flips your status to <strong>"Confirmed"</strong>. You'll get a confirmation email.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Bank Details */}
+            <BankDetailsCard event={event} />
+
+            {/* Proof Upload */}
+            <div className="bg-white border border-stone-200 rounded-xl p-6 mt-8">
+              <div className="flex items-center gap-2 mb-4">
+                <Upload className="w-5 h-5 text-[#9F8320]" />
+                <h3 className="font-serif text-lg text-[#1e3a8a] font-semibold">Upload Wire Transfer Receipt</h3>
+              </div>
+              <p className="text-stone-500 text-sm mb-4">
+                After sending your wire, upload the MT103 or bank receipt here. We'll verify and confirm your registration.
+              </p>
+
+              {proofUploaded ? (
+                <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+                  <CheckCircle className="w-8 h-8 text-green-600 mx-auto mb-2" />
+                  <p className="text-green-800 font-semibold text-sm">Receipt Uploaded Successfully!</p>
+                  <p className="text-green-600 text-xs mt-1">Your status is now <strong>Pending Verification</strong>. We'll confirm within 2–3 business days.</p>
+                </div>
+              ) : (
+                <>
+                  {proofError && (
+                    <div className="mb-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+                      {proofError}
+                    </div>
+                  )}
+                  <label className="flex flex-col items-center justify-center w-full border-2 border-dashed border-stone-300 hover:border-[#9F8320]/50 rounded-lg p-8 cursor-pointer transition-colors bg-stone-50/50 hover:bg-stone-50">
+                    <Upload className="w-8 h-8 text-stone-400 mb-2" />
+                    <p className="text-sm font-semibold text-stone-600">
+                      {proofUploading ? "Uploading..." : "Click to upload your receipt"}
+                    </p>
+                    <p className="text-xs text-stone-400 mt-1">PDF, PNG, or JPG accepted</p>
+                    <input
+                      type="file"
+                      className="hidden"
+                      accept=".pdf,.png,.jpg,.jpeg"
+                      onChange={handleProofUpload}
+                      disabled={proofUploading}
+                    />
+                  </label>
+                </>
+              )}
+            </div>
+
+            {/* Actions */}
+            <div className="flex flex-wrap justify-center gap-4 mt-8">
               <Link
                 href={`/events/${slug}`}
                 className="inline-flex items-center gap-2 bg-stone-100 hover:bg-stone-200 text-stone-700 font-semibold px-8 py-4 text-sm tracking-wider uppercase transition-all duration-500 rounded-lg"
@@ -202,7 +455,7 @@ export default function EventRegistrationPage() {
                 className="inline-flex items-center gap-2 bg-[#9F8320] hover:bg-[#9F8320]/90 text-white font-semibold px-8 py-4 text-sm tracking-wider uppercase transition-all duration-500 rounded-lg"
               >
                 All Events
-                <ChevronRight className="w-4 h-4" />
+                <ExternalLink className="w-4 h-4" />
               </Link>
             </div>
           </div>
@@ -210,6 +463,8 @@ export default function EventRegistrationPage() {
       </>
     );
   }
+
+  // ── FORM VIEW ─────────────────────────────────────────────────────────────
 
   return (
     <>
@@ -279,6 +534,13 @@ export default function EventRegistrationPage() {
         </div>
       </section>
 
+      {/* Workflow Stepper */}
+      <section className="py-8 bg-stone-50 border-b border-stone-200">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-8">
+          <WorkflowStepper />
+        </div>
+      </section>
+
       {/* Registration Form */}
       <section className="py-16 md:py-24 bg-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
@@ -311,6 +573,17 @@ export default function EventRegistrationPage() {
                 </ul>
               </div>
 
+              {/* Payment Workflow Sidebar */}
+              <div className="reveal">
+                <WorkflowSidebar />
+              </div>
+
+              {/* Payment Info / Bank Details */}
+              <div className="reveal">
+                <h3 className="font-serif text-[#1e3a8a] font-semibold mb-3 text-base">Payment Instructions</h3>
+                <BankDetailsCard event={event} />
+              </div>
+
               <div className="reveal bg-stone-50 border border-stone-200 rounded-xl p-6">
                 <h3 className="font-serif text-[#1e3a8a] font-semibold mb-3">Need Help?</h3>
                 <p className="text-stone-500 text-sm leading-relaxed mb-4">
@@ -323,21 +596,6 @@ export default function EventRegistrationPage() {
                   Contact Us
                   <ChevronRight className="w-3.5 h-3.5" />
                 </Link>
-              </div>
-
-              <div className="reveal bg-[#9F8320]/5 border border-[#9F8320]/20 rounded-xl p-6">
-                <h3 className="font-serif text-[#1e3a8a] font-semibold mb-2">Payment Info</h3>
-                <p className="text-stone-500 text-sm leading-relaxed mb-3">
-                  Please wire the ticket amount to the bank account below and include your reference code in the transfer.
-                </p>
-                {event?.bank_number && (
-                  <div className="text-sm space-y-1">
-                    <p className="text-stone-700"><span className="font-semibold">Bank Account:</span> {event.bank_number}</p>
-                    {event?.swift_code && (
-                      <p className="text-stone-700"><span className="font-semibold">SWIFT Code:</span> {event.swift_code}</p>
-                    )}
-                  </div>
-                )}
               </div>
 
               <div className="reveal bg-stone-50 border border-stone-200 rounded-xl p-6">
@@ -571,24 +829,6 @@ export default function EventRegistrationPage() {
                         <option key={c} value={c}>{c}</option>
                       ))}
                     </select>
-                  </div>
-
-                  {/* Reference Code */}
-                  <div>
-                    <label className="block text-sm font-semibold text-stone-800 mb-2">
-                      Payment Reference Code
-                    </label>
-                    <input
-                      type="text"
-                      name="reference_code"
-                      value={form.reference_code}
-                      onChange={handleChange}
-                      placeholder="Enter your wire transfer reference (optional)"
-                      className="w-full px-4 py-3.5 border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#9F8320]/40 focus:border-[#9F8320] bg-white text-stone-900 placeholder-stone-400 text-sm transition-all"
-                    />
-                    <p className="text-xs text-stone-400 mt-1.5">
-                      If you have already transferred the amount, enter the reference code from your bank transfer.
-                    </p>
                   </div>
 
                   {/* Comment */}

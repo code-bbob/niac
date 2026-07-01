@@ -38,7 +38,7 @@ const navLinks = [
   },
   { label: "Events", href: "/events" },
   { label: "Blogs", href: "/blogs" },
-  // { label: "Fee Calculator", href: "/fee-calculator" },
+  { label: "Fee Calculator", href: "/fee-calculator" },
   {
     label: "Rules",
     href: "#",
@@ -316,7 +316,7 @@ const serviceItems = [
 
   {/* Twitter / X */}
   <a
-    href="https://twitter.com"
+    href="https://x.com/adr_nepal"
     target="_blank"
     rel="noopener noreferrer"
     className="text-gray-500 hover:text-sky-500 transition-colors p-1"
@@ -335,7 +335,7 @@ const serviceItems = [
 
   {/* LinkedIn */}
   <a
-    href="https://linkedin.com"
+    href="https://www.linkedin.com/company/nepal-international-adr-center/?originalSubdomain=np"
     target="_blank"
     rel="noopener noreferrer"
     className="text-gray-500 hover:text-[#0077B5] transition-colors p-1"
