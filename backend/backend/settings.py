@@ -195,6 +195,8 @@ BREVO_API_KEY = os.getenv("SENDINBLUE_API_KEY")
 DEFAULT_FROM_EMAIL_ADDRESS = "secretariat@niac.org.np"
 DEFAULT_FROM_EMAIL_NAME = "Nepal International ADR Center"
 
+FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:3000")
+
 
 
 # Static files (CSS, JavaScript, Images)

@@ -48,7 +48,7 @@ const ARBITRATOR_FEE_TIERS = {
     {
       max: 2_000_000,
       single: { max: 50_000 },
-      tribunal: { max: 80_000 },
+      tribunal: { max: 180_000 },
     },
     {
       max: 5_000_000,
@@ -147,29 +147,46 @@ const ARBITRATOR_FEE_TIERS = {
 
 const VAT_RATE = 0.13;
 
-const getTier = (amount, tiers) =>
-  tiers.find((tier) => amount <= tier.max) || tiers[tiers.length - 1];
-
 const calculateAdminFee = (amount) => {
-  const tier = getTier(amount, ADMIN_FEE_TIERS);
-  if (tier.minFee) {
-    return tier.minFee;
+  let fee = 0;
+  let prevMax = 0;
+
+  for (const tier of ADMIN_FEE_TIERS) {
+    if (amount <= prevMax) break;
+    const portion = Math.min(amount, tier.max) - prevMax;
+
+    if (tier.minFee !== undefined) {
+      fee += tier.minFee;
+    } else {
+      fee += portion * (tier.rate / 100);
+    }
+
+    prevMax = tier.max;
   }
-  return amount * (tier.rate / 100);
+
+  return fee;
 };
 
 const calculateArbitratorFee = (amount, isTribunal, contractType) => {
   const tiers = ARBITRATOR_FEE_TIERS[contractType];
-  const tier = getTier(amount, tiers);
-  const feeMeta = isTribunal ? tier.tribunal : tier.single;
-  if (!feeMeta.rate) {
-    return feeMeta.max || 0;
+  let fee = 0;
+  let prevMax = 0;
+
+  for (const tier of tiers) {
+    if (amount <= prevMax) break;
+    const portion = Math.min(amount, tier.max) - prevMax;
+    const meta = isTribunal ? tier.tribunal : tier.single;
+
+    if (meta.max !== undefined && meta.rate === undefined) {
+      fee += meta.max;
+    } else {
+      fee += portion * (meta.rate / 100);
+    }
+
+    prevMax = tier.max;
   }
-  const computed = amount * (feeMeta.rate / 100);
-  if (feeMeta.max) {
-    return Math.min(computed, feeMeta.max);
-  }
-  return computed;
+
+  return fee;
 };
 
 export default function FeeCalculatorPage() {

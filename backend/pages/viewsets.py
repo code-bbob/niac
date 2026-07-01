@@ -1,3 +1,4 @@
+import uuid
 from rest_framework import viewsets, status, parsers
 from rest_framework.response import Response
 from rest_framework.decorators import action
@@ -286,9 +287,53 @@ class EventBookingViewSet(viewsets.ModelViewSet):
             {
                 "message": "Registration successful!",
                 "registration_id": booking.registration_id,
+                "lookup_token": str(booking.lookup_token),
                 "booking": self.get_serializer(booking).data,
             },
             status=status.HTTP_201_CREATED
+        )
+
+    @action(detail=False, methods=['get'])
+    def lookup(self, request):
+        token = request.query_params.get('token')
+        email = request.query_params.get('email')
+        registration_id = request.query_params.get('registration_id')
+
+        if token:
+            try:
+                uuid.UUID(token)
+            except (ValueError, AttributeError):
+                return Response(
+                    {"error": "Invalid lookup token format"},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+            try:
+                booking = EventBooking.objects.get(lookup_token=token)
+                serializer = self.get_serializer(booking)
+                return Response({"booking": serializer.data})
+            except EventBooking.DoesNotExist:
+                return Response(
+                    {"error": "Invalid or expired lookup token"},
+                    status=status.HTTP_404_NOT_FOUND,
+                )
+
+        if email and registration_id:
+            try:
+                booking = EventBooking.objects.get(
+                    email__iexact=email,
+                    registration_id__iexact=registration_id,
+                )
+                serializer = self.get_serializer(booking)
+                return Response({"booking": serializer.data})
+            except EventBooking.DoesNotExist:
+                return Response(
+                    {"error": "No booking found with that email and Registration ID"},
+                    status=status.HTTP_404_NOT_FOUND,
+                )
+
+        return Response(
+            {"error": "Provide a token, or email + registration_id"},
+            status=status.HTTP_400_BAD_REQUEST,
         )
 
     @action(detail=True, methods=['post'], parser_classes=[parsers.MultiPartParser, parsers.FormParser])

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import {
@@ -231,21 +231,68 @@ export default function EventRegistrationPage() {
   const [proofUploaded, setProofUploaded] = useState(false);
   const [proofError, setProofError] = useState(null);
 
+  // Proof confirmation
+  const [pendingFile, setPendingFile] = useState(null);
+  const fileInputRef = useRef(null);
+
+  // Token/lookup state
+  const [lookupLoading, setLookupLoading] = useState(false);
+  const [lookupError, setLookupError] = useState(null);
+  const [showLookupForm, setShowLookupForm] = useState(false);
+  const [lookupForm, setLookupForm] = useState({ email: "", registration_id: "" });
+
   useEffect(() => {
     if (!slug) return;
-    fetch(`${API_URL}/events/${slug}/`)
-      .then((r) => {
-        if (!r.ok) throw new Error("Event not found");
-        return r.json();
-      })
-      .then((data) => {
-        setEvent(data);
-        setLoading(false);
-      })
-      .catch(() => {
-        setError("Failed to load event details.");
-        setLoading(false);
-      });
+
+    const token = new URLSearchParams(window.location.search).get("token");
+    const lsToken = !token ? localStorage.getItem(`niac_booking_${slug}`) : null;
+    const lookupToken = token || lsToken;
+
+    const fetchEvent = fetch(`${API_URL}/events/${slug}/`).then((r) => {
+      if (!r.ok) throw new Error("Event not found");
+      return r.json();
+    });
+
+    if (lookupToken) {
+      setLookupLoading(true);
+      Promise.all([
+        fetchEvent,
+        fetch(`${API_URL}/event-bookings/lookup/?token=${encodeURIComponent(lookupToken)}`).then((r) => r.json()),
+      ])
+        .then(([eventData, lookupData]) => {
+          setEvent(eventData);
+          if (lookupData.booking) {
+            setBookingData(lookupData.booking);
+            setProofUploaded(
+              lookupData.booking.status === "pending_verification" ||
+                lookupData.booking.status === "confirmed"
+            );
+            setSuccess(true);
+            if (token) {
+              window.history.replaceState({}, "", window.location.pathname);
+            }
+          } else {
+            setLookupError("Booking not found. The link may be invalid.");
+          }
+          setLoading(false);
+          setLookupLoading(false);
+        })
+        .catch(() => {
+          setError("Failed to load your booking details.");
+          setLoading(false);
+          setLookupLoading(false);
+        });
+    } else {
+      fetchEvent
+        .then((data) => {
+          setEvent(data);
+          setLoading(false);
+        })
+        .catch(() => {
+          setError("Failed to load event details.");
+          setLoading(false);
+        });
+    }
   }, [slug]);
 
   const handleChange = (e) => {
@@ -271,9 +318,16 @@ export default function EventRegistrationPage() {
         throw new Error(data.error || data.message || "Submission failed. Please try again.");
       }
 
-      setBookingData(data.booking || data);
+      const booking = data.booking || data;
+      setBookingData(booking);
       setSuccess(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
+
+      const bookToken = booking.lookup_token || data.lookup_token;
+      if (bookToken) {
+        localStorage.setItem(`niac_booking_${slug}`, bookToken);
+        window.history.replaceState({}, "", `?token=${bookToken}`);
+      }
     } catch (err) {
       setError(err.message);
     } finally {
@@ -281,16 +335,22 @@ export default function EventRegistrationPage() {
     }
   };
 
-  const handleProofUpload = async (e) => {
+  const handleFileSelect = (e) => {
     const file = e.target.files[0];
-    if (!file || !bookingData?.id) return;
+    if (!file) return;
+    setPendingFile(file);
+    setProofError(null);
+  };
+
+  const confirmUpload = async () => {
+    if (!pendingFile || !bookingData?.id) return;
 
     setProofUploading(true);
     setProofError(null);
 
     try {
       const formData = new FormData();
-      formData.append("proof_file", file);
+      formData.append("proof_file", pendingFile);
 
       const res = await fetch(`${API_URL}/event-bookings/${bookingData.id}/upload_proof/`, {
         method: "POST",
@@ -304,10 +364,61 @@ export default function EventRegistrationPage() {
       }
 
       setProofUploaded(true);
+      setPendingFile(null);
     } catch (err) {
       setProofError(err.message);
     } finally {
       setProofUploading(false);
+    }
+  };
+
+  const cancelUpload = () => {
+    setPendingFile(null);
+    setProofError(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
+  const handleLookupChange = (e) => {
+    const { name, value } = e.target;
+    setLookupForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleLookupSubmit = async (e) => {
+    e.preventDefault();
+    setLookupError(null);
+    setLookupLoading(true);
+
+    try {
+      const params = new URLSearchParams({
+        email: lookupForm.email,
+        registration_id: lookupForm.registration_id,
+      });
+      const res = await fetch(`${API_URL}/event-bookings/lookup/?${params}`);
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "No booking found");
+      }
+
+      const lsToken = data.booking?.lookup_token;
+      if (lsToken) {
+        localStorage.setItem(`niac_booking_${slug}`, lsToken);
+        window.history.replaceState({}, "", `?token=${lsToken}`);
+      }
+
+      setBookingData(data.booking);
+      setProofUploaded(
+        data.booking.status === "pending_verification" ||
+          data.booking.status === "confirmed"
+      );
+      setSuccess(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (err) {
+      setLookupError(err.message);
+    } finally {
+      setLookupLoading(false);
     }
   };
 
@@ -334,17 +445,34 @@ export default function EventRegistrationPage() {
           />
           <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-8">
             {/* Success header */}
-            <div className="text-center mb-10">
-              <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="text-center mb-6">
+              <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-4">
                 <CheckCircle className="w-10 h-10 text-green-600" />
               </div>
               <h1 className="font-serif text-3xl md:text-4xl text-[#1e3a8a] font-bold mb-2">
-                Registration Received!
+                Registration Received, Payment Pending!
               </h1>
-              <p className="text-stone-500 text-base">
+              <p className="text-stone-500 text-sm">
                 Thank you for registering for <strong className="text-stone-700">{event?.title}</strong>
               </p>
             </div>
+
+            {!proofUploaded && (
+              <div className="bg-red-50 border-2 border-red-300 rounded-xl p-5 mb-8">
+                <div className="flex items-start gap-3">
+                  <span className="text-xl leading-none mt-0.5">⚠</span>
+                  <div>
+                    <p className="text-red-800 font-bold text-sm">
+                      Action Required — Wire Transfer Not Yet Completed
+                    </p>
+                    <p className="text-red-700 text-xs mt-1.5 leading-relaxed">
+                      Your registration is on hold until you send the wire transfer and upload the payment receipt.
+                      A link to return to this page has been emailed to you — you can leave and come back anytime.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Registration ID Badge */}
             <div className="text-center mb-8">
@@ -414,7 +542,50 @@ export default function EventRegistrationPage() {
                 <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
                   <CheckCircle className="w-8 h-8 text-green-600 mx-auto mb-2" />
                   <p className="text-green-800 font-semibold text-sm">Receipt Uploaded Successfully!</p>
-                  <p className="text-green-600 text-xs mt-1">Your status is now <strong>Pending Verification</strong>. We'll confirm within 2–3 business days.</p>
+                  {bookingData?.status === "confirmed" ? (
+                    <p className="text-green-600 text-xs mt-1">
+                      Your registration is <strong>Confirmed</strong>. Thank you!
+                    </p>
+                  ) : (
+                    <p className="text-green-600 text-xs mt-1">
+                      Your status is now <strong>Pending Verification</strong>. We'll confirm within 2–3 business days.
+                    </p>
+                  )}
+                </div>
+              ) : pendingFile ? (
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-5 text-center">
+                  <p className="text-amber-800 font-semibold text-sm mb-2">
+                    Once uploaded, the receipt cannot be changed.
+                  </p>
+                  <p className="text-amber-600 text-xs mb-4">
+                    Are you sure you want to upload this receipt?
+                  </p>
+                  <p className="text-xs text-amber-500 mb-4 truncate max-w-full">
+                    Selected file: <strong>{pendingFile.name}</strong>
+                  </p>
+                  <div className="flex justify-center gap-3">
+                    <button
+                      onClick={cancelUpload}
+                      disabled={proofUploading}
+                      className="px-5 py-2.5 border border-stone-300 text-stone-700 rounded-lg text-sm font-semibold hover:bg-stone-100 transition-colors"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={confirmUpload}
+                      disabled={proofUploading}
+                      className="px-5 py-2.5 bg-[#9F8320] hover:bg-[#9F8320]/90 disabled:bg-stone-400 text-white rounded-lg text-sm font-semibold transition-colors flex items-center gap-2"
+                    >
+                      {proofUploading ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          Uploading...
+                        </>
+                      ) : (
+                        "Yes, Upload Receipt"
+                      )}
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <>
@@ -426,15 +597,15 @@ export default function EventRegistrationPage() {
                   <label className="flex flex-col items-center justify-center w-full border-2 border-dashed border-stone-300 hover:border-[#9F8320]/50 rounded-lg p-8 cursor-pointer transition-colors bg-stone-50/50 hover:bg-stone-50">
                     <Upload className="w-8 h-8 text-stone-400 mb-2" />
                     <p className="text-sm font-semibold text-stone-600">
-                      {proofUploading ? "Uploading..." : "Click to upload your receipt"}
+                      Click to upload your receipt
                     </p>
                     <p className="text-xs text-stone-400 mt-1">PDF, PNG, or JPG accepted</p>
                     <input
+                      ref={fileInputRef}
                       type="file"
                       className="hidden"
                       accept=".pdf,.png,.jpg,.jpeg"
-                      onChange={handleProofUpload}
-                      disabled={proofUploading}
+                      onChange={handleFileSelect}
                     />
                   </label>
                 </>
@@ -873,6 +1044,63 @@ export default function EventRegistrationPage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Already Registered? Lookup */}
+      <section className="pb-16 bg-white border-t border-stone-100">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-8 pt-10">
+          <div className="text-center">
+            <p className="text-stone-500 text-sm">
+              Already registered?{" "}
+              <button
+                onClick={() => setShowLookupForm(!showLookupForm)}
+                className="text-[#9F8320] font-semibold hover:underline"
+              >
+                Look up your registration
+              </button>
+            </p>
+          </div>
+          {showLookupForm && (
+            <div className="max-w-md mx-auto mt-6 bg-stone-50 border border-stone-200 rounded-xl p-6">
+              <h4 className="font-semibold text-stone-800 mb-1">Find Your Booking</h4>
+              <p className="text-xs text-stone-400 mb-4">
+                Enter the email and Registration ID you received.
+              </p>
+              {lookupError && (
+                <div className="mb-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+                  {lookupError}
+                </div>
+              )}
+              <form onSubmit={handleLookupSubmit} className="space-y-4">
+                <input
+                  type="email"
+                  name="email"
+                  value={lookupForm.email}
+                  onChange={handleLookupChange}
+                  required
+                  placeholder="Your email address"
+                  className="w-full px-4 py-3 border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#9F8320]/40 focus:border-[#9F8320] bg-white text-stone-900 placeholder-stone-400 text-sm"
+                />
+                <input
+                  type="text"
+                  name="registration_id"
+                  value={lookupForm.registration_id}
+                  onChange={handleLookupChange}
+                  required
+                  placeholder="Your Registration ID (e.g., ADR-001)"
+                  className="w-full px-4 py-3 border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#9F8320]/40 focus:border-[#9F8320] bg-white text-stone-900 placeholder-stone-400 text-sm"
+                />
+                <button
+                  type="submit"
+                  disabled={lookupLoading}
+                  className="w-full bg-[#9F8320] hover:bg-[#9F8320]/90 disabled:bg-stone-400 text-white font-semibold py-3 px-6 rounded-xl transition-all text-sm tracking-wider uppercase"
+                >
+                  {lookupLoading ? "Searching..." : "Search"}
+                </button>
+              </form>
+            </div>
+          )}
         </div>
       </section>
     </>

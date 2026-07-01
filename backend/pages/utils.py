@@ -472,6 +472,7 @@ def send_event_booking_email_async(booking):
             event_date = booking.event.event_start_date.strftime('%B %d, %Y') if booking.event.event_start_date else 'TBD'
             registration_id = booking.registration_id
             bank = booking.event
+            lookup_url = f"{settings.FRONTEND_URL}/events/{booking.event.slug}/register?token={booking.lookup_token}"
 
             # Email to admin
             admin_subject = f"New Reg #{registration_id} - {booking.name} for {event_title}"
@@ -564,25 +565,18 @@ def send_event_booking_email_async(booking):
                 <head>
                     <style>
                         body {{ font-family: 'Noto Sans', Arial, sans-serif; color: #333; line-height: 1.8; font-size: 20px; }}
-                        .container {{ max-width: 1000px; margin: 0 auto; padding: 20px; }}
+                        .container {{ max-width: 640px; margin: 0 auto; padding: 20px; }}
                         .header {{ background: linear-gradient(135deg, #0a1628 0%, #1e3a8a 100%); color: white; padding: 40px; border-radius: 8px 8px 0 0; text-align: center; }}
-                        .header h1 {{ margin: 0; font-size: 40px; font-weight: bold; }}
-                        .header p {{ margin: 15px 0 0 0; font-size: 20px; opacity: 0.95; }}
-                        .content {{ background: #ffffff; padding: 40px; border: 2px solid #c9a961; border-radius: 0 0 8px 8px; }}
-                        .reg-badge {{ display: inline-block; background: #c9a961; color: white; padding: 12px 24px; border-radius: 6px; font-size: 24px; font-weight: bold; letter-spacing: 2px; margin: 10px 0; }}
-                        .message {{ color: #333; margin: 20px 0; font-size: 16px; line-height: 1.8; }}
-                        .message p {{ font-size: 18px; margin: 15px 0; }}
-                        .highlight {{ background: #f0f4ff; padding: 20px; border-left: 4px solid #c9a961; margin: 25px 0; border-radius: 4px; font-size: 16px; line-height: 1.8; }}
-                        .highlight strong {{ font-size: 18px; color: #1e3a8a; }}
-                        .step {{ display: flex; gap: 12px; margin: 12px 0; padding: 12px; background: #f8f9fa; border-radius: 6px; }}
-                        .step-num {{ width: 28px; height: 28px; background: #1e3a8a; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: bold; flex-shrink: 0; }}
-                        .step-content {{ font-size: 14px; color: #444; }}
-                        .footer {{ text-align: center; color: #666; font-size: 14px; margin-top: 30px; padding-top: 20px; border-top: 1px solid #c9a961; }}
+                        .header h1 {{ margin: 20px 0 0 0; font-size: 32px; font-weight: bold; }}
+                        .header p {{ margin: 12px 0 0 0; font-size: 18px; opacity: 0.95; }}
+                        .content {{ background: #ffffff; padding: 32px; border: 2px solid #c9a961; border-radius: 0 0 8px 8px; }}
+                        .reg-badge {{ display: inline-block; background: #c9a961; color: white; padding: 12px 28px; border-radius: 6px; font-size: 22px; font-weight: bold; letter-spacing: 2px; margin: 10px 0; }}
+                        .footer {{ text-align: center; color: #666; font-size: 13px; margin-top: 30px; padding-top: 20px; border-top: 1px solid #c9a961; }}
                         .contact-info {{ background: #f8f9fa; padding: 25px; border-radius: 6px; margin: 20px 0; }}
-                        .contact-item {{ margin: 15px 0; font-size: 16px; }}
-                        .contact-label {{ color: #1e3a8a; font-weight: bold; font-size: 15px; }}
+                        .contact-item {{ margin: 12px 0; font-size: 15px; }}
+                        .contact-label {{ color: #1e3a8a; font-weight: bold; font-size: 14px; }}
                         .event-details {{ background: #f8f9fa; padding: 25px; border: 2px solid #c9a961; border-radius: 6px; margin: 25px 0; }}
-                        .detail-row {{ padding: 8px 0; }}
+                        .detail-row {{ padding: 6px 0; }}
                         .detail-label {{ color: #1e3a8a; font-weight: bold; }}
                         .bank-details {{ background: #fff8e7; padding: 20px; border: 1px solid #c9a961; border-radius: 6px; margin: 15px 0; }}
                     </style>
@@ -615,32 +609,62 @@ def send_event_booking_email_async(booking):
                             </div>
 
                             <div style="background:#f0f4ff;padding:25px;border-radius:8px;margin:25px 0;">
-                                <h3 style="color:#1e3a8a;margin:0 0 15px 0;font-size:18px;">How to Complete Your Payment – Step by Step</h3>
+                                <h3 style="color:#1e3a8a;margin:0 0 15px 0;font-size:18px;text-align:center;">How to Complete Your Payment – Step by Step</h3>
 
-                                <div class="step">
-                                    <div class="step-num">1</div>
-                                    <div class="step-content">
-                                        <strong>Send Wire Transfer</strong><br>
-                                        Instruct your bank to wire the ticket amount to our Sanima Bank account (details below).<br>
-                                        <strong>Important:</strong> Put <strong>{registration_id}</strong> in the wire transfer memo/remarks field.
-                                    </div>
-                                </div>
+                                <table cellpadding="0" cellspacing="0" style="width:100%;margin:10px 0;background:#f8f9fa;border-radius:6px;">
+                                    <tr>
+                                        <td style="width:36px;padding:12px 0 12px 12px;vertical-align:top;">
+                                            <table cellpadding="0" cellspacing="0" style="width:28px;height:28px;">
+                                                <tr>
+                                                    <td style="width:28px;height:28px;background:#1e3a8a;color:#ffffff;border-radius:50%;text-align:center;vertical-align:middle;font-size:14px;font-weight:bold;line-height:28px;">
+                                                        1
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td style="padding:12px 12px 12px 8px;vertical-align:top;font-size:14px;color:#444;line-height:1.6;">
+                                            <strong>Send Wire Transfer</strong><br>
+                                            Instruct your bank to wire the ticket amount to our Sanima Bank account (details below).<br>
+                                            <strong>Important:</strong> Put <strong>{registration_id}</strong> in the wire transfer memo/remarks field.
+                                        </td>
+                                    </tr>
+                                </table>
 
-                                <div class="step">
-                                    <div class="step-num">2</div>
-                                    <div class="step-content">
-                                        <strong>Upload Your Receipt</strong><br>
-                                        Return to our registration page and upload your wire transfer receipt / MT103. Your status will change to "Pending Verification".
-                                    </div>
-                                </div>
+                                <table cellpadding="0" cellspacing="0" style="width:100%;margin:10px 0;background:#f8f9fa;border-radius:6px;">
+                                    <tr>
+                                        <td style="width:36px;padding:12px 0 12px 12px;vertical-align:top;">
+                                            <table cellpadding="0" cellspacing="0" style="width:28px;height:28px;">
+                                                <tr>
+                                                    <td style="width:28px;height:28px;background:#1e3a8a;color:#ffffff;border-radius:50%;text-align:center;vertical-align:middle;font-size:14px;font-weight:bold;line-height:28px;">
+                                                        2
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td style="padding:12px 12px 12px 8px;vertical-align:top;font-size:14px;color:#444;line-height:1.6;">
+                                            <strong>Upload Your Receipt</strong><br>
+                                            <a href="{lookup_url}" style="color:#1e3a8a;font-weight:bold;text-decoration:underline;">Click here</a> to return to your booking page and upload your wire transfer receipt / MT103. Your status will change to "Pending Verification".
+                                        </td>
+                                    </tr>
+                                </table>
 
-                                <div class="step">
-                                    <div class="step-num">3</div>
-                                    <div class="step-content">
-                                        <strong>We Verify & Confirm</strong><br>
-                                        Our team matches your transfer against our bank statement and flips your status to "Confirmed". You'll receive a confirmation email.
-                                    </div>
-                                </div>
+                                <table cellpadding="0" cellspacing="0" style="width:100%;margin:10px 0;background:#f8f9fa;border-radius:6px;">
+                                    <tr>
+                                        <td style="width:36px;padding:12px 0 12px 12px;vertical-align:top;">
+                                            <table cellpadding="0" cellspacing="0" style="width:28px;height:28px;">
+                                                <tr>
+                                                    <td style="width:28px;height:28px;background:#1e3a8a;color:#ffffff;border-radius:50%;text-align:center;vertical-align:middle;font-size:14px;font-weight:bold;line-height:28px;">
+                                                        3
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td style="padding:12px 12px 12px 8px;vertical-align:top;font-size:14px;color:#444;line-height:1.6;">
+                                            <strong>We Verify & Confirm</strong><br>
+                                            Our team matches your transfer against our bank statement and flips your status to "Confirmed". You'll receive a confirmation email.
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
 
                             <div class="bank-details">
@@ -656,9 +680,13 @@ def send_event_booking_email_async(booking):
                                 </p>
                             </div>
 
-                            <div class="message">
-                                <p>If you need to reach us, feel free to contact us directly:</p>
+                            <div style="margin:25px 0 15px 0;text-align:center;">
+                                <a href="{lookup_url}" style="display:inline-block;background:#c9a961;color:#ffffff;padding:14px 36px;border-radius:6px;font-size:16px;font-weight:bold;text-decoration:none;">Upload Your Payment Receipt</a>
                             </div>
+
+                            <p style="font-size:14px;color:#555;margin:20px 0;text-align:center;">
+                                If you need to reach us, feel free to contact us directly:
+                            </p>
 
                             <div class="contact-info">
                                 <div class="contact-item">
@@ -675,10 +703,10 @@ def send_event_booking_email_async(booking):
                                 </div>
                             </div>
 
-                            <div class="message">
-                                <p>Best regards,</p>
-                                <p><strong>The NIAC Team</strong></p>
-                                <p style="color: #1e3a8a; font-size: 14px;"><em>Nepal International ADR Center</em></p>
+                            <div style="text-align:center;margin:30px 0 10px 0;">
+                                <p style="font-size:16px;color:#333;margin:0 0 4px 0;">Best regards,</p>
+                                <p style="font-size:16px;font-weight:bold;color:#1e3a8a;margin:0 0 2px 0;">The NIAC Team</p>
+                                <p style="font-size:14px;font-style:italic;color:#1e3a8a;margin:0;">Nepal International ADR Center</p>
                             </div>
 
                             <div class="footer">

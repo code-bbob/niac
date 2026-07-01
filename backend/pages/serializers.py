@@ -151,9 +151,9 @@ class EventBookingSerializer(serializers.ModelSerializer):
             'name', 'email', 'address', 'city', 'state', 'zip_code',
             'country', 'phone', 'comment', 'company', 'reference_code',
             'status', 'is_verified', 'proof_file', 'proof_file_url',
-            'proof_uploaded_at', 'admin_notes',
+            'proof_uploaded_at', 'admin_notes', 'lookup_token',
         ]
-        read_only_fields = ['id', 'registration_id', 'status', 'is_verified', 'proof_file_url', 'proof_uploaded_at']
+        read_only_fields = ['id', 'registration_id', 'status', 'is_verified', 'proof_file_url', 'proof_uploaded_at', 'lookup_token']
 
     def get_proof_file_url(self, obj):
         if obj.proof_file:
