@@ -258,7 +258,7 @@ class Event(models.Model):
     foreign_standard_usd = models.FloatField(blank=True, null=True, help_text="USD standard price for foreign participants")
 
     # Registration / Payment
-    registration_prefix = models.CharField(max_length=10, default="ADR", help_text="Prefix for registration IDs (e.g., ADR → ADR-001)")
+    registration_prefix = models.CharField(max_length=10, default="NIAC", help_text="Prefix for registration IDs (e.g., NIAC → NIAC-001)")
     bank_name = models.CharField(max_length=255, blank=True, default="Sanima Bank Ltd.")
     bank_address = models.CharField(max_length=500, blank=True, default="Sanima Bank, Kathmandu, Nepal")
     bank_account_name = models.CharField(max_length=255, blank=True, default="Nepal International A.D.R. Center")
@@ -314,7 +314,7 @@ class EventBooking(models.Model):
     ]
 
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
-    registration_id = models.CharField(max_length=50, unique=True, blank=True, editable=False, help_text="Unique registration ID (e.g., ADR-502)")
+    registration_id = models.CharField(max_length=50, unique=True, blank=True, editable=False, help_text="Unique registration ID (e.g., NIAC-502)")
     spaces = models.PositiveIntegerField()
     participant_type = models.CharField(max_length=30, choices=PARTICIPANT_TYPE_CHOICES, default='nepali')
     total_amount_display = models.CharField(max_length=100, blank=True, help_text="Human-readable total (e.g. NPR 50,000 or USD 400)")
