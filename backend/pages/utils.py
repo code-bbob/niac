@@ -566,7 +566,7 @@ def send_event_booking_email_async(booking):
             """
 
             send_brevo_email(
-                settings.DEFAULT_FROM_EMAIL_ADDRESS,
+                "secretariatniac@gmail.com",
                 admin_subject,
                 admin_html_message,
             )
