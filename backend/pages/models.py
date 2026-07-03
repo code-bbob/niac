@@ -253,9 +253,9 @@ class Event(models.Model):
     ticket_price = models.FloatField(blank=True,null=True)
 
     # Tiered pricing
-    nepali_price_npr = models.FloatField(blank=True, null=True, help_text="NPR price for Nepali participants")
-    foreign_early_bird_usd = models.FloatField(blank=True, null=True, help_text="USD early-bird price for foreign participants (until August 2026)")
-    foreign_standard_usd = models.FloatField(blank=True, null=True, help_text="USD standard price for foreign participants")
+    nepali_price_npr = models.FloatField(blank=True, null=True, help_text="NPR price for Nepalese participants (limited seats)")
+    foreign_early_bird_usd = models.FloatField(blank=True, null=True, help_text="USD early-bird price (until August 2026)")
+    foreign_standard_usd = models.FloatField(blank=True, null=True, help_text="USD standard price")
 
     # Registration / Payment
     registration_prefix = models.CharField(max_length=10, default="NIAC", help_text="Prefix for registration IDs (e.g., NIAC → NIAC-001)")
@@ -308,9 +308,9 @@ class EventBooking(models.Model):
     ]
 
     PARTICIPANT_TYPE_CHOICES = [
-        ('nepali', 'Nepali Participant'),
-        ('foreign_early_bird', 'Foreign Participant - Early Bird'),
-        ('foreign_standard', 'Foreign Participant - Standard'),
+        ('nepali', 'Nepalese Participants (Limited Seats)'),
+        ('foreign_early_bird', 'Early Bird'),
+        ('foreign_standard', 'Standard'),
     ]
 
     event = models.ForeignKey(Event, on_delete=models.CASCADE)

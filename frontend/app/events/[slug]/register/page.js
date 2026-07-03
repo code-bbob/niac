@@ -211,7 +211,7 @@ export default function EventRegistrationPage() {
 
   const [form, setForm] = useState({
     spaces: 1,
-    participant_type: "nepali",
+    participant_type: "foreign_early_bird",
     name: "",
     email: "",
     phone: "",
