@@ -523,8 +523,8 @@ export default function EventRegistrationPage() {
                   <div className="flex justify-between text-stone-600">
                     <span>Participant Type</span>
                     <span className="font-medium text-stone-800">
-                      {bookingData.participant_type === "nepali" ? "Nepali Participant" :
-                       bookingData.participant_type === "foreign_early_bird" ? "Foreign (Early Bird)" : "Foreign (Standard)"}
+                      {bookingData.participant_type === "nepali" ? "Nepalese Participants(Limited Seats)" :
+                       bookingData.participant_type === "foreign_early_bird" ? "Early Bird" : "Standard"}
                     </span>
                   </div>
                   <div className="flex justify-between text-stone-600">
@@ -736,16 +736,17 @@ export default function EventRegistrationPage() {
             {(event?.nepali_price_npr || event?.foreign_early_bird_usd || event?.foreign_standard_usd) && (
               <div className="reveal mt-6 inline-flex flex-wrap items-stretch gap-0 bg-[#9F8320]/15 border border-[#9F8320]/30 rounded-xl overflow-hidden">
                 <div className="px-5 py-3 border-r border-[#9F8320]/20">
-                  <span className="text-white/60 text-xs tracking-wider uppercase">Nepali</span>
+                  <span className="text-white/60 text-xs tracking-wider uppercase">Nepalese Participants</span>
                   <p className="text-white font-semibold text-base">NPR {event.nepali_price_npr?.toLocaleString() || "25,000"}</p>
+                  <span className="text-white/40 text-[10px]">Limited Seats</span>
                 </div>
                 <div className="px-5 py-3 border-r border-[#9F8320]/20">
-                  <span className="text-white/60 text-xs tracking-wider uppercase">Foreign (Early Bird)</span>
+                  <span className="text-white/60 text-xs tracking-wider uppercase">Early Bird</span>
                   <p className="text-[#9F8320] font-semibold text-base">USD {event.foreign_early_bird_usd?.toLocaleString() || "200"}</p>
                   <span className="text-white/40 text-[10px]">until Aug 2026</span>
                 </div>
                 <div className="px-5 py-3">
-                  <span className="text-white/60 text-xs tracking-wider uppercase">Foreign (Standard)</span>
+                  <span className="text-white/60 text-xs tracking-wider uppercase">Standard</span>
                   <p className="text-white font-semibold text-base">USD {event.foreign_standard_usd?.toLocaleString() || "250"}</p>
                 </div>
               </div>
@@ -807,20 +808,23 @@ export default function EventRegistrationPage() {
               <div className="reveal bg-white border border-stone-200 rounded-xl p-5">
                 <h3 className="font-serif text-[#1e3a8a] font-semibold mb-3 text-base">Registration Fees</h3>
                 <div className="space-y-3 text-sm">
-                  <div className="flex items-center justify-between pb-2 border-b border-stone-100">
-                    <span className="text-stone-600">Nepali Participant</span>
-                    <span className="font-bold text-stone-800">NPR {event?.nepali_price_npr?.toLocaleString() || "25,000"}</span>
-                  </div>
+                
                   <div className="flex items-center justify-between pb-2 border-b border-stone-100">
                     <div>
-                      <span className="text-stone-600">Foreign Participant</span>
-                      <span className="text-[#9F8320] text-[10px] ml-1.5 font-medium">Early Bird</span>
+                      <span className="text-stone-600">Early Bird</span>
                     </div>
                     <span className="font-bold text-stone-800">USD {event?.foreign_early_bird_usd?.toLocaleString() || "200"}</span>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-stone-600">Foreign Participant <span className="text-stone-400 text-[10px]">(Standard)</span></span>
+                  <div className="flex items-center justify-between pb-2 border-b border-stone-100">
+                    <span className="text-stone-600">Standard</span>
                     <span className="font-bold text-stone-800">USD {event?.foreign_standard_usd?.toLocaleString() || "250"}</span>
+                  </div>
+  <div className="flex items-center justify-between pb-2 border-b border-stone-100">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-stone-600">Nepalese Participants</span>
+                      <span className="text-[#9F8320] text-[10px] font-medium">Limited Seats</span>
+                    </div>
+                    <span className="font-bold text-stone-800">NPR {event?.nepali_price_npr?.toLocaleString() || "25,000"}</span>
                   </div>
                 </div>
               </div>
@@ -937,9 +941,10 @@ export default function EventRegistrationPage() {
                     </label>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                       {[
-                        { value: "nepali", label: "Nepali Participant", price: event?.nepali_price_npr ? `NPR ${event.nepali_price_npr.toLocaleString()}` : "NPR 25,000" },
-                        { value: "foreign_early_bird", label: "Foreign (Early Bird)", price: event?.foreign_early_bird_usd ? `USD ${event.foreign_early_bird_usd.toLocaleString()}` : "USD 200", subtitle: "until Aug 2026" },
-                        { value: "foreign_standard", label: "Foreign (Standard)", price: event?.foreign_standard_usd ? `USD ${event.foreign_standard_usd.toLocaleString()}` : "USD 250" },
+                        { value: "foreign_early_bird", label: "Early Bird", price: event?.foreign_early_bird_usd ? `USD ${event.foreign_early_bird_usd.toLocaleString()}` : "USD 200", subtitle: "until Aug 2026" },
+                        { value: "foreign_standard", label: "Standard", price: event?.foreign_standard_usd ? `USD ${event.foreign_standard_usd.toLocaleString()}` : "USD 250" },
+
+                        { value: "nepali", label: "Nepalese (Limited Seats)", price: event?.nepali_price_npr ? `NPR ${event.nepali_price_npr.toLocaleString()}` : "NPR 25,000" },
                       ].map((opt) => (
                         <button
                           key={opt.value}
@@ -1137,7 +1142,7 @@ export default function EventRegistrationPage() {
                         <div className="flex justify-between text-stone-600">
                           <span>Participant Type</span>
                           <span className="font-medium text-stone-800">
-                            {form.participant_type === "nepali" ? "Nepali Participant" : form.participant_type === "foreign_early_bird" ? "Foreign (Early Bird)" : "Foreign (Standard)"}
+                            {form.participant_type === "nepali" ? "Nepalese Participants (Limited Seats)" : form.participant_type === "foreign_early_bird" ? "Early Bird" : "Standard"}
                           </span>
                         </div>
                         <div className="flex justify-between text-stone-600">
