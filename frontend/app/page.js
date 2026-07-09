@@ -73,7 +73,7 @@ function HeroSection() {
         </p>
         <div className="mb-6 inline-flex items-center space-x-3 bg-white/10 px-4 py-2 rounded-full border border-white/20 backdrop-blur-sm">
           <span className="w-2 h-2 rounded-full bg-[#c9a961] animate-pulse"></span>
-          <span className="text-white font-sans text-md uppercase tracking-widest font-bold">
+          <span className="text-white text-2xl font-sans text-md tracking-widest font-bold">
              Reaching the Pinnacle of ADR in a Changing World. 
           </span>
         </div>
