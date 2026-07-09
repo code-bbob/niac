@@ -63,8 +63,14 @@ function HeroSection() {
         />
       </div>
 
-      <div className="relative z-20 text-center px-5 md:px-16 max-w-5xl mx-auto pt-24">
+      <div className="relative z-20 text-center px-5 md:px-16 max-w-5xl mx-auto pt-36">
         {/* Badge */}
+
+        {/* Title */}
+        <p className="text-white font-serif font-bold text-7xl md:text-7xl mb-6 leading-tight">
+          Asia ADR Summit & <br />
+          <span className="text-[#c9a961] italic">Nepal ADR Week 2026</span>
+        </p>
         <div className="mb-6 inline-flex items-center space-x-3 bg-white/10 px-4 py-2 rounded-full border border-white/20 backdrop-blur-sm">
           <span className="w-2 h-2 rounded-full bg-[#c9a961] animate-pulse"></span>
           <span className="text-white font-sans text-md uppercase tracking-widest font-bold">
@@ -72,15 +78,9 @@ function HeroSection() {
           </span>
         </div>
 
-        {/* Title */}
-        <p className="text-white font-serif font-bold text-7xl md:text-7xl mb-6 leading-tight">
-          Asia ADR Summit & <br />
-          <span className="text-[#c9a961] italic">Nepal ADR Week 2026</span>
-        </p>
-
         {/* Subtitle */}
         <p className="text-white font-sans text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-        AIADR and NIAC cordially invites abritrators, mediators, jurists, lawyers, engineers, management personnels, chartered accountants and academics to participate in this historic event.
+        NIAC and AIADR cordially invites abritrators, mediators, jurists, lawyers, engineers, management personnels, chartered accountants and academics to participate in this historic event.
 
         </p>
 
