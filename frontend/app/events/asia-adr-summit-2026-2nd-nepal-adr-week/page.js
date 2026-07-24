@@ -704,6 +704,165 @@ function ExploreNepal() {
   );
 }
 
+/* ── Official Travel & Tour Partner ──────────────────────────────────────── */
+
+function TravelPartner() {
+  const contactItems = [
+    {
+      icon: MapPin,
+      label: "Address",
+      value: "Bhagawati Marg, Thamel, Kathmandu, Nepal",
+    },
+    {
+      icon: Globe,
+      label: "Website",
+      value: "www.touchkailash.com",
+      href: "https://www.touchkailash.com",
+    },
+    {
+      icon: School,
+      label: "Email",
+      value: "info@touchkailash.com",
+      href: "mailto:info@touchkailash.com",
+    },
+  ];
+
+  const phones = [
+    { label: "Office", number: "+977 1 4700357, 4700249" },
+    { label: "Obil", number: "+977 9802346606" },
+    { label: "Bashu", number: "+977 9851092632" },
+  ];
+
+  return (
+    <section className="py-24 md:py-32 bg-stone-50/60 relative overflow-hidden">
+      <div
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage:
+            "url('https://www.transparenttextures.com/patterns/simple-dashed.png')",
+        }}
+      />
+      <div className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-8">
+        <SectionHeading subtitle="Your trusted partner for travel and tour arrangements during the Asia ADR Summit 2026 and Nepal ADR Week.">
+          Official Travel & Tour Guide
+        </SectionHeading>
+
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+          {/* Left: Company Info Card */}
+          <div className="reveal bg-white p-8 md:p-10 border-t-4 border-[#9F8320] shadow-sm rounded-lg">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-14 h-14 bg-[#1e3a8a] rounded-lg flex items-center justify-center">
+                <Mountain className="w-7 h-7 text-[#c9a961]" />
+              </div>
+              <div>
+                <h3 className="font-serif text-2xl text-[#1e3a8a] font-bold">
+                  Touch Kailash
+                </h3>
+                <p className="text-[#9F8320] text-sm font-medium tracking-wide">
+                  Travels & Tours
+                </p>
+              </div>
+            </div>
+
+            <p className="text-stone-500 text-sm leading-relaxed mb-8">
+              For all your travel and tour needs during the summit, Touch Kailash
+              Travels & Tours is the official travel partner. Whether you need
+              airport transfers, hotel bookings, or post-summit adventure
+              packages across Nepal, they provide personalized service with local
+              expertise.
+            </p>
+
+            <div className="space-y-5">
+              {contactItems.map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <div key={i} className="flex items-start gap-4">
+                    <div className="w-10 h-10 bg-stone-100 rounded-lg flex items-center justify-center flex-shrink-0 text-[#9F8320]">
+                      <Icon className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-stone-400 uppercase tracking-wider font-medium mb-1">
+                        {item.label}
+                      </p>
+                      {item.href ? (
+                        <a
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[#1e3a8a] text-sm font-medium hover:text-[#9F8320] transition-colors"
+                        >
+                          {item.value}
+                        </a>
+                      ) : (
+                        <p className="text-stone-600 text-sm font-medium">
+                          {item.value}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Right: Contact Numbers */}
+          <div className="reveal space-y-6" style={{ transitionDelay: "100ms" }}>
+            <div className="bg-white p-8 border-t-4 border-[#9F8320] shadow-sm rounded-lg">
+              <h4 className="font-serif text-lg text-[#1e3a8a] font-semibold mb-6">
+                Contact Numbers
+              </h4>
+              <div className="space-y-4">
+                {phones.map((phone, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center justify-between p-4 bg-stone-50 rounded-lg"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 bg-[#9F8320]/10 rounded-full flex items-center justify-center">
+                        <span className="text-[#9F8320] text-xs font-bold">
+                          {phone.label.charAt(0)}
+                        </span>
+                      </div>
+                      <span className="text-stone-400 text-xs uppercase tracking-wider">
+                        {phone.label}
+                      </span>
+                    </div>
+                    <a
+                      href={`tel:${phone.number.replace(/\s/g, "")}`}
+                      className="text-[#1e3a8a] text-sm font-semibold hover:text-[#9F8320] transition-colors"
+                    >
+                      {phone.number}
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-[#1e3a8a] p-8 rounded-lg text-white">
+              <h4 className="font-serif text-lg font-semibold mb-3">
+                Why Choose Touch Kailash?
+              </h4>
+              <ul className="space-y-3">
+                {[
+                  "Official travel partner for the Asia ADR Summit 2026",
+                  "Local expertise with international service standards",
+                  "Customized tour packages: Himalayan flights, Pokhara, Chitwan & more",
+                  "Reliable airport transfers and in-country logistics",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3 text-sm opacity-90">
+                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#c9a961] flex-shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ── Why NIAC ────────────────────────────────────────────────────────────── */
 
 function WhyNiac() {
@@ -1211,6 +1370,7 @@ export default function EventsPage() {
       <SectionDivider />
       <NepalGallery />
       <ExploreNepal />
+      <TravelPartner />
       <WhyNiac />
       <SectionDivider />
       <Organizers />
