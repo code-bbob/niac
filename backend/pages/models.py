@@ -254,6 +254,8 @@ class Event(models.Model):
 
     # Tiered pricing
     nepali_price_npr = models.FloatField(blank=True, null=True, help_text="NPR price for Nepalese participants (limited seats)")
+    institutional_price_npr = models.FloatField(blank=True, null=True, help_text="NPR price — Institutional Fee")
+    individual_price_npr = models.FloatField(blank=True, null=True, help_text="NPR price — Individual Fee")
     foreign_early_bird_usd = models.FloatField(blank=True, null=True, help_text="USD early-bird price (until August 2026)")
     foreign_standard_usd = models.FloatField(blank=True, null=True, help_text="USD standard price")
 
@@ -308,21 +310,23 @@ class EventBooking(models.Model):
     ]
 
     PARTICIPANT_TYPE_CHOICES = [
-        ('nepali', 'Nepalese Participants (Limited Seats)'),
-        ('foreign_early_bird', 'Early Bird'),
-        ('foreign_standard', 'Standard'),
-    ]
+    ('nepali_scholars', 'Scholars, Academics & Students'),
+    ('nepali_institutional', 'Institutional Fee'),
+    ('nepali_individual', 'Individual Fee'),
+    ('foreign_early_bird', 'Early Bird'),
+    ('foreign_standard', 'Standard'),
+]
 
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     registration_id = models.CharField(max_length=50, unique=True, blank=True, editable=False, help_text="Unique registration ID (e.g., NIAC-502)")
     spaces = models.PositiveIntegerField()
-    participant_type = models.CharField(max_length=30, choices=PARTICIPANT_TYPE_CHOICES, default='nepali')
+    participant_type = models.CharField(max_length=30, choices=PARTICIPANT_TYPE_CHOICES, default='nepali_scholars')
     total_amount_display = models.CharField(max_length=100, blank=True, help_text="Human-readable total (e.g. NPR 50,000 or USD 400)")
     name = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     address = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
-    state = models.CharField(max_length=255)
+    state = models.CharField(max_length=255, blank=True)
     zip_code = models.CharField(max_length=255)
     country = models.CharField(max_length=255)
     phone = models.CharField(max_length=255)
