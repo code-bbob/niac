@@ -42,37 +42,201 @@ function ScrollReveal() {
 }
 
 const COUNTRIES = [
-  "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda",
-  "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas",
-  "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin",
-  "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei",
-  "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon",
-  "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia",
-  "Comoros", "Congo", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic",
-  "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt",
-  "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia",
-  "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana",
-  "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti",
-  "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland",
-  "Israel", "Italy", "Ivory Coast", "Jamaica", "Japan", "Jordan", "Kazakhstan",
-  "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon",
-  "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg",
-  "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands",
-  "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia",
-  "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal",
-  "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea",
-  "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama",
-  "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal",
-  "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia",
-  "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe",
-  "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore",
-  "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea",
-  "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland",
-  "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo",
-  "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu",
-  "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States",
-  "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam",
-  "Yemen", "Zambia", "Zimbabwe",
+  "Afghanistan",
+  "Albania",
+  "Algeria",
+  "Andorra",
+  "Angola",
+  "Antigua and Barbuda",
+  "Argentina",
+  "Armenia",
+  "Australia",
+  "Austria",
+  "Azerbaijan",
+  "Bahamas",
+  "Bahrain",
+  "Bangladesh",
+  "Barbados",
+  "Belarus",
+  "Belgium",
+  "Belize",
+  "Benin",
+  "Bhutan",
+  "Bolivia",
+  "Bosnia and Herzegovina",
+  "Botswana",
+  "Brazil",
+  "Brunei",
+  "Bulgaria",
+  "Burkina Faso",
+  "Burundi",
+  "Cabo Verde",
+  "Cambodia",
+  "Cameroon",
+  "Canada",
+  "Central African Republic",
+  "Chad",
+  "Chile",
+  "China",
+  "Colombia",
+  "Comoros",
+  "Congo",
+  "Costa Rica",
+  "Croatia",
+  "Cuba",
+  "Cyprus",
+  "Czech Republic",
+  "Denmark",
+  "Djibouti",
+  "Dominica",
+  "Dominican Republic",
+  "Ecuador",
+  "Egypt",
+  "El Salvador",
+  "Equatorial Guinea",
+  "Eritrea",
+  "Estonia",
+  "Eswatini",
+  "Ethiopia",
+  "Fiji",
+  "Finland",
+  "France",
+  "Gabon",
+  "Gambia",
+  "Georgia",
+  "Germany",
+  "Ghana",
+  "Greece",
+  "Grenada",
+  "Guatemala",
+  "Guinea",
+  "Guinea-Bissau",
+  "Guyana",
+  "Haiti",
+  "Honduras",
+  "Hungary",
+  "Iceland",
+  "India",
+  "Indonesia",
+  "Iran",
+  "Iraq",
+  "Ireland",
+  "Israel",
+  "Italy",
+  "Ivory Coast",
+  "Jamaica",
+  "Japan",
+  "Jordan",
+  "Kazakhstan",
+  "Kenya",
+  "Kiribati",
+  "Kuwait",
+  "Kyrgyzstan",
+  "Laos",
+  "Latvia",
+  "Lebanon",
+  "Lesotho",
+  "Liberia",
+  "Libya",
+  "Liechtenstein",
+  "Lithuania",
+  "Luxembourg",
+  "Madagascar",
+  "Malawi",
+  "Malaysia",
+  "Maldives",
+  "Mali",
+  "Malta",
+  "Marshall Islands",
+  "Mauritania",
+  "Mauritius",
+  "Mexico",
+  "Micronesia",
+  "Moldova",
+  "Monaco",
+  "Mongolia",
+  "Montenegro",
+  "Morocco",
+  "Mozambique",
+  "Myanmar",
+  "Namibia",
+  "Nauru",
+  "Nepal",
+  "Netherlands",
+  "New Zealand",
+  "Nicaragua",
+  "Niger",
+  "Nigeria",
+  "North Korea",
+  "North Macedonia",
+  "Norway",
+  "Oman",
+  "Pakistan",
+  "Palau",
+  "Palestine",
+  "Panama",
+  "Papua New Guinea",
+  "Paraguay",
+  "Peru",
+  "Philippines",
+  "Poland",
+  "Portugal",
+  "Qatar",
+  "Romania",
+  "Russia",
+  "Rwanda",
+  "Saint Kitts and Nevis",
+  "Saint Lucia",
+  "Saint Vincent and the Grenadines",
+  "Samoa",
+  "San Marino",
+  "Sao Tome and Principe",
+  "Saudi Arabia",
+  "Senegal",
+  "Serbia",
+  "Seychelles",
+  "Sierra Leone",
+  "Singapore",
+  "Slovakia",
+  "Slovenia",
+  "Solomon Islands",
+  "Somalia",
+  "South Africa",
+  "South Korea",
+  "South Sudan",
+  "Spain",
+  "Sri Lanka",
+  "Sudan",
+  "Suriname",
+  "Sweden",
+  "Switzerland",
+  "Syria",
+  "Taiwan",
+  "Tajikistan",
+  "Tanzania",
+  "Thailand",
+  "Timor-Leste",
+  "Togo",
+  "Tonga",
+  "Trinidad and Tobago",
+  "Tunisia",
+  "Turkey",
+  "Turkmenistan",
+  "Tuvalu",
+  "Uganda",
+  "Ukraine",
+  "United Arab Emirates",
+  "United Kingdom",
+  "United States",
+  "Uruguay",
+  "Uzbekistan",
+  "Vanuatu",
+  "Vatican City",
+  "Venezuela",
+  "Vietnam",
+  "Yemen",
+  "Zambia",
+  "Zimbabwe",
 ];
 
 const STEPS = [
@@ -90,18 +254,27 @@ function WorkflowStepper() {
         <div className="w-8 h-8 bg-[#1e3a8a]/10 rounded-lg flex items-center justify-center">
           <FileText className="w-4 h-4 text-[#1e3a8a]" />
         </div>
-        <h3 className="font-serif text-lg text-[#1e3a8a] font-semibold">How It Works</h3>
+        <h3 className="font-serif text-lg text-[#1e3a8a] font-semibold">
+          How It Works
+        </h3>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-5 gap-3">
         {STEPS.map((step, i) => (
-          <div key={step.num} className="relative flex sm:flex-col items-start sm:items-center gap-3 sm:gap-2">
+          <div
+            key={step.num}
+            className="relative flex sm:flex-col items-start sm:items-center gap-3 sm:gap-2"
+          >
             <div className="flex items-center gap-3 sm:flex-col sm:items-center">
               <div className="w-9 h-9 bg-[#9F8320] text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
                 {step.num}
               </div>
               <div className="sm:text-center">
-                <p className="text-sm font-semibold text-stone-800">{step.label}</p>
-                <p className="text-xs text-stone-400 hidden sm:block">{step.desc}</p>
+                <p className="text-sm font-semibold text-stone-800">
+                  {step.label}
+                </p>
+                <p className="text-xs text-stone-400 hidden sm:block">
+                  {step.desc}
+                </p>
               </div>
             </div>
             {i < STEPS.length - 1 && (
@@ -119,13 +292,31 @@ function WorkflowStepper() {
 function WorkflowSidebar() {
   return (
     <div className="bg-[#1e3a8a]/5 border border-[#1e3a8a]/15 rounded-xl p-6">
-      <h3 className="font-serif text-[#1e3a8a] font-semibold mb-4 text-base">Payment Workflow</h3>
+      <h3 className="font-serif text-[#1e3a8a] font-semibold mb-4 text-base">
+        Payment Workflow
+      </h3>
       <div className="space-y-4">
         {[
-          { step: "1", icon: FileText, text: "Submit this registration form to get your unique Registration ID" },
-          { step: "2", icon: Banknote, text: "Send USD wire to Sanima Bank — put your Registration ID in the memo field" },
-          { step: "3", icon: Upload, text: "Upload your wire receipt / MT103 below to shift status to Pending Verification" },
-          { step: "4", icon: Search, text: "We match your transfer against our bank statement and Confirm your seat" },
+          {
+            step: "1",
+            icon: FileText,
+            text: "Submit this registration form to get your unique Registration ID",
+          },
+          {
+            step: "2",
+            icon: Banknote,
+            text: "Send USD wire to Sanima Bank — put your Registration ID in the memo field",
+          },
+          {
+            step: "3",
+            icon: Upload,
+            text: "Upload your wire receipt / MT103 below to shift status to Pending Verification",
+          },
+          {
+            step: "4",
+            icon: Search,
+            text: "We match your transfer against our bank statement and Confirm your seat",
+          },
         ].map((item, i) => {
           const Icon = item.icon;
           return (
@@ -133,7 +324,9 @@ function WorkflowSidebar() {
               <div className="w-6 h-6 bg-[#9F8320] text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
                 {item.step}
               </div>
-              <p className="text-stone-600 text-xs leading-relaxed">{item.text}</p>
+              <p className="text-stone-600 text-xs leading-relaxed">
+                {item.text}
+              </p>
             </div>
           );
         })}
@@ -153,7 +346,9 @@ function BankDetailsCard({ event }) {
   const field = (label, value) => (
     <div className="flex items-center justify-between py-2 border-b border-stone-100 last:border-0">
       <div>
-        <span className="text-xs text-stone-400 uppercase tracking-wider">{label}</span>
+        <span className="text-xs text-stone-400 uppercase tracking-wider">
+          {label}
+        </span>
         <p className="text-sm font-semibold text-stone-800">{value || "—"}</p>
       </div>
       {value && (
@@ -178,12 +373,17 @@ function BankDetailsCard({ event }) {
         <div className="bg-[#9F8320] px-5 py-3">
           <div className="flex items-center gap-2">
             <Banknote className="w-4 h-4 text-white" />
-            <p className="text-white font-semibold text-sm">Sanima Bank Wire Details</p>
+            <p className="text-white font-semibold text-sm">
+              Sanima Bank Wire Details
+            </p>
           </div>
         </div>
         <div className="px-5 py-3">
-              {field("Bank Name", event?.bank_name || "Sanima Bank Ltd.")}
-              {field("Account Name", event?.bank_account_name || "Nepal International A.D.R. Center")}
+          {field("Bank Name", event?.bank_name || "Sanima Bank Ltd.")}
+          {field(
+            "Account Name",
+            event?.bank_account_name || "Nepal International A.D.R. Center",
+          )}
           {field("Account Number", event?.bank_number)}
           {field("Account Type", event?.bank_account_type || "Savings Account")}
           {field("SWIFT Code", event?.swift_code)}
@@ -192,7 +392,8 @@ function BankDetailsCard({ event }) {
         <div className="bg-red-50 border-t-2 border-red-200 px-5 py-3">
           <p className="text-xs text-red-700 font-semibold flex items-start gap-1.5">
             <span className="text-base leading-none mt-0.5">⚠</span>
-            You MUST include your Registration ID in the wire transfer memo/remarks. Otherwise we cannot match your payment.
+            You MUST include your Registration ID in the wire transfer
+            memo/remarks. Otherwise we cannot match your payment.
           </p>
         </div>
       </div>
@@ -229,20 +430,25 @@ export default function EventRegistrationPage() {
     if (!event) return null;
     const { participant_type, spaces } = form;
     let label, unit, totalDisplay;
-    if (participant_type === "nepali") {
+    if (participant_type === "nepali_scholars") {
       const price = event.nepali_price_npr || 25000;
-      label = `NPR ${price.toLocaleString()}`;
-      unit = `NPR ${price.toLocaleString()}`;
+      label = unit = `NPR ${price.toLocaleString()}`;
+      totalDisplay = `NPR ${(price * spaces).toLocaleString()}`;
+    } else if (participant_type === "nepali_institutional") {
+      const price = event.institutional_price_npr || 100000;
+      label = unit = `NPR ${price.toLocaleString()}`;
+      totalDisplay = `NPR ${(price * spaces).toLocaleString()}`;
+    } else if (participant_type === "nepali_individual") {
+      const price = event.individual_price_npr || 45000;
+      label = unit = `NPR ${price.toLocaleString()}`;
       totalDisplay = `NPR ${(price * spaces).toLocaleString()}`;
     } else if (participant_type === "foreign_early_bird") {
       const price = event.foreign_early_bird_usd || 200;
-      label = `USD ${price.toLocaleString()}`;
-      unit = `USD ${price.toLocaleString()}`;
+      label = unit = `USD ${price.toLocaleString()}`;
       totalDisplay = `USD ${(price * spaces).toLocaleString()}`;
     } else {
       const price = event.foreign_standard_usd || 250;
-      label = `USD ${price.toLocaleString()}`;
-      unit = `USD ${price.toLocaleString()}`;
+      label = unit = `USD ${price.toLocaleString()}`;
       totalDisplay = `USD ${(price * spaces).toLocaleString()}`;
     }
     return { label, unit, totalDisplay };
@@ -262,13 +468,18 @@ export default function EventRegistrationPage() {
   const [lookupLoading, setLookupLoading] = useState(false);
   const [lookupError, setLookupError] = useState(null);
   const [showLookupForm, setShowLookupForm] = useState(false);
-  const [lookupForm, setLookupForm] = useState({ email: "", registration_id: "" });
+  const [lookupForm, setLookupForm] = useState({
+    email: "",
+    registration_id: "",
+  });
 
   useEffect(() => {
     if (!slug) return;
 
     const token = new URLSearchParams(window.location.search).get("token");
-    const lsToken = !token ? localStorage.getItem(`niac_booking_${slug}`) : null;
+    const lsToken = !token
+      ? localStorage.getItem(`niac_booking_${slug}`)
+      : null;
     const lookupToken = token || lsToken;
 
     const fetchEvent = fetch(`${API_URL}/events/${slug}/`).then((r) => {
@@ -280,7 +491,9 @@ export default function EventRegistrationPage() {
       setLookupLoading(true);
       Promise.all([
         fetchEvent,
-        fetch(`${API_URL}/event-bookings/lookup/?token=${encodeURIComponent(lookupToken)}`).then((r) => r.json()),
+        fetch(
+          `${API_URL}/event-bookings/lookup/?token=${encodeURIComponent(lookupToken)}`,
+        ).then((r) => r.json()),
       ])
         .then(([eventData, lookupData]) => {
           setEvent(eventData);
@@ -288,7 +501,7 @@ export default function EventRegistrationPage() {
             setBookingData(lookupData.booking);
             setProofUploaded(
               lookupData.booking.status === "pending_verification" ||
-                lookupData.booking.status === "confirmed"
+                lookupData.booking.status === "confirmed",
             );
             setSuccess(true);
             if (token) {
@@ -343,7 +556,9 @@ export default function EventRegistrationPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || data.message || "Submission failed. Please try again.");
+        throw new Error(
+          data.error || data.message || "Submission failed. Please try again.",
+        );
       }
 
       const booking = data.booking || data;
@@ -380,10 +595,13 @@ export default function EventRegistrationPage() {
       const formData = new FormData();
       formData.append("proof_file", pendingFile);
 
-      const res = await fetch(`${API_URL}/event-bookings/${bookingData.id}/upload_proof/`, {
-        method: "POST",
-        body: formData,
-      });
+      const res = await fetch(
+        `${API_URL}/event-bookings/${bookingData.id}/upload_proof/`,
+        {
+          method: "POST",
+          body: formData,
+        },
+      );
 
       const data = await res.json();
 
@@ -439,7 +657,7 @@ export default function EventRegistrationPage() {
       setBookingData(data.booking);
       setProofUploaded(
         data.booking.status === "pending_verification" ||
-          data.booking.status === "confirmed"
+          data.booking.status === "confirmed",
       );
       setSuccess(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -455,7 +673,9 @@ export default function EventRegistrationPage() {
       <div className="min-h-screen flex items-center justify-center bg-white">
         <div className="flex flex-col items-center gap-4">
           <Loader2 className="w-8 h-8 text-[#9F8320] animate-spin" />
-          <p className="text-stone-500 text-sm font-medium">Loading registration...</p>
+          <p className="text-stone-500 text-sm font-medium">
+            Loading registration...
+          </p>
         </div>
       </div>
     );
@@ -468,8 +688,12 @@ export default function EventRegistrationPage() {
       <>
         <ScrollReveal />
         <section className="min-h-screen bg-white pt-28 pb-24 relative overflow-hidden">
-          <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
-            style={{ backgroundImage: "url('https://www.transparenttextures.com/patterns/simple-dashed.png')" }}
+          <div
+            className="absolute inset-0 opacity-[0.03] pointer-events-none"
+            style={{
+              backgroundImage:
+                "url('https://www.transparenttextures.com/patterns/simple-dashed.png')",
+            }}
           />
           <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-8">
             {/* Success header */}
@@ -481,7 +705,8 @@ export default function EventRegistrationPage() {
                 Registration Received, Payment Pending!
               </h1>
               <p className="text-stone-500 text-sm">
-                Thank you for registering for <strong className="text-stone-700">{event?.title}</strong>
+                Thank you for registering for{" "}
+                <strong className="text-stone-700">{event?.title}</strong>
               </p>
             </div>
 
@@ -494,8 +719,10 @@ export default function EventRegistrationPage() {
                       Action Required — Wire Transfer Not Yet Completed
                     </p>
                     <p className="text-red-700 text-xs mt-1.5 leading-relaxed">
-                      Your registration is on hold until you send the wire transfer and upload the payment receipt.
-                      A link to return to this page has been emailed to you — you can leave and come back anytime.
+                      Your registration is on hold until you send the wire
+                      transfer and upload the payment receipt. A link to return
+                      to this page has been emailed to you — you can leave and
+                      come back anytime.
                     </p>
                   </div>
                 </div>
@@ -505,7 +732,9 @@ export default function EventRegistrationPage() {
             {/* Registration ID Badge */}
             <div className="text-center mb-8">
               <div className="inline-block bg-gradient-to-r from-[#9F8320] to-[#c9a961] text-white px-8 py-4 rounded-xl shadow-lg shadow-[#9F8320]/30">
-                <p className="text-xs tracking-[0.2em] uppercase opacity-80 mb-1">Your Registration ID</p>
+                <p className="text-xs tracking-[0.2em] uppercase opacity-80 mb-1">
+                  Your Registration ID
+                </p>
                 <p className="font-mono text-3xl md:text-4xl font-bold tracking-wider">
                   {bookingData?.registration_id || "—"}
                 </p>
@@ -518,22 +747,38 @@ export default function EventRegistrationPage() {
             {/* Pricing Summary on Success */}
             {bookingData?.total_amount_display && (
               <div className="bg-[#1e3a8a]/5 border border-[#1e3a8a]/15 rounded-xl p-5 mb-8">
-                <h4 className="font-semibold text-[#1e3a8a] text-sm mb-3">Registration Fee Summary</h4>
+                <h4 className="font-semibold text-[#1e3a8a] text-sm mb-3">
+                  Registration Fee Summary
+                </h4>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between text-stone-600">
                     <span>Participant Type</span>
                     <span className="font-medium text-stone-800">
-                      {bookingData.participant_type === "nepali" ? "Nepalese Participants(Limited Seats)" :
-                       bookingData.participant_type === "foreign_early_bird" ? "Early Bird" : "Standard"}
+                      {bookingData.participant_type === "nepali_institutional"
+                        ? "Institutional Fee"
+                        : bookingData.participant_type === "nepali_individual"
+                          ? "Individual Fee"
+                          : bookingData.participant_type === "nepali_scholars"
+                            ? "Scholars, Academics & Students"
+                            : bookingData.participant_type ===
+                                "foreign_early_bird"
+                              ? "Early Bird"
+                              : "Standard"}
                     </span>
                   </div>
                   <div className="flex justify-between text-stone-600">
                     <span>Number of Participants</span>
-                    <span className="font-medium text-stone-800">{bookingData.spaces}</span>
+                    <span className="font-medium text-stone-800">
+                      {bookingData.spaces}
+                    </span>
                   </div>
                   <div className="border-t border-stone-200 pt-2 flex justify-between">
-                    <span className="font-semibold text-stone-800">Total Amount</span>
-                    <span className="font-bold text-lg text-[#1e3a8a]">{bookingData.total_amount_display}</span>
+                    <span className="font-semibold text-stone-800">
+                      Total Amount
+                    </span>
+                    <span className="font-bold text-lg text-[#1e3a8a]">
+                      {bookingData.total_amount_display}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -541,14 +786,25 @@ export default function EventRegistrationPage() {
 
             {/* Next Steps */}
             <div className="bg-amber-50/80 border border-amber-200/60 rounded-xl p-6 mb-8">
-              <h3 className="font-serif text-[#1e3a8a] font-semibold mb-4 text-lg">Complete Your Registration – 3 Simple Steps</h3>
+              <h3 className="font-serif text-[#1e3a8a] font-semibold mb-4 text-lg">
+                Complete Your Registration – 3 Simple Steps
+              </h3>
               <div className="space-y-4">
                 <div className="flex items-start gap-3 bg-white rounded-lg p-4 border border-amber-100">
-                  <div className="w-8 h-8 bg-[#9F8320] text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">1</div>
+                  <div className="w-8 h-8 bg-[#9F8320] text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
+                    1
+                  </div>
                   <div>
-                    <p className="font-semibold text-stone-800 text-sm">Send Wire Transfer to Sanima Bank</p>
+                    <p className="font-semibold text-stone-800 text-sm">
+                      Send Wire Transfer to Sanima Bank
+                    </p>
                     <p className="text-stone-500 text-xs mt-1">
-                      Instruct your bank to wire <strong>{bookingData?.total_amount_display || "the ticket amount"}</strong>. You <strong className="text-red-600">MUST</strong> put{" "}
+                      Instruct your bank to wire{" "}
+                      <strong>
+                        {bookingData?.total_amount_display ||
+                          "the ticket amount"}
+                      </strong>
+                      . You <strong className="text-red-600">MUST</strong> put{" "}
                       <span className="font-mono font-bold text-[#1e3a8a] bg-[#1e3a8a]/10 px-1.5 py-0.5 rounded">
                         {bookingData?.registration_id}
                       </span>{" "}
@@ -557,20 +813,32 @@ export default function EventRegistrationPage() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3 bg-white rounded-lg p-4 border border-amber-100">
-                  <div className="w-8 h-8 bg-[#9F8320] text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">2</div>
+                  <div className="w-8 h-8 bg-[#9F8320] text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
+                    2
+                  </div>
                   <div>
-                    <p className="font-semibold text-stone-800 text-sm">Upload Your MT103 / Wire Receipt</p>
+                    <p className="font-semibold text-stone-800 text-sm">
+                      Upload Your MT103 / Wire Receipt
+                    </p>
                     <p className="text-stone-500 text-xs mt-1">
-                      Upload your payment receipt below. Your status will change to <strong>"Pending Verification"</strong>.
+                      Upload your payment receipt below. Your status will change
+                      to <strong>"Pending Verification"</strong>.
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 bg-white rounded-lg p-4 border border-amber-100">
-                  <div className="w-8 h-8 bg-[#9F8320] text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">3</div>
+                  <div className="w-8 h-8 bg-[#9F8320] text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
+                    3
+                  </div>
                   <div>
-                    <p className="font-semibold text-stone-800 text-sm">We Match & Confirm</p>
+                    <p className="font-semibold text-stone-800 text-sm">
+                      We Match & Confirm
+                    </p>
                     <p className="text-stone-500 text-xs mt-1">
-                      Our team checks your transfer against our Sanima Bank statement and flips your status to <strong>"Confirmed"</strong>. You'll get a confirmation email.
+                      Our team checks your transfer against our Sanima Bank
+                      statement and flips your status to{" "}
+                      <strong>"Confirmed"</strong>. You'll get a confirmation
+                      email.
                     </p>
                   </div>
                 </div>
@@ -584,23 +852,30 @@ export default function EventRegistrationPage() {
             <div className="bg-white border border-stone-200 rounded-xl p-6 mt-8">
               <div className="flex items-center gap-2 mb-4">
                 <Upload className="w-5 h-5 text-[#9F8320]" />
-                <h3 className="font-serif text-lg text-[#1e3a8a] font-semibold">Upload Wire Transfer Receipt</h3>
+                <h3 className="font-serif text-lg text-[#1e3a8a] font-semibold">
+                  Upload Wire Transfer Receipt
+                </h3>
               </div>
               <p className="text-stone-500 text-sm mb-4">
-                After sending your wire, upload the MT103 or bank receipt here. We'll verify and confirm your registration.
+                After sending your wire, upload the MT103 or bank receipt here.
+                We'll verify and confirm your registration.
               </p>
 
               {proofUploaded ? (
                 <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
                   <CheckCircle className="w-8 h-8 text-green-600 mx-auto mb-2" />
-                  <p className="text-green-800 font-semibold text-sm">Receipt Uploaded Successfully!</p>
+                  <p className="text-green-800 font-semibold text-sm">
+                    Receipt Uploaded Successfully!
+                  </p>
                   {bookingData?.status === "confirmed" ? (
                     <p className="text-green-600 text-xs mt-1">
-                      Your registration is <strong>Confirmed</strong>. Thank you!
+                      Your registration is <strong>Confirmed</strong>. Thank
+                      you!
                     </p>
                   ) : (
                     <p className="text-green-600 text-xs mt-1">
-                      Your status is now <strong>Pending Verification</strong>. We'll confirm within 2–3 business days.
+                      Your status is now <strong>Pending Verification</strong>.
+                      We'll confirm within 2–3 business days.
                     </p>
                   )}
                 </div>
@@ -651,7 +926,9 @@ export default function EventRegistrationPage() {
                     <p className="text-sm font-semibold text-stone-600">
                       Click to upload your receipt
                     </p>
-                    <p className="text-xs text-stone-400 mt-1">PDF, PNG, or JPG accepted</p>
+                    <p className="text-xs text-stone-400 mt-1">
+                      PDF, PNG, or JPG accepted
+                    </p>
                     <input
                       ref={fileInputRef}
                       type="file"
@@ -695,8 +972,13 @@ export default function EventRegistrationPage() {
 
       {/* Hero Banner */}
       <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 bg-navy overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.15]"
-          style={{ backgroundImage: "url('/images/possibility1.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}
+        <div
+          className="absolute inset-0 opacity-[0.15]"
+          style={{
+            backgroundImage: "url('/images/possibility1.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-navy/70 via-navy/50 to-navy" />
         <div className="absolute top-0 right-0 w-1/3 h-1 bg-[#9F8320] z-10" />
@@ -720,12 +1002,23 @@ export default function EventRegistrationPage() {
               {event?.event_start_date && (
                 <span className="inline-flex items-center gap-2 bg-white/[0.08] backdrop-blur-sm border border-white/15 px-5 py-2.5 rounded-full text-sm text-white/80">
                   <Calendar className="w-4 h-4 text-[#9F8320]" />
-                  {new Date(event.event_start_date).toLocaleDateString("en-US", {
-                    month: "long", day: "numeric", year: "numeric",
-                  })}
-                  {event?.event_end_date && ` — ${new Date(event.event_end_date).toLocaleDateString("en-US", {
-                    month: "long", day: "numeric", year: "numeric",
-                  })}`}
+                  {new Date(event.event_start_date).toLocaleDateString(
+                    "en-US",
+                    {
+                      month: "long",
+                      day: "numeric",
+                      year: "numeric",
+                    },
+                  )}
+                  {event?.event_end_date &&
+                    ` — ${new Date(event.event_end_date).toLocaleDateString(
+                      "en-US",
+                      {
+                        month: "long",
+                        day: "numeric",
+                        year: "numeric",
+                      },
+                    )}`}
                 </span>
               )}
               <span className="inline-flex items-center gap-2 bg-white/[0.08] backdrop-blur-sm border border-white/15 px-5 py-2.5 rounded-full text-sm text-white/80">
@@ -733,21 +1026,58 @@ export default function EventRegistrationPage() {
                 Kathmandu, Nepal
               </span>
             </div>
-            {(event?.nepali_price_npr || event?.foreign_early_bird_usd || event?.foreign_standard_usd) && (
+            {(event?.nepali_price_npr ||
+              event?.institutional_price_npr ||
+              event?.individual_price_npr ||
+              event?.foreign_early_bird_usd ||
+              event?.foreign_standard_usd) && (
               <div className="reveal mt-6 inline-flex flex-wrap items-stretch gap-0 bg-[#9F8320]/15 border border-[#9F8320]/30 rounded-xl overflow-hidden">
                 <div className="px-5 py-3 border-r border-[#9F8320]/20">
-                  <span className="text-white/60 text-xs tracking-wider uppercase">Nepalese Participants</span>
-                  <p className="text-white font-semibold text-base">NPR {event.nepali_price_npr?.toLocaleString() || "25,000"}</p>
-                  <span className="text-white/40 text-[10px]">Limited Seats</span>
+                  <span className="text-white/60 text-xs tracking-wider uppercase">
+                    Institutional Fee
+                  </span>
+                  <p className="text-white font-semibold text-base">
+                    NPR{" "}
+                    {event.institutional_price_npr?.toLocaleString() ||
+                      "100,000"}
+                  </p>
                 </div>
                 <div className="px-5 py-3 border-r border-[#9F8320]/20">
-                  <span className="text-white/60 text-xs tracking-wider uppercase">Early Bird</span>
-                  <p className="text-[#9F8320] font-semibold text-base">USD {event.foreign_early_bird_usd?.toLocaleString() || "200"}</p>
-                  <span className="text-white/40 text-[10px]">until Aug 2026</span>
+                  <span className="text-white/60 text-xs tracking-wider uppercase">
+                    Individual Fee
+                  </span>
+                  <p className="text-white font-semibold text-base">
+                    NPR{" "}
+                    {event.individual_price_npr?.toLocaleString() || "45,000"}
+                  </p>
+                </div>
+                <div className="px-5 py-3 border-r border-[#9F8320]/20">
+                  <span className="text-white/60 text-xs tracking-wider uppercase">
+                    Scholars & Students
+                  </span>
+                  <p className="text-white font-semibold text-base">
+                    NPR {event.nepali_price_npr?.toLocaleString() || "25,000"}
+                  </p>
+                </div>
+                <div className="px-5 py-3 border-r border-[#9F8320]/20">
+                  <span className="text-white/60 text-xs tracking-wider uppercase">
+                    Early Bird
+                  </span>
+                  <p className="text-[#9F8320] font-semibold text-base">
+                    USD{" "}
+                    {event.foreign_early_bird_usd?.toLocaleString() || "150"}
+                  </p>
+                  <span className="text-white/40 text-[10px]">
+                    until Aug 2026
+                  </span>
                 </div>
                 <div className="px-5 py-3">
-                  <span className="text-white/60 text-xs tracking-wider uppercase">Standard</span>
-                  <p className="text-white font-semibold text-base">USD {event.foreign_standard_usd?.toLocaleString() || "250"}</p>
+                  <span className="text-white/60 text-xs tracking-wider uppercase">
+                    Standard
+                  </span>
+                  <p className="text-white font-semibold text-base">
+                    USD {event.foreign_standard_usd?.toLocaleString() || "200"}
+                  </p>
                 </div>
               </div>
             )}
@@ -755,7 +1085,10 @@ export default function EventRegistrationPage() {
         </div>
         <div className="absolute bottom-0 left-0 right-0 leading-none">
           <svg viewBox="0 0 1440 72" fill="none" className="w-full h-auto">
-            <path d="M0 72V0C240 48 480 72 720 72C960 72 1200 48 1440 0V72H0Z" fill="#ffffff" />
+            <path
+              d="M0 72V0C240 48 480 72 720 72C960 72 1200 48 1440 0V72H0Z"
+              fill="#ffffff"
+            />
           </svg>
         </div>
       </section>
@@ -769,8 +1102,12 @@ export default function EventRegistrationPage() {
 
       {/* Registration Form */}
       <section className="py-16 md:py-24 bg-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
-          style={{ backgroundImage: "url('https://www.transparenttextures.com/patterns/simple-dashed.png')" }}
+        <div
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage:
+              "url('https://www.transparenttextures.com/patterns/simple-dashed.png')",
+          }}
         />
         <div className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
@@ -782,13 +1119,25 @@ export default function EventRegistrationPage() {
                 </h2>
                 <ul className="space-y-4">
                   {[
-                    { icon: Users, text: "Network with global ADR professionals" },
-                    { icon: Calendar, text: "Keynote sessions, panels & workshops" },
-                    { icon: MapPin, text: "Experience the rich culture of Nepal" },
+                    {
+                      icon: Users,
+                      text: "Network with global ADR professionals",
+                    },
+                    {
+                      icon: Calendar,
+                      text: "Keynote sessions, panels & workshops",
+                    },
+                    {
+                      icon: MapPin,
+                      text: "Experience the rich culture of Nepal",
+                    },
                   ].map((item, i) => {
                     const Icon = item.icon;
                     return (
-                      <li key={i} className="flex items-start gap-3 text-stone-600 text-sm">
+                      <li
+                        key={i}
+                        className="flex items-start gap-3 text-stone-600 text-sm"
+                      >
                         <div className="w-8 h-8 bg-[#9F8320]/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
                           <Icon className="w-4 h-4 text-[#9F8320]" />
                         </div>
@@ -806,39 +1155,67 @@ export default function EventRegistrationPage() {
 
               {/* Registration Fees */}
               <div className="reveal bg-white border border-stone-200 rounded-xl p-5">
-                <h3 className="font-serif text-[#1e3a8a] font-semibold mb-3 text-base">Registration Fees</h3>
+                <h3 className="font-serif text-[#1e3a8a] font-semibold mb-3 text-base">
+                  Registration Fees
+                </h3>
                 <div className="space-y-3 text-sm">
-                
                   <div className="flex items-center justify-between pb-2 border-b border-stone-100">
-                    <div>
-                      <span className="text-stone-600">Early Bird</span>
-                    </div>
-                    <span className="font-bold text-stone-800">USD {event?.foreign_early_bird_usd?.toLocaleString() || "200"}</span>
+                    <span className="text-stone-600">Early Bird</span>
+                    <span className="font-bold text-stone-800">
+                      USD{" "}
+                      {event?.foreign_early_bird_usd?.toLocaleString() || "200"}
+                    </span>
                   </div>
                   <div className="flex items-center justify-between pb-2 border-b border-stone-100">
                     <span className="text-stone-600">Standard</span>
-                    <span className="font-bold text-stone-800">USD {event?.foreign_standard_usd?.toLocaleString() || "250"}</span>
+                    <span className="font-bold text-stone-800">
+                      USD{" "}
+                      {event?.foreign_standard_usd?.toLocaleString() || "250"}
+                    </span>
                   </div>
-  <div className="flex items-center justify-between pb-2 border-b border-stone-100">
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-stone-600">Nepalese Participants</span>
-                      <span className="text-[#9F8320] text-[10px] font-medium">Limited Seats</span>
-                    </div>
-                    <span className="font-bold text-stone-800">NPR {event?.nepali_price_npr?.toLocaleString() || "25,000"}</span>
+                  <div className="flex items-center justify-between pb-2 border-b border-stone-100">
+                    <span className="text-stone-600">Institutional Fee</span>
+                    <span className="font-bold text-stone-800">
+                      NPR{" "}
+                      {event?.institutional_price_npr?.toLocaleString() ||
+                        "100,000"}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between pb-2 border-b border-stone-100">
+                    <span className="text-stone-600">Individual Fee</span>
+                    <span className="font-bold text-stone-800">
+                      NPR{" "}
+                      {event?.individual_price_npr?.toLocaleString() ||
+                        "45,000"}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between pb-2 border-b border-stone-100">
+                    <span className="text-stone-600">
+                      Scholars, Academics & Students
+                    </span>
+                    <span className="font-bold text-stone-800">
+                      NPR{" "}
+                      {event?.nepali_price_npr?.toLocaleString() || "25,000"}
+                    </span>
                   </div>
                 </div>
               </div>
 
               {/* Payment Info / Bank Details */}
               <div className="reveal">
-                <h3 className="font-serif text-[#1e3a8a] font-semibold mb-3 text-base">Payment Instructions</h3>
+                <h3 className="font-serif text-[#1e3a8a] font-semibold mb-3 text-base">
+                  Payment Instructions
+                </h3>
                 <BankDetailsCard event={event} />
               </div>
 
               <div className="reveal bg-stone-50 border border-stone-200 rounded-xl p-6">
-                <h3 className="font-serif text-[#1e3a8a] font-semibold mb-3">Need Help?</h3>
+                <h3 className="font-serif text-[#1e3a8a] font-semibold mb-3">
+                  Need Help?
+                </h3>
                 <p className="text-stone-500 text-sm leading-relaxed mb-4">
-                  For inquiries about registration, sponsorship, or the event program, please contact us.
+                  For inquiries about registration, sponsorship, or the event
+                  program, please contact us.
                 </p>
                 <Link
                   href="/contact"
@@ -850,13 +1227,18 @@ export default function EventRegistrationPage() {
               </div>
 
               <div className="reveal bg-stone-50 border border-stone-200 rounded-xl p-6">
-                <h3 className="font-serif text-[#1e3a8a] font-semibold mb-3">Hotel Accommodation</h3>
+                <h3 className="font-serif text-[#1e3a8a] font-semibold mb-3">
+                  Hotel Accommodation
+                </h3>
                 <p className="text-stone-500 text-sm leading-relaxed mb-4">
-                  We recommend the following hotels for your stay during the event:
+                  We recommend the following hotels for your stay during the
+                  event:
                 </p>
                 <div className="space-y-4">
                   <div>
-                    <p className="font-semibold text-sm text-stone-800 mb-2">Hotel View Bhrikuti</p>
+                    <p className="font-semibold text-sm text-stone-800 mb-2">
+                      Hotel View Bhrikuti
+                    </p>
                     <div className="rounded-lg overflow-hidden">
                       <iframe
                         src="https://maps.google.com/maps?q=Hotel%20View%20Bhrikuti%20Kathmandu&output=embed"
@@ -870,7 +1252,9 @@ export default function EventRegistrationPage() {
                     </div>
                   </div>
                   <div>
-                    <p className="font-semibold text-sm text-stone-800 mb-2">Best Western Plus Hotel</p>
+                    <p className="font-semibold text-sm text-stone-800 mb-2">
+                      Best Western Plus Hotel
+                    </p>
                     <div className="rounded-lg overflow-hidden">
                       <iframe
                         src="https://maps.google.com/maps?q=Best%20Western%20Plus%20Hotel%20Kathmandu&output=embed"
@@ -895,11 +1279,15 @@ export default function EventRegistrationPage() {
                     <h2 className="font-serif text-2xl text-[#1e3a8a] font-semibold">
                       Registration Form
                     </h2>
-                    <p className="text-stone-400 text-sm mt-1">Fill in your details to secure your place</p>
+                    <p className="text-stone-400 text-sm mt-1">
+                      Fill in your details to secure your place
+                    </p>
                   </div>
                   <div className="hidden sm:flex items-center gap-2 bg-stone-50 px-4 py-2 rounded-lg">
                     <Users className="w-4 h-4 text-[#9F8320]" />
-                    <span className="text-sm font-semibold text-stone-700">{form.spaces || 1}</span>
+                    <span className="text-sm font-semibold text-stone-700">
+                      {form.spaces || 1}
+                    </span>
                   </div>
                 </div>
 
@@ -918,15 +1306,27 @@ export default function EventRegistrationPage() {
                     <div className="flex items-center gap-4">
                       <button
                         type="button"
-                        onClick={() => setForm((p) => ({ ...p, spaces: Math.max(1, p.spaces - 1) }))}
+                        onClick={() =>
+                          setForm((p) => ({
+                            ...p,
+                            spaces: Math.max(1, p.spaces - 1),
+                          }))
+                        }
                         className="w-10 h-10 border border-stone-300 rounded-lg flex items-center justify-center text-stone-600 hover:border-[#9F8320] hover:text-[#9F8320] transition-all"
                       >
                         −
                       </button>
-                      <span className="w-12 text-center font-semibold text-lg text-stone-800">{form.spaces}</span>
+                      <span className="w-12 text-center font-semibold text-lg text-stone-800">
+                        {form.spaces}
+                      </span>
                       <button
                         type="button"
-                        onClick={() => setForm((p) => ({ ...p, spaces: Math.min(20, p.spaces + 1) }))}
+                        onClick={() =>
+                          setForm((p) => ({
+                            ...p,
+                            spaces: Math.min(20, p.spaces + 1),
+                          }))
+                        }
                         className="w-10 h-10 border border-stone-300 rounded-lg flex items-center justify-center text-stone-600 hover:border-[#9F8320] hover:text-[#9F8320] transition-all"
                       >
                         +
@@ -935,31 +1335,59 @@ export default function EventRegistrationPage() {
                   </div>
 
                   {/* Participant Type */}
+                  {/* Participant Type */}
                   <div>
                     <label className="block text-sm font-semibold text-stone-800 mb-3">
                       Participant Type <span className="text-red-400">*</span>
                     </label>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                      {[
-                        { value: "foreign_early_bird", label: "Early Bird", price: event?.foreign_early_bird_usd ? `USD ${event.foreign_early_bird_usd.toLocaleString()}` : "USD 200", subtitle: "until Aug 2026" },
-                        { value: "foreign_standard", label: "Standard", price: event?.foreign_standard_usd ? `USD ${event.foreign_standard_usd.toLocaleString()}` : "USD 250" },
 
-                        { value: "nepali", label: "Nepalese (Limited Seats)", price: event?.nepali_price_npr ? `NPR ${event.nepali_price_npr.toLocaleString()}` : "NPR 25,000" },
+                    {/* International Participants */}
+                    <p className="text-xs font-semibold text-stone-500 uppercase tracking-wider mb-2">
+                      International Participants
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
+                      {[
+                        {
+                          value: "foreign_early_bird",
+                          label: "Early Bird",
+                          price: event?.foreign_early_bird_usd
+                            ? `USD ${event.foreign_early_bird_usd.toLocaleString()}`
+                            : "USD 200",
+                          subtitle: "until Aug 2026",
+                        },
+                        {
+                          value: "foreign_standard",
+                          label: "Standard",
+                          price: event?.foreign_standard_usd
+                            ? `USD ${event.foreign_standard_usd.toLocaleString()}`
+                            : "USD 250",
+                        },
                       ].map((opt) => (
                         <button
                           key={opt.value}
                           type="button"
-                          onClick={() => setForm((p) => ({ ...p, participant_type: opt.value }))}
+                          onClick={() =>
+                            setForm((p) => ({
+                              ...p,
+                              participant_type: opt.value,
+                            }))
+                          }
                           className={`relative text-left p-4 rounded-xl border-2 transition-all ${
                             form.participant_type === opt.value
                               ? "border-[#9F8320] bg-[#9F8320]/5 shadow-sm"
                               : "border-stone-200 bg-white hover:border-stone-300"
                           }`}
                         >
-                          <p className="text-sm font-semibold text-stone-800">{opt.label}</p>
-                          <p className="text-lg font-bold text-[#1e3a8a] mt-1">{opt.price}</p>
+                          <p className="text-sm font-semibold text-stone-800">
+                            {opt.label}
+                          </p>
+                          <p className="text-lg font-bold text-[#1e3a8a] mt-1">
+                            {opt.price}
+                          </p>
                           {opt.subtitle && (
-                            <p className="text-xs text-[#9F8320] font-medium mt-0.5">{opt.subtitle}</p>
+                            <p className="text-xs text-[#9F8320] font-medium mt-0.5">
+                              {opt.subtitle}
+                            </p>
                           )}
                           {form.participant_type === opt.value && (
                             <div className="absolute top-2 right-2 w-5 h-5 bg-[#9F8320] rounded-full flex items-center justify-center">
@@ -968,6 +1396,71 @@ export default function EventRegistrationPage() {
                           )}
                         </button>
                       ))}
+                    </div>
+
+                    {/* Nepali Participants — grouped box */}
+                    <div className="border-2 border-[#1e3a8a]/15 bg-[#1e3a8a]/[0.03] rounded-xl p-4">
+                      <div className="flex items-center gap-2 mb-3">
+                        <p className="text-xs font-semibold text-[#1e3a8a] uppercase tracking-wider">
+                          Nepali Participants
+                        </p>
+                        <span className="text-[#9F8320] text-[10px] font-medium bg-[#9F8320]/10 px-2 py-0.5 rounded-full">
+                          Limited Seats
+                        </span>
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        {[
+                          {
+                            value: "nepali_institutional",
+                            label: "Institutional Fee",
+                            price: event?.institutional_price_npr
+                              ? `NPR ${event.institutional_price_npr.toLocaleString()}`
+                              : "NPR 100,000",
+                          },
+                          {
+                            value: "nepali_individual",
+                            label: "Individual Fee",
+                            price: event?.individual_price_npr
+                              ? `NPR ${event.individual_price_npr.toLocaleString()}`
+                              : "NPR 45,000",
+                          },
+                          {
+                            value: "nepali_scholars",
+                            label: "Scholars, Academics & Students",
+                            price: event?.nepali_price_npr
+                              ? `NPR ${event.nepali_price_npr.toLocaleString()}`
+                              : "NPR 25,000",
+                          },
+                        ].map((opt) => (
+                          <button
+                            key={opt.value}
+                            type="button"
+                            onClick={() =>
+                              setForm((p) => ({
+                                ...p,
+                                participant_type: opt.value,
+                              }))
+                            }
+                            className={`relative text-left p-4 rounded-xl border-2 bg-white transition-all ${
+                              form.participant_type === opt.value
+                                ? "border-[#9F8320] bg-[#9F8320]/5 shadow-sm"
+                                : "border-stone-200 hover:border-stone-300"
+                            }`}
+                          >
+                            <p className="text-sm font-semibold text-stone-800">
+                              {opt.label}
+                            </p>
+                            <p className="text-lg font-bold text-[#1e3a8a] mt-1">
+                              {opt.price}
+                            </p>
+                            {form.participant_type === opt.value && (
+                              <div className="absolute top-2 right-2 w-5 h-5 bg-[#9F8320] rounded-full flex items-center justify-center">
+                                <CheckCircle className="w-3 h-3 text-white" />
+                              </div>
+                            )}
+                          </button>
+                        ))}
+                      </div>
                     </div>
                   </div>
 
@@ -1068,13 +1561,14 @@ export default function EventRegistrationPage() {
                     </div>
                     <div>
                       <label className="block text-sm font-semibold text-stone-800 mb-2">
-                        State / Province
+                        State / Province <span className="text-red-400">*</span>
                       </label>
                       <input
                         type="text"
                         name="state"
                         value={form.state}
                         onChange={handleChange}
+                        required
                         placeholder="Bagmati"
                         className="w-full px-4 py-3.5 border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#9F8320]/40 focus:border-[#9F8320] bg-white text-stone-900 placeholder-stone-400 text-sm transition-all"
                       />
@@ -1107,14 +1601,17 @@ export default function EventRegistrationPage() {
                       required
                       className="w-full px-4 py-3.5 border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#9F8320]/40 focus:border-[#9F8320] bg-white text-stone-900 text-sm transition-all appearance-none"
                       style={{
-                        backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2375777d' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E\")",
+                        backgroundImage:
+                          "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2375777d' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E\")",
                         backgroundRepeat: "no-repeat",
                         backgroundPosition: "right 1rem center",
                       }}
                     >
                       <option value="">Select your country</option>
                       {COUNTRIES.map((c) => (
-                        <option key={c} value={c}>{c}</option>
+                        <option key={c} value={c}>
+                          {c}
+                        </option>
                       ))}
                     </select>
                   </div>
@@ -1137,25 +1634,44 @@ export default function EventRegistrationPage() {
                   {/* Pricing Summary */}
                   {pricing && (
                     <div className="bg-[#1e3a8a]/5 border border-[#1e3a8a]/15 rounded-xl p-5">
-                      <h4 className="font-semibold text-[#1e3a8a] text-sm mb-3">Registration Fee Summary</h4>
+                      <h4 className="font-semibold text-[#1e3a8a] text-sm mb-3">
+                        Registration Fee Summary
+                      </h4>
                       <div className="space-y-2 text-sm">
                         <div className="flex justify-between text-stone-600">
                           <span>Participant Type</span>
                           <span className="font-medium text-stone-800">
-                            {form.participant_type === "nepali" ? "Nepalese Participants (Limited Seats)" : form.participant_type === "foreign_early_bird" ? "Early Bird" : "Standard"}
+                            {form.participant_type === "nepali_institutional"
+                              ? "Institutional Fee"
+                              : form.participant_type === "nepali_individual"
+                                ? "Individual Fee"
+                                : form.participant_type === "nepali_scholars"
+                                  ? "Scholars, Academics & Students"
+                                  : form.participant_type ===
+                                      "foreign_early_bird"
+                                    ? "Early Bird"
+                                    : "Standard"}
                           </span>
                         </div>
                         <div className="flex justify-between text-stone-600">
                           <span>Unit Price</span>
-                          <span className="font-medium text-stone-800">{pricing.unit}</span>
+                          <span className="font-medium text-stone-800">
+                            {pricing.unit}
+                          </span>
                         </div>
                         <div className="flex justify-between text-stone-600">
                           <span>Number of Participants</span>
-                          <span className="font-medium text-stone-800">{form.spaces}</span>
+                          <span className="font-medium text-stone-800">
+                            {form.spaces}
+                          </span>
                         </div>
                         <div className="border-t border-stone-200 pt-2 flex justify-between">
-                          <span className="font-semibold text-stone-800">Total Amount</span>
-                          <span className="font-bold text-lg text-[#1e3a8a]">{pricing.totalDisplay}</span>
+                          <span className="font-semibold text-stone-800">
+                            Total Amount
+                          </span>
+                          <span className="font-bold text-lg text-[#1e3a8a]">
+                            {pricing.totalDisplay}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -1181,7 +1697,9 @@ export default function EventRegistrationPage() {
                       )}
                     </button>
                     <p className="text-center text-xs text-stone-400 mt-4">
-                      By submitting, you agree to our terms and conditions. We will handle your data in accordance with our privacy policy.
+                      By submitting, you agree to our terms and conditions. We
+                      will handle your data in accordance with our privacy
+                      policy.
                     </p>
                   </div>
                 </form>
@@ -1207,7 +1725,9 @@ export default function EventRegistrationPage() {
           </div>
           {showLookupForm && (
             <div className="max-w-md mx-auto mt-6 bg-stone-50 border border-stone-200 rounded-xl p-6">
-              <h4 className="font-semibold text-stone-800 mb-1">Find Your Booking</h4>
+              <h4 className="font-semibold text-stone-800 mb-1">
+                Find Your Booking
+              </h4>
               <p className="text-xs text-stone-400 mb-4">
                 Enter the email and Registration ID you received.
               </p>

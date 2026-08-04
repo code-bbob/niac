@@ -118,65 +118,40 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 
-# Tell django-storages to use the S3Boto3 backend:
-# STORAGES = {
-#     "default": {
-#         "BACKEND": "storages.backends.s3.S3Storage",
-#         "OPTIONS": {
-#             "access_key": os.getenv('AWS_ACCESS_KEY_ID'),
-#             "secret_key": os.getenv('AWS_SECRET_ACCESS_KEY'),
-#             "bucket_name": os.getenv('AWS_STORAGE_BUCKET_NAME'),
-#             "endpoint_url": os.getenv('AWS_S3_ENDPOINT_URL'),
-#             "location":'images',
-#             "default_acl": "public-read",
-#             "custom_domain": os.getenv('AWS_S3_CUSTOM_DOMAIN'),
-#         }
-#     },
-#     "staticfiles": {
-#         "BACKEND": "storages.backends.s3.S3Storage",
-#         "OPTIONS": {
-#             "access_key": os.getenv('AWS_ACCESS_KEY_ID'),
-#             "secret_key": os.getenv('AWS_SECRET_ACCESS_KEY'),
-#             "bucket_name": os.getenv('AWS_STORAGE_BUCKET_NAME'),
-#             "endpoint_url": os.getenv('AWS_S3_ENDPOINT_URL'),
-#             "location":'static',
-#             "default_acl": "public-read",
-#             "custom_domain": os.getenv('AWS_S3_CUSTOM_DOMAIN'),
-#         }
-#     },
-# }
-#okay
 
 
-STORAGES = {
-    "default": {
-        "BACKEND": "storages.backends.s3.S3Storage",
-        "OPTIONS": {
-            "access_key": os.getenv('AWS_ACCESS_KEY_ID'),
-            "secret_key": os.getenv('AWS_SECRET_ACCESS_KEY'),
-            "bucket_name": os.getenv('AWS_STORAGE_BUCKET_NAME'),
-            "endpoint_url": os.getenv('AWS_S3_ENDPOINT_URL'),
-            "location":'images',
-            "default_acl": "public-read",
-            "custom_domain": os.getenv('AWS_S3_CUSTOM_DOMAIN'),
-        }
-    },
-    # "staticfiles": {
-    #     "BACKEND": "storages.backends.s3.S3Storage",
-    #     "OPTIONS": {
-    #         "access_key": os.getenv('AWS_ACCESS_KEY_ID'),
-    #         "secret_key": os.getenv('AWS_SECRET_ACCESS_KEY'),
-    #         "bucket_name": os.getenv('AWS_STORAGE_BUCKET_NAME'),
-    #         "endpoint_url": os.getenv('AWS_S3_ENDPOINT_URL'),
-    #         "location":'static',
-    #         "default_acl": "public-read",
-    #         "custom_domain": os.getenv('AWS_S3_CUSTOM_DOMAIN'),
-    #     }
-    # },
-    "staticfiles": {
-        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
-    },
-}
+
+
+##LOCAL DEVELOPMENT FALLBACK WHEN S3 CREDS AREN'T AVAILABLE
+
+if os.getenv('AWS_STORAGE_BUCKET_NAME'):
+    STORAGES = {
+        "default": {
+            "BACKEND": "storages.backends.s3.S3Storage",
+            "OPTIONS": {
+                "access_key": os.getenv('AWS_ACCESS_KEY_ID'),
+                "secret_key": os.getenv('AWS_SECRET_ACCESS_KEY'),
+                "bucket_name": os.getenv('AWS_STORAGE_BUCKET_NAME'),
+                "endpoint_url": os.getenv('AWS_S3_ENDPOINT_URL'),
+                "location": 'images',
+                "default_acl": "public-read",
+                "custom_domain": os.getenv('AWS_S3_CUSTOM_DOMAIN'),
+            }
+        },
+        "staticfiles": {
+            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        },
+    }
+else:
+    # Local dev fallback when S3 creds aren't available
+    STORAGES = {
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        },
+    }
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/

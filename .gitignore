@@ -97,3 +97,4 @@ docker-compose.override.yml
 *.swp
 *.swo
 *~
+"backend/db.sqlite3" 

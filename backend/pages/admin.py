@@ -209,6 +209,7 @@ class EventBookingAdmin(admin.ModelAdmin):
         'email',
         'company',
         'spaces',
+        'participant_type_badge',
         'country',
         'status_badge',
         'proof_status',
@@ -217,6 +218,7 @@ class EventBookingAdmin(admin.ModelAdmin):
     list_filter = [
         'status',
         'is_verified',
+         'participant_type',
         'country',
         'event',
     ]
@@ -238,6 +240,7 @@ class EventBookingAdmin(admin.ModelAdmin):
         'registration_id',
         'event',
         'spaces',
+        'participant_type',
         'name',
         'email',
         'company',
@@ -260,6 +263,7 @@ class EventBookingAdmin(admin.ModelAdmin):
         'registration_id',
         'event',
         'spaces',
+         'participant_type',
         'name',
         'email',
         'company',
@@ -281,6 +285,11 @@ class EventBookingAdmin(admin.ModelAdmin):
         mark_verified,
         mark_unverified,
     ]
+
+    def participant_type_badge(self, obj):
+        return obj.get_participant_type_display()
+    participant_type_badge.short_description = "Participant Type"
+
 
     def status_badge(self, obj):
         colors = {

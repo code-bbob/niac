@@ -116,14 +116,15 @@ class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event 
         fields = [
-            'id', 'title', 'slug', 'description', 'featured_image', 'image_url',
-            'order', 'event_start_date', 'event_end_date',
-            'early_bird_price', 'ticket_price',
-            'nepali_price_npr', 'foreign_early_bird_usd', 'foreign_standard_usd',
-            'registration_prefix',
-            'bank_name', 'bank_address', 'bank_account_name',
-            'bank_number', 'swift_code', 'bank_account_type',
-        ]
+    'id', 'title', 'slug', 'description', 'featured_image', 'image_url',
+    'order', 'event_start_date', 'event_end_date',
+    'early_bird_price', 'ticket_price',
+    'nepali_price_npr', 'institutional_price_npr', 'individual_price_npr',
+    'foreign_early_bird_usd', 'foreign_standard_usd',
+    'registration_prefix',
+    'bank_name', 'bank_address', 'bank_account_name',
+    'bank_number', 'swift_code', 'bank_account_type',
+]
 
     def get_image_url(self,obj):
         if obj.featured_image:
