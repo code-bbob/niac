@@ -21,6 +21,9 @@ import {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
 
+const EARLY_BIRD_DEADLINE = new Date("2026-08-31T23:59:59+05:45"); // Nepal time
+
+
 function ScrollReveal() {
   useEffect(() => {
     const els = () => document.querySelectorAll(".reveal");
@@ -408,8 +411,9 @@ export default function EventRegistrationPage() {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [pricingWindow, setPricingWindow] = useState(null);
   const [error, setError] = useState(null);
-
+  
   const [form, setForm] = useState({
     spaces: 1,
     participant_type: "foreign_early_bird",
@@ -426,6 +430,28 @@ export default function EventRegistrationPage() {
     reference_code: "",
   });
 
+
+
+  useEffect(() => {
+    if (!pricingWindow) return;
+    const validForeignTypes = {
+      early_bird: "foreign_early_bird",
+      standard: "foreign_standard",
+      final: "foreign_final",
+    };
+    const currentIsForeign = form.participant_type.startsWith("foreign_");
+    if (
+      currentIsForeign &&
+      form.participant_type !== validForeignTypes[pricingWindow]
+    ) {
+      setForm((p) => ({
+        ...p,
+        participant_type: validForeignTypes[pricingWindow],
+      }));
+    }
+  }, [pricingWindow]);
+
+  const earlyBirdExpired = new Date() > EARLY_BIRD_DEADLINE;
   const pricing = useMemo(() => {
     if (!event) return null;
     const { participant_type, spaces } = form;
@@ -453,6 +479,13 @@ export default function EventRegistrationPage() {
     }
     return { label, unit, totalDisplay };
   }, [event, form.participant_type, form.spaces]);
+
+
+  useEffect(() => {
+  if (earlyBirdExpired && form.participant_type === "foreign_early_bird") {
+    setForm((p) => ({ ...p, participant_type: "foreign_standard" }));
+  }
+}, [earlyBirdExpired]);
 
   // Success state
   const [bookingData, setBookingData] = useState(null);
@@ -822,7 +855,7 @@ export default function EventRegistrationPage() {
                     </p>
                     <p className="text-stone-500 text-xs mt-1">
                       Upload your payment receipt below. Your status will change
-                      to <strong>"Pending Verification"</strong>.
+                      to <strong>`Pending Verification`</strong>.
                     </p>
                   </div>
                 </div>
@@ -837,8 +870,8 @@ export default function EventRegistrationPage() {
                     <p className="text-stone-500 text-xs mt-1">
                       Our team checks your transfer against our Sanima Bank
                       statement and flips your status to{" "}
-                      <strong>"Confirmed"</strong>. You'll get a confirmation
-                      email.
+                      <strong>`Confirmed`</strong>. You&apos;ll get a
+                      confirmation email.
                     </p>
                   </div>
                 </div>
@@ -858,7 +891,7 @@ export default function EventRegistrationPage() {
               </div>
               <p className="text-stone-500 text-sm mb-4">
                 After sending your wire, upload the MT103 or bank receipt here.
-                We'll verify and confirm your registration.
+                We&apos;ll verify and confirm your registration.
               </p>
 
               {proofUploaded ? (
@@ -875,7 +908,7 @@ export default function EventRegistrationPage() {
                   ) : (
                     <p className="text-green-600 text-xs mt-1">
                       Your status is now <strong>Pending Verification</strong>.
-                      We'll confirm within 2–3 business days.
+                      We&apos;ll confirm within 2–3 business days.
                     </p>
                   )}
                 </div>
@@ -1353,7 +1386,8 @@ export default function EventRegistrationPage() {
                           price: event?.foreign_early_bird_usd
                             ? `USD ${event.foreign_early_bird_usd.toLocaleString()}`
                             : "USD 200",
-                          subtitle: "until Aug 2026",
+                          subtitle: "until Aug 31, 2026",
+                          disabled: earlyBirdExpired,
                         },
                         {
                           value: "foreign_standard",
@@ -1361,21 +1395,26 @@ export default function EventRegistrationPage() {
                           price: event?.foreign_standard_usd
                             ? `USD ${event.foreign_standard_usd.toLocaleString()}`
                             : "USD 250",
+                          disabled: false,
                         },
                       ].map((opt) => (
                         <button
                           key={opt.value}
                           type="button"
+                          disabled={opt.disabled}
                           onClick={() =>
+                            !opt.disabled &&
                             setForm((p) => ({
                               ...p,
                               participant_type: opt.value,
                             }))
                           }
                           className={`relative text-left p-4 rounded-xl border-2 transition-all ${
-                            form.participant_type === opt.value
-                              ? "border-[#9F8320] bg-[#9F8320]/5 shadow-sm"
-                              : "border-stone-200 bg-white hover:border-stone-300"
+                            opt.disabled
+                              ? "border-stone-200 bg-stone-50 opacity-50 cursor-not-allowed"
+                              : form.participant_type === opt.value
+                                ? "border-[#9F8320] bg-[#9F8320]/5 shadow-sm"
+                                : "border-stone-200 bg-white hover:border-stone-300"
                           }`}
                         >
                           <p className="text-sm font-semibold text-stone-800">
@@ -1389,11 +1428,17 @@ export default function EventRegistrationPage() {
                               {opt.subtitle}
                             </p>
                           )}
-                          {form.participant_type === opt.value && (
-                            <div className="absolute top-2 right-2 w-5 h-5 bg-[#9F8320] rounded-full flex items-center justify-center">
-                              <CheckCircle className="w-3 h-3 text-white" />
-                            </div>
+                          {opt.disabled && (
+                            <span className="absolute top-2 right-2 text-[10px] font-bold text-red-500 bg-red-50 px-2 py-0.5 rounded-full">
+                              Ended
+                            </span>
                           )}
+                          {form.participant_type === opt.value &&
+                            !opt.disabled && (
+                              <div className="absolute top-2 right-2 w-5 h-5 bg-[#9F8320] rounded-full flex items-center justify-center">
+                                <CheckCircle className="w-3 h-3 text-white" />
+                              </div>
+                            )}
                         </button>
                       ))}
                     </div>

@@ -113,7 +113,7 @@ function HeroSection() {
           </div>
           <div className="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-lg text-white">
             <Users className="text-[#c9a961] mb-4 w-10 h-10 mx-auto" />
-            <h3 className="font-bold text-lg mb-1">40+ Speakers</h3>
+            <h3 className="font-bold text-lg mb-1">45+ Speakers</h3>
             <p className="text-sm opacity-70">Elite Networking Opportunities</p>
           </div>
         </div>
@@ -366,7 +366,7 @@ function LatestNews() {
     <section className="py-16 sm:py-20 bg-white">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-8">
         <h2 className="text-center font-serif text-3xl sm:text-4xl md:text-5xl text-primary mb-12 sm:mb-16 reveal">
-          Latest News
+          NIAC Activities
         </h2>
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -710,7 +710,7 @@ export default function Home() {
       <HeroSection />
       <CtaSection />
       <ServicesSection />
-      <BulletinSection />
+      
       <WhyChooseUs />
       <LatestNews />
       <QuoteSection />

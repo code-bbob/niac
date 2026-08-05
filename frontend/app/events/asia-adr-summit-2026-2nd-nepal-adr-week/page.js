@@ -223,7 +223,7 @@ function Hero() {
           </div>
           <div className="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-lg text-white">
             <Users className="text-[#c9a961] mb-4 w-10 h-10 mx-auto" />
-            <h3 className="font-bold text-lg mb-1">40+ Speakers</h3>
+            <h3 className="font-bold text-lg mb-1">45+ Speakers</h3>
             <p className="text-sm opacity-70">Elite Networking Opportunities</p>
           </div>
         </div>
@@ -241,7 +241,7 @@ function Stats() {
     <section id="stats" className="bg-[#10245f] py-14 md:py-16">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-          <Counter end={40} label="Expert Speakers" />
+          <Counter end={45} label="Expert Speakers" />
           <Counter end={30} label="Countries" />
           <Counter end={3} label="Conference Days" />
           <Counter end={300} label="Delegates" />
@@ -747,114 +747,63 @@ function TravelPartner() {
           Official Travel & Tour Guide
         </SectionHeading>
 
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-          {/* Left: Company Info Card */}
-          <div className="reveal bg-white p-8 md:p-10 border-t-4 border-[#9F8320] shadow-sm rounded-lg">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-14 h-14 bg-[#1e3a8a] rounded-lg flex items-center justify-center">
-                <Mountain className="w-7 h-7 text-[#c9a961]" />
+        <div className="mt-12 reveal">
+          <div className="bg-white p-6 border-t-4 border-[#9F8320] shadow-sm rounded-lg">
+            <div className="flex flex-col md:flex-row md:items-center gap-6">
+              {/* Left: Logo + Name */}
+              <div className="flex items-center gap-3 md:w-1/4">
+                <div className="w-10 h-10 bg-[#1e3a8a] rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Mountain className="w-5 h-5 text-[#c9a961]" />
+                </div>
+                <div>
+                  <h3 className="font-serif text-base text-[#1e3a8a] font-bold leading-tight">
+                    Touch Kailash
+                  </h3>
+                  <p className="text-[#9F8320] text-xs font-medium tracking-wide">
+                    Official Travel Partner
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-serif text-2xl text-[#1e3a8a] font-bold">
-                  Touch Kailash
-                </h3>
-                <p className="text-[#9F8320] text-sm font-medium tracking-wide">
-                  Travels & Tours
-                </p>
-              </div>
-            </div>
 
-            <p className="text-stone-500 text-sm leading-relaxed mb-8">
-              For all your travel and tour needs during the summit, Touch Kailash
-              Travels & Tours is the official travel partner. Whether you need
-              airport transfers, hotel bookings, or post-summit adventure
-              packages across Nepal, they provide personalized service with local
-              expertise.
-            </p>
+              {/* Middle: One-line description */}
+              <p className="text-stone-500 text-xs leading-relaxed md:w-2/5">
+                Airport transfers, hotel bookings, and post-summit tour packages across Nepal.
+              </p>
 
-            <div className="space-y-5">
-              {contactItems.map((item, i) => {
-                const Icon = item.icon;
-                return (
-                  <div key={i} className="flex items-start gap-4">
-                    <div className="w-10 h-10 bg-stone-100 rounded-lg flex items-center justify-center flex-shrink-0 text-[#9F8320]">
-                      <Icon className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <p className="text-xs text-stone-400 uppercase tracking-wider font-medium mb-1">
-                        {item.label}
-                      </p>
+              {/* Right: Contact info, inline */}
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-2 md:w-1/3 md:justify-end">
+                {contactItems.map((item, i) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={i} className="flex items-center gap-2">
+                      <Icon className="w-4 h-4 text-[#9F8320] flex-shrink-0" />
                       {item.href ? (
                         <a
                           href={item.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-[#1e3a8a] text-sm font-medium hover:text-[#9F8320] transition-colors"
+                          className="text-[#1e3a8a] text-xs font-medium hover:text-[#9F8320] transition-colors"
                         >
                           {item.value}
                         </a>
                       ) : (
-                        <p className="text-stone-600 text-sm font-medium">
+                        <span className="text-stone-600 text-xs font-medium">
                           {item.value}
-                        </p>
+                        </span>
                       )}
                     </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Right: Contact Numbers */}
-          <div className="reveal space-y-6" style={{ transitionDelay: "100ms" }}>
-            <div className="bg-white p-8 border-t-4 border-[#9F8320] shadow-sm rounded-lg">
-              <h4 className="font-serif text-lg text-[#1e3a8a] font-semibold mb-6">
-                Contact Numbers
-              </h4>
-              <div className="space-y-4">
+                  );
+                })}
                 {phones.map((phone, i) => (
-                  <div
+                  <a
                     key={i}
-                    className="flex items-center justify-between p-4 bg-stone-50 rounded-lg"
+                    href={`tel:${phone.number.replace(/\s/g, "")}`}
+                    className="text-[#1e3a8a] text-xs font-semibold hover:text-[#9F8320] transition-colors"
                   >
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-[#9F8320]/10 rounded-full flex items-center justify-center">
-                        <span className="text-[#9F8320] text-xs font-bold">
-                          {phone.label.charAt(0)}
-                        </span>
-                      </div>
-                      <span className="text-stone-400 text-xs uppercase tracking-wider">
-                        {phone.label}
-                      </span>
-                    </div>
-                    <a
-                      href={`tel:${phone.number.replace(/\s/g, "")}`}
-                      className="text-[#1e3a8a] text-sm font-semibold hover:text-[#9F8320] transition-colors"
-                    >
-                      {phone.number}
-                    </a>
-                  </div>
+                    {phone.number}
+                  </a>
                 ))}
               </div>
-            </div>
-
-            <div className="bg-[#1e3a8a] p-8 rounded-lg text-white">
-              <h4 className="font-serif text-lg font-semibold mb-3">
-                Why Choose Touch Kailash?
-              </h4>
-              <ul className="space-y-3">
-                {[
-                  "Official travel partner for the Asia ADR Summit 2026",
-                  "Local expertise with international service standards",
-                  "Customized tour packages: Himalayan flights, Pokhara, Chitwan & more",
-                  "Reliable airport transfers and in-country logistics",
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm opacity-90">
-                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#c9a961] flex-shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
             </div>
           </div>
         </div>
@@ -895,7 +844,7 @@ function WhyNiac() {
       />
       <div className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-8">
         <SectionHeading subtitle="NIAC is more than an institution; it is a gateway to excellence in dispute resolution within the Himalayan region.">
-          Why Partner with NIAC?
+          Why Partnership with NIAC?
         </SectionHeading>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
