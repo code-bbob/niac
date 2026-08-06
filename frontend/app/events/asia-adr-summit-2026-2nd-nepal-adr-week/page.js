@@ -22,6 +22,7 @@ import {
   Users,
   ChevronLeft,
   Sun,
+  Flower2,
   TreePine,
   Sailboat,
   Plane,
@@ -178,24 +179,31 @@ function Hero() {
         <div className="mb-6 inline-flex items-center space-x-3 bg-white/10 px-4 py-2 rounded-full border border-white/20 backdrop-blur-sm">
           <span className="w-2 h-2 rounded-full bg-[#c9a961] animate-pulse"></span>
           <span className="text-white font-sans text-md uppercase tracking-widest font-bold">
-             Reaching the Pinnacle of ADR in a Changing World. 
+            Reaching the Pinnacle of ADR in a Changing World.
           </span>
         </div>
 
         {/* Title */}
-        <p id="title" className="text-white font-serif font-bold text-7xl md:text-7xl mb-6 leading-tight">
+        <p
+          id="title"
+          className="text-white font-serif font-bold text-7xl md:text-7xl mb-6 leading-tight"
+        >
           Asia ADR Summit & <br />
           <span className="text-[#c9a961] italic">Nepal ADR Week 2026</span>
         </p>
 
         {/* Subtitle */}
         <p className="text-white font-sans text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-        AIADR and NIAC cordially invites abritrators, mediators, jurists, lawyers, engineers, management personnels, chartered accountants and academics to participate in this historic event.
-
+          AIADR and NIAC cordially invites abritrators, mediators, jurists,
+          lawyers, engineers, management personnels, chartered accountants and
+          academics to participate in this historic event.
         </p>
 
         {/* Hero CTAs */}
-        <div id="register" className="flex flex-col md:flex-row items-center justify-center gap-6 mb-16">
+        <div
+          id="register"
+          className="flex flex-col md:flex-row items-center justify-center gap-6 mb-16"
+        >
           <Link
             href="/events/asia-adr-summit-2026-2nd-nepal-adr-week/register"
             target="_blank"
@@ -597,12 +605,12 @@ function ExploreNepal() {
     },
     {
       title: "Multi-Day Post-Summit Adventures",
-      duration: "3\u20135 Days",
+      duration: "3–5 Days",
       cards: [
         {
           icon: Sailboat,
           title: "Pokhara Lakeside",
-          desc: "Take a short 25-minute flight to Nepal\u2019s tourism capital to relax by Phewa Lake and see the iconic, mirror-like reflection of Mount Machhapuchhre (Fishtail).",
+          desc: "Take a short 25-minute flight to Nepal's tourism capital to relax by Phewa Lake and see the iconic, mirror-like reflection of Mount Machhapuchhre (Fishtail).",
         },
         {
           icon: TreePine,
@@ -614,6 +622,17 @@ function ExploreNepal() {
           title: "Dhulikhel Panorama",
           desc: "Visit this ancient Newari town to enjoy unobstructed views of the high Himalayas, terraced fields, and traditional rural mountain life.",
         },
+        {
+          icon: Mountain,
+          title: "Annapurna & Dhaulagiri Panorama",
+          desc: "Trek or drive up to Poon Hill or Sarangkot for a sweeping sunrise view of the Annapurna range and Dhaulagiri, two of the world's highest peaks rising above the Kaski and Myagdi foothills.",
+        },
+        {
+          icon: Flower2,
+          title: "Lumbini Pilgrimage",
+          desc: "Journey to the birthplace of Buddha in the Terai plains, home to the sacred Maya Devi Temple, the Ashoka Pillar, and monasteries built by Buddhist communities from around the world.",
+        },
+        ,
       ],
     },
   ];
@@ -742,7 +761,8 @@ function TravelPartner() {
             "url('https://www.transparenttextures.com/patterns/simple-dashed.png')",
         }}
       />
-      <div className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-8">
+
+     <div className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-8">
         <SectionHeading subtitle="Your trusted partner for travel and tour arrangements during the Asia ADR Summit 2026 and Nepal ADR Week.">
           Official Travel & Tour Guide
         </SectionHeading>
@@ -751,7 +771,12 @@ function TravelPartner() {
           <div className="bg-white p-6 border-t-4 border-[#9F8320] shadow-sm rounded-lg">
             <div className="flex flex-col md:flex-row md:items-center gap-6">
               {/* Left: Logo + Name */}
-              <div className="flex items-center gap-3 md:w-1/4">
+              <a
+                href="https://www.touchkailash.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 md:w-1/4 hover:opacity-80 transition-opacity"
+              >
                 <div className="w-10 h-10 bg-[#1e3a8a] rounded-lg flex items-center justify-center flex-shrink-0">
                   <Mountain className="w-5 h-5 text-[#c9a961]" />
                 </div>
@@ -763,11 +788,12 @@ function TravelPartner() {
                     Official Travel Partner
                   </p>
                 </div>
-              </div>
+              </a>
 
               {/* Middle: One-line description */}
               <p className="text-stone-500 text-xs leading-relaxed md:w-2/5">
-                Airport transfers, hotel bookings, and post-summit tour packages across Nepal.
+                Airport transfers, hotel bookings, and post-summit tour packages
+                across Nepal.
               </p>
 
               {/* Right: Contact info, inline */}
