@@ -1106,7 +1106,7 @@ export default function EventRegistrationPage() {
                 </div>
                 <div className="px-5 py-3">
                   <span className="text-white/60 text-xs tracking-wider uppercase">
-                    Standard
+                    Regular
                   </span>
                   <p className="text-white font-semibold text-base">
                     USD {event.foreign_standard_usd?.toLocaleString() || "200"}
@@ -1196,14 +1196,14 @@ export default function EventRegistrationPage() {
                     <span className="text-stone-600">Early Bird</span>
                     <span className="font-bold text-stone-800">
                       USD{" "}
-                      {event?.foreign_early_bird_usd?.toLocaleString() || "200"}
+                      {event?.foreign_early_bird_usd?.toLocaleString() || "150"}
                     </span>
                   </div>
                   <div className="flex items-center justify-between pb-2 border-b border-stone-100">
                     <span className="text-stone-600">Standard</span>
                     <span className="font-bold text-stone-800">
                       USD{" "}
-                      {event?.foreign_standard_usd?.toLocaleString() || "250"}
+                      {event?.foreign_standard_usd?.toLocaleString() || "200"}
                     </span>
                   </div>
                   <div className="flex items-center justify-between pb-2 border-b border-stone-100">
