@@ -23,7 +23,6 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
 
 const EARLY_BIRD_DEADLINE = new Date("2026-08-31T23:59:59+05:45"); // Nepal time
 
-
 function ScrollReveal() {
   useEffect(() => {
     const els = () => document.querySelectorAll(".reveal");
@@ -413,7 +412,7 @@ export default function EventRegistrationPage() {
   const [success, setSuccess] = useState(false);
   const [pricingWindow, setPricingWindow] = useState(null);
   const [error, setError] = useState(null);
-  
+
   const [form, setForm] = useState({
     spaces: 1,
     participant_type: "foreign_early_bird",
@@ -429,8 +428,6 @@ export default function EventRegistrationPage() {
     comment: "",
     reference_code: "",
   });
-
-
 
   useEffect(() => {
     if (!pricingWindow) return;
@@ -480,12 +477,11 @@ export default function EventRegistrationPage() {
     return { label, unit, totalDisplay };
   }, [event, form.participant_type, form.spaces]);
 
-
   useEffect(() => {
-  if (earlyBirdExpired && form.participant_type === "foreign_early_bird") {
-    setForm((p) => ({ ...p, participant_type: "foreign_standard" }));
-  }
-}, [earlyBirdExpired]);
+    if (earlyBirdExpired && form.participant_type === "foreign_early_bird") {
+      setForm((p) => ({ ...p, participant_type: "foreign_standard" }));
+    }
+  }, [earlyBirdExpired]);
 
   // Success state
   const [bookingData, setBookingData] = useState(null);
@@ -1100,8 +1096,11 @@ export default function EventRegistrationPage() {
                     USD{" "}
                     {event.foreign_early_bird_usd?.toLocaleString() || "150"}
                   </p>
-                  <span className="text-white/40 text-[10px]">
+                  <span className="text-white/40 text-[10px] block">
                     until Aug 2026
+                  </span>
+                  <span className="text-white/30 text-[9px] block italic">
+                    excluding bank fee
                   </span>
                 </div>
                 <div className="px-5 py-3">
@@ -1111,6 +1110,9 @@ export default function EventRegistrationPage() {
                   <p className="text-white font-semibold text-base">
                     USD {event.foreign_standard_usd?.toLocaleString() || "200"}
                   </p>
+                  <span className="text-white/30 text-[9px] block italic">
+                    excluding bank fee
+                  </span>
                 </div>
               </div>
             )}
@@ -1385,8 +1387,9 @@ export default function EventRegistrationPage() {
                           label: "Early Bird",
                           price: event?.foreign_early_bird_usd
                             ? `USD ${event.foreign_early_bird_usd.toLocaleString()}`
-                            : "USD 200",
+                            : "USD 150",
                           subtitle: "until Aug 31, 2026",
+                          note: "excluding bank fee",
                           disabled: earlyBirdExpired,
                         },
                         {
@@ -1394,7 +1397,8 @@ export default function EventRegistrationPage() {
                           label: "Standard",
                           price: event?.foreign_standard_usd
                             ? `USD ${event.foreign_standard_usd.toLocaleString()}`
-                            : "USD 250",
+                            : "USD 200",
+                          note: "excluding bank fee",
                           disabled: false,
                         },
                       ].map((opt) => (
@@ -1426,6 +1430,11 @@ export default function EventRegistrationPage() {
                           {opt.subtitle && (
                             <p className="text-xs text-[#9F8320] font-medium mt-0.5">
                               {opt.subtitle}
+                            </p>
+                          )}
+                          {opt.note && (
+                             <p className="text-[10px] text-red-600 font-bold bg-red-50 border border-red-200 inline-block px-2 py-0.5 rounded-full mt-1.5">
+                              {opt.note}
                             </p>
                           )}
                           {opt.disabled && (
