@@ -1060,61 +1060,78 @@ export default function EventRegistrationPage() {
               event?.individual_price_npr ||
               event?.foreign_early_bird_usd ||
               event?.foreign_standard_usd) && (
-              <div className="reveal mt-6 inline-flex flex-wrap items-stretch gap-0 bg-[#9F8320]/15 border border-[#9F8320]/30 rounded-xl overflow-hidden">
-                <div className="px-5 py-3 border-r border-[#9F8320]/20">
-                  <span className="text-white/60 text-xs tracking-wider uppercase">
-                    Institutional Fee
-                  </span>
-                  <p className="text-white font-semibold text-base">
-                    NPR{" "}
-                    {event.institutional_price_npr?.toLocaleString() ||
-                      "100,000"}
-                  </p>
-                </div>
-                <div className="px-5 py-3 border-r border-[#9F8320]/20">
-                  <span className="text-white/60 text-xs tracking-wider uppercase">
-                    Individual Fee
-                  </span>
-                  <p className="text-white font-semibold text-base">
-                    NPR{" "}
-                    {event.individual_price_npr?.toLocaleString() || "45,000"}
-                  </p>
-                </div>
-                <div className="px-5 py-3 border-r border-[#9F8320]/20">
-                  <span className="text-white/60 text-xs tracking-wider uppercase">
-                    Scholars & Students
-                  </span>
-                  <p className="text-white font-semibold text-base">
-                    NPR {event.nepali_price_npr?.toLocaleString() || "25,000"}
-                  </p>
-                </div>
-                <div className="px-5 py-3 border-r border-[#9F8320]/20">
-                  <span className="text-white/60 text-xs tracking-wider uppercase">
-                    Early Bird
-                  </span>
-                  <p className="text-[#9F8320] font-semibold text-base">
-                    USD{" "}
-                    {event.foreign_early_bird_usd?.toLocaleString() || "150"}
-                  </p>
-                  <span className="text-white/40 text-[10px] block">
-                    until Aug 2026
-                  </span>
-                  <span className="text-white/30 text-[9px] block italic">
-                    excluding bank fee
-                  </span>
-                </div>
-                <div className="px-5 py-3">
-                  <span className="text-white/60 text-xs tracking-wider uppercase">
-                    Regular
-                  </span>
-                  <p className="text-white font-semibold text-base">
-                    USD {event.foreign_standard_usd?.toLocaleString() || "200"}
-                  </p>
-                  <span className="text-white/30 text-[9px] block italic">
-                    excluding bank fee
-                  </span>
-                </div>
-              </div>
+              <div className="reveal mt-6 flex flex-wrap gap-4">
+  {/* Nepali pricing group */}
+  <div className="inline-flex flex-col">
+    <div className="inline-flex items-center gap-1.5 mb-2 px-2.5 py-1 bg-blue-500/20 border border-blue-500/40 rounded-full w-fit">
+      <span className="text-sm">🇳🇵</span>
+      <span className="text-blue-300 text-[11px] font-semibold tracking-wide uppercase">
+        Nepali Citizens Only
+      </span>
+    </div>
+    <div className="inline-flex flex-wrap items-stretch bg-[#9F8320]/15 border border-[#9F8320]/30 rounded-xl overflow-hidden">
+      <div className="px-5 py-3 border-r border-[#9F8320]/20">
+        <span className="text-white/60 text-xs tracking-wider uppercase">
+          Institutional Fee
+        </span>
+        <p className="text-white font-semibold text-base">
+          NPR {event.institutional_price_npr?.toLocaleString() || "100,000"}
+        </p>
+      </div>
+      <div className="px-5 py-3 border-r border-[#9F8320]/20">
+        <span className="text-white/60 text-xs tracking-wider uppercase">
+          Individual Fee
+        </span>
+        <p className="text-white font-semibold text-base">
+          NPR {event.individual_price_npr?.toLocaleString() || "45,000"}
+        </p>
+      </div>
+      <div className="px-5 py-3">
+        <span className="text-white/60 text-xs tracking-wider uppercase">
+          Scholars & Students
+        </span>
+        <p className="text-white font-semibold text-base">
+          NPR {event.nepali_price_npr?.toLocaleString() || "25,000"}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  {/* International pricing group */}
+  <div className="inline-flex flex-col">
+    <div className="inline-flex items-center gap-1.5 mb-2 px-2.5 py-1 bg-emerald-500/20 border border-emerald-500/40 rounded-full w-fit">
+      <span className="text-sm">🌐</span>
+      <span className="text-emerald-300 text-[11px] font-semibold tracking-wide uppercase">
+        International
+      </span>
+    </div>
+    <div className="inline-flex flex-wrap items-stretch bg-[#9F8320]/15 border border-[#9F8320]/30 rounded-xl overflow-hidden">
+      <div className="px-5 py-3 border-r border-[#9F8320]/20">
+        <span className="text-white/60 text-xs tracking-wider uppercase">
+          Early Bird
+        </span>
+        <p className="text-[#9F8320] font-semibold text-base">
+          USD {event.foreign_early_bird_usd?.toLocaleString() || "150"}
+        </p>
+        <span className="text-white/40 text-[10px] block">until Aug 2026</span>
+        <span className="text-white/30 text-[9px] block italic">
+          excluding bank fee
+        </span>
+      </div>
+      <div className="px-5 py-3">
+        <span className="text-white/60 text-xs tracking-wider uppercase">
+          Regular
+        </span>
+        <p className="text-white font-semibold text-base">
+          USD {event.foreign_standard_usd?.toLocaleString() || "200"}
+        </p>
+        <span className="text-white/30 text-[9px] block italic">
+          excluding bank fee
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
             )}
           </div>
         </div>
