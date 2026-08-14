@@ -703,7 +703,7 @@ export default function EventRegistrationPage() {
         <div className="flex flex-col items-center gap-4">
           <Loader2 className="w-8 h-8 text-[#9F8320] animate-spin" />
           <p className="text-stone-500 text-sm font-medium">
-            Loading registration...
+            Loading registration....
           </p>
         </div>
       </div>
