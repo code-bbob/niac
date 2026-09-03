@@ -221,7 +221,7 @@ function Hero() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-lg text-white">
             <Calendar className="text-[#c9a961] mb-4 w-10 h-10 mx-auto" />
-            <h3 className="font-bold text-lg mb-1">4-6 December 2026</h3>
+            <h3 className="font-bold text-lg mb-1">5-7 March 2027</h3>
             <p className="text-sm opacity-70">Main Summit & Workshops</p>
           </div>
           <div className="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-lg text-white">
