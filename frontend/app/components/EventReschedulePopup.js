@@ -90,14 +90,14 @@ export default function NIACNoticeModal() {
             <li className="flex items-start gap-2.5">
               <Scale className="w-4 h-4 text-[#c17937] shrink-0 mt-0.5" />
               <div>
-                <strong className="text-slate-900 uppercase">CHOOSE NEPAL AS AN ARBITRATION SEAT:</strong> Host your upcoming mediations and arbitrations in Nepal.
+                <strong className="text-slate-900 uppercase">CHOOSE NEPAL AS AN ARBITRATION VENUE/SEAT:</strong> We request you to host your upcoming arbitrations and mediations in Nepal.
               </div>
             </li>
 
             <li className="flex items-start gap-2.5">
               <Globe className="w-4 h-4 text-[#c17937] shrink-0 mt-0.5" />
               <div>
-                <strong className="text-slate-900 uppercase">BRING GLOBAL EVENTS TO NEPAL:</strong> Host future conferences and summits here to contribute to economic recovery.
+                <strong className="text-slate-900 uppercase">BRING GLOBAL EVENTS TO NEPAL:</strong> Host future summits, conferences and meetings in Nepal to contribute economic recovery.
               </div>
             </li>
           </ul>
