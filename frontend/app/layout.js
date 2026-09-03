@@ -4,6 +4,7 @@ import LenisScroll from './components/LenisScroll';
 import './globals.css';
 import { Inter, Playfair_Display } from 'next/font/google';
 import { baseUrl } from '@/lib/seo';
+import EventReschedulePopup from './components/EventReschedulePopup';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -55,6 +56,7 @@ export default function RootLayout({ children }) {
       <body className={`${inter.variable} ${playfairDisplay.variable} bg-white text-black`}>
         <LenisScroll />
         <NiacHeader />
+        <EventReschedulePopup />
         <main className="min-h-screen bg-white text-black">
           {children}
         </main>
