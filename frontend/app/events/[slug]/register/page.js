@@ -21,7 +21,7 @@ import {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
 
-const EARLY_BIRD_DEADLINE = new Date("2026-08-31T23:59:59+05:45"); // Nepal time
+const EARLY_BIRD_DEADLINE = new Date("2026-11-31T23:59:59+05:45"); // Nepal time
 
 function ScrollReveal() {
   useEffect(() => {
@@ -1108,15 +1108,16 @@ export default function EventRegistrationPage() {
     <div className="inline-flex flex-wrap items-stretch bg-[#9F8320]/15 border border-[#9F8320]/30 rounded-xl overflow-hidden">
       <div className="px-5 py-3 border-r border-[#9F8320]/20">
         <span className="text-white/60 text-xs tracking-wider uppercase">
-          Early Bird
+          Special Offer
         </span>
         <p className="text-[#9F8320] font-semibold text-base">
           USD {event.foreign_early_bird_usd?.toLocaleString() || "150"}
         </p>
-        <span className="text-white/40 text-[10px] block">until Aug 2026</span>
+        <span className="text-white/40 text-[10px] block">until Nov 31, 2026</span>
         <span className="text-white/30 text-[9px] block italic">
           excluding bank fee
         </span>
+        
       </div>
       <div className="px-5 py-3">
         <span className="text-white/60 text-xs tracking-wider uppercase">
@@ -1128,6 +1129,7 @@ export default function EventRegistrationPage() {
         <span className="text-white/30 text-[9px] block italic">
           excluding bank fee
         </span>
+        
       </div>
     </div>
   </div>
@@ -1401,11 +1403,11 @@ export default function EventRegistrationPage() {
                       {[
                         {
                           value: "foreign_early_bird",
-                          label: "Early Bird",
+                          label: "Special Offer",
                           price: event?.foreign_early_bird_usd
                             ? `USD ${event.foreign_early_bird_usd.toLocaleString()}`
                             : "USD 150",
-                          subtitle: "until Aug 31, 2026",
+                          subtitle: "until Nov 31, 2026",
                           note: "excluding bank fee",
                           disabled: earlyBirdExpired,
                         },
