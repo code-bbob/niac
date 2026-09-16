@@ -69,7 +69,7 @@ function HeroSection() {
         {/* Title */}
         <p className="text-white font-serif font-bold text-7xl md:text-7xl mb-6 leading-tight">
           Asia ADR Summit & <br />
-          <span className="text-[#c9a961] italic">Nepal ADR Week 2026</span>
+          <span className="text-[#c9a961] italic">Nepal ADR Week 2027</span>
         </p>
         <div className="mb-6 inline-flex items-center space-x-3 bg-white/10 px-4 py-2 rounded-full border border-white/20 backdrop-blur-sm">
           <span className="w-2 h-2 rounded-full bg-[#c9a961] animate-pulse"></span>

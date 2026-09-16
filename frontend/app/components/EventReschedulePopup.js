@@ -46,7 +46,7 @@ export default function NIACNoticeModal() {
 
           <div>
             <h3 className="text-lg font-bold text-[#0f2b5c] uppercase tracking-wide">
-              ASIA ADR SUMMIT & NEPAL ADR WEEK 2026
+              ASIA ADR SUMMIT & NEPAL ADR WEEK 2027
             </h3>
             <p className="text-sm font-semibold text-[#c17937] mt-1">
               <span className="line-through text-slate-400 mr-2">4–6 DECEMBER 2026</span> 
