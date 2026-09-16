@@ -345,14 +345,14 @@ function About() {
         }}
       />
       <div className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-8 ">
-        <SectionHeading subtitle="The Asian Institute of Alternative Dispute Resolution (AIADR) and the Nepal International ADR Centre (NIAC) are pleased to announce the Asia ADR Summit 2026 and the 2nd Nepal ADR Week, a landmark international event dedicated to advancing the field of Alternative Dispute Resolution (ADR).">
+        <SectionHeading subtitle="The Asian Institute of Alternative Dispute Resolution (AIADR) and the Nepal International ADR Centre (NIAC) are pleased to announce the Asia ADR Summit 2027 and the 2nd Nepal ADR Week, a landmark international event dedicated to advancing the field of Alternative Dispute Resolution (ADR).">
           Nepal ADR Week 2026
         </SectionHeading>
 
         <div className="grid grid-cols-1 mt-16 lg:grid-cols-2 gap-16 lg:gap-20 items-start">
           <div className="space-y-6">
             <p className="reveal text-stone-600 leading-relaxed text-base lg:text-lg">
-              The summit will take place from <strong>4–6 December 2026</strong>{" "}
+              The summit will take place from <strong>5–7 March 2027</strong>{" "}
               in <strong>Kathmandu, Nepal</strong>, under the theme{" "}
               <strong className="text-[#1e3a8a]">
                 &ldquo;Reaching the Pinnacle of ADR in a Changing World.&rdquo;
@@ -763,7 +763,7 @@ function TravelPartner() {
       />
 
      <div className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-8">
-        <SectionHeading subtitle="Your trusted partner for travel and tour arrangements during the Asia ADR Summit 2026 and Nepal ADR Week.">
+        <SectionHeading subtitle="Your trusted partner for travel and tour arrangements during the Asia ADR Summit 2027 and Nepal ADR Week.">
           Official Travel & Tour Guide
         </SectionHeading>
 
@@ -1030,7 +1030,7 @@ function Theme() {
         </div>
         <p className="reveal text-white/70 leading-relaxed text-base lg:text-lg max-w-3xl mx-auto">
           Drawing together leading practitioners, institutions, policymakers,
-          academics, and industry stakeholders, the Asia ADR Summit 2026 will
+          academics, and industry stakeholders, the Asia ADR Summit 2027 will
           explore how arbitration, mediation, and emerging ADR processes can
           continue to deliver legitimacy, efficiency, and access to justice in
           an increasingly complex international landscape.
@@ -1250,8 +1250,8 @@ function LookingAhead() {
         />
       </div>
       <div className="relative z-10 max-w-[900px] mx-auto px-4 sm:px-8 text-center">
-        <SectionHeading subtitle="The Asia ADR Summit 2026 and 2nd Nepal ADR Week promise to be an important milestone in strengthening ADR cooperation and knowledge exchange throughout the region.">
-          Looking Ahead to December 2026
+        <SectionHeading subtitle="The Asia ADR Summit 2027 and 2nd Nepal ADR Week promise to be an important milestone in strengthening ADR cooperation and knowledge exchange throughout the region.">
+          Looking Ahead to March 2027
         </SectionHeading>
 
         <div className="reveal max-w-2xl mx-auto space-y-8">
@@ -1305,7 +1305,7 @@ function Cta() {
         </div>
 
         <h2 className="reveal font-serif text-3xl md:text-4xl lg:text-5xl text-white font-bold leading-tight mb-6">
-          Secure Your Place at the Asia ADR Summit 2026 &amp; 2nd Nepal ADR Week
+          Secure Your Place at the Asia ADR Summit 2027 &amp; 2nd Nepal ADR Week
         </h2>
 
         <p className="reveal text-white/60 text-base md:text-lg max-w-xl mx-auto mb-10 leading-relaxed">

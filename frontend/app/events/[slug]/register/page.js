@@ -17,6 +17,8 @@ import {
   Search,
   Copy,
   ExternalLink,
+  Phone,
+  Mail,
 } from "lucide-react";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
@@ -788,7 +790,7 @@ export default function EventRegistrationPage() {
                         : bookingData.participant_type === "nepali_individual"
                           ? "Individual Fee"
                           : bookingData.participant_type === "nepali_scholars"
-                            ? "Scholars, Academics & Students"
+                            ? "Scholars, Students & Researchers"
                             : bookingData.participant_type ===
                                 "foreign_early_bird"
                               ? "Early Bird"
@@ -1025,13 +1027,14 @@ export default function EventRegistrationPage() {
               Event Registration
             </div>
             <h1 className="reveal font-serif text-4xl sm:text-5xl md:text-6xl text-white font-bold leading-tight mb-4">
-              {event?.title}
+              {/* {event?.title} Had to hardcode it */}
+              Asia ADR Summit & 2nd Nepal ADR Week 2027
             </h1>
             <div className="reveal flex flex-wrap items-center gap-4 mt-6">
               {event?.event_start_date && (
                 <span className="inline-flex items-center gap-2 bg-white/[0.08] backdrop-blur-sm border border-white/15 px-5 py-2.5 rounded-full text-sm text-white/80">
                   <Calendar className="w-4 h-4 text-[#9F8320]" />
-                  {new Date(event.event_start_date).toLocaleDateString(
+                  {/* {new Date(event.event_start_date).toLocaleDateString(
                     "en-US",
                     {
                       month: "long",
@@ -1047,7 +1050,8 @@ export default function EventRegistrationPage() {
                         day: "numeric",
                         year: "numeric",
                       },
-                    )}`}
+                    )}`} */}
+                    March 5, 2027 — March 7, 2027
                 </span>
               )}
               <span className="inline-flex items-center gap-2 bg-white/[0.08] backdrop-blur-sm border border-white/15 px-5 py-2.5 rounded-full text-sm text-white/80">
@@ -1061,78 +1065,79 @@ export default function EventRegistrationPage() {
               event?.foreign_early_bird_usd ||
               event?.foreign_standard_usd) && (
               <div className="reveal mt-6 flex flex-wrap gap-4">
-  {/* Nepali pricing group */}
-  <div className="inline-flex flex-col">
-    <div className="inline-flex items-center gap-1.5 mb-2 px-2.5 py-1 bg-blue-500/20 border border-blue-500/40 rounded-full w-fit">
-      <span className="text-sm">🇳🇵</span>
-      <span className="text-blue-300 text-[11px] font-semibold tracking-wide uppercase">
-        Nepali Citizens Only
-      </span>
-    </div>
-    <div className="inline-flex flex-wrap items-stretch bg-[#9F8320]/15 border border-[#9F8320]/30 rounded-xl overflow-hidden">
-      <div className="px-5 py-3 border-r border-[#9F8320]/20">
-        <span className="text-white/60 text-xs tracking-wider uppercase">
-          Institutional Fee
-        </span>
-        <p className="text-white font-semibold text-base">
-          NPR {event.institutional_price_npr?.toLocaleString() || "100,000"}
-        </p>
-      </div>
-      <div className="px-5 py-3 border-r border-[#9F8320]/20">
-        <span className="text-white/60 text-xs tracking-wider uppercase">
-          Individual Fee
-        </span>
-        <p className="text-white font-semibold text-base">
-          NPR {event.individual_price_npr?.toLocaleString() || "45,000"}
-        </p>
-      </div>
-      <div className="px-5 py-3">
-        <span className="text-white/60 text-xs tracking-wider uppercase">
-          Scholars & Students
-        </span>
-        <p className="text-white font-semibold text-base">
-          NPR {event.nepali_price_npr?.toLocaleString() || "25,000"}
-        </p>
-      </div>
-    </div>
-  </div>
-
   {/* International pricing group */}
-  <div className="inline-flex flex-col">
-    <div className="inline-flex items-center gap-1.5 mb-2 px-2.5 py-1 bg-emerald-500/20 border border-emerald-500/40 rounded-full w-fit">
-      <span className="text-sm">🌐</span>
-      <span className="text-emerald-300 text-[11px] font-semibold tracking-wide uppercase">
-        International
+<div className="inline-flex flex-col">
+  <span className="text-white/40 text-[10px] uppercase tracking-wide mb-1.5">
+    Conference Participation — International Registration Package
+  </span>
+  <div className="inline-flex items-center gap-1.5 mb-2 px-2.5 py-1 bg-emerald-500/20 border border-emerald-500/40 rounded-full w-fit">
+    <span className="text-sm">🌐</span>
+    <span className="text-emerald-300 text-[11px] font-semibold tracking-wide uppercase">
+      International
+    </span>
+  </div>
+  <div className="inline-flex flex-wrap items-stretch bg-[#9F8320]/15 border border-[#9F8320]/30 rounded-xl overflow-hidden w-70">
+    <div className="px-5 py-3 border-r border-[#9F8320]/20">
+      <span className="text-white/60 text-xs tracking-wider uppercase">
+        Special Offer
+      </span>
+      <p className="text-[#9F8320] font-semibold text-base">
+        USD {event.foreign_early_bird_usd?.toLocaleString() || "150"}
+      </p>
+      <span className="text-white text-[10px] block">until Nov 31, 2026</span>
+      <span className="text-amber-600 text-[9px] block italic">
+        excluding bank fee
       </span>
     </div>
-    <div className="inline-flex flex-wrap items-stretch bg-[#9F8320]/15 border border-[#9F8320]/30 rounded-xl overflow-hidden">
-      <div className="px-5 py-3 border-r border-[#9F8320]/20">
-        <span className="text-white/60 text-xs tracking-wider uppercase">
-          Special Offer
-        </span>
-        <p className="text-[#9F8320] font-semibold text-base">
-          USD {event.foreign_early_bird_usd?.toLocaleString() || "150"}
-        </p>
-        <span className="text-white/40 text-[10px] block">until Nov 31, 2026</span>
-        <span className="text-white/30 text-[9px] block italic">
-          excluding bank fee
-        </span>
-        
-      </div>
-      <div className="px-5 py-3">
-        <span className="text-white/60 text-xs tracking-wider uppercase">
-          Regular
-        </span>
-        <p className="text-white font-semibold text-base">
-          USD {event.foreign_standard_usd?.toLocaleString() || "200"}
-        </p>
-        <span className="text-white/30 text-[9px] block italic">
-          excluding bank fee
-        </span>
-        
-      </div>
+    <div className="px-5 py-3">
+      <span className="text-white/60 text-xs tracking-wider uppercase">
+        Regular
+      </span>
+      <p className="text-white font-semibold text-base">
+        USD {event.foreign_standard_usd?.toLocaleString() || "200"}
+      </p>
+      <span className="text-amber-600 text-[9px] block italic">
+        excluding bank fee
+      </span>
     </div>
   </div>
+</div>
+
+  {/* Nepali pricing group - understated but not diminished */}
+<div className="inline-flex flex-col mt-5">
+  <span className="text-white/40 text-[10px] uppercase tracking-wide mb-1.5">
+    Conference Participation — Nepal Registration Package
+  </span>
+  <span className="text-white/70 text-xs font-semibold uppercase tracking-wide px-1 mb-1">
+    Nepali
+  </span>
+  <div className="inline-flex flex-wrap items-center gap-x-6 gap-y-2 px-1 py-1">
+    <div>
+      <span className="text-white/60 text-xs tracking-wide block">
+        Institutional Fee
+      </span>
+      <span className="text-white font-semibold text-sm">
+        NPR {event.institutional_price_npr?.toLocaleString() || "100,000"}
+      </span>
+    </div>
+    <div>
+      <span className="text-white/60 text-xs tracking-wide block">
+        Individual Fee
+      </span>
+      <span className="text-white font-semibold text-sm">
+        NPR {event.individual_price_npr?.toLocaleString() || "45,000"}
+      </span>
+    </div>
+    <div>
+      <span className="text-white/60 text-xs tracking-wide block">
+        Scholars, Students & Researchers
+      </span>
+      <span className="text-white font-semibold text-sm">
+        NPR {event.nepali_price_npr?.toLocaleString() || "25,000"}
+      </span>
+    </div>
+  </div>
+</div>
 </div>
             )}
           </div>
@@ -1245,7 +1250,7 @@ export default function EventRegistrationPage() {
                   </div>
                   <div className="flex items-center justify-between pb-2 border-b border-stone-100">
                     <span className="text-stone-600">
-                      Scholars, Academics & Students
+                      Scholars, Students & Researchers
                     </span>
                     <span className="font-bold text-stone-800">
                       NPR{" "}
@@ -1471,68 +1476,29 @@ export default function EventRegistrationPage() {
                       ))}
                     </div>
 
-                    {/* Nepali Participants — grouped box */}
-                    <div className="border-2 border-[#1e3a8a]/15 bg-[#1e3a8a]/[0.03] rounded-xl p-4">
-                      <div className="flex items-center gap-2 mb-3">
-                        <p className="text-xs font-semibold text-[#1e3a8a] uppercase tracking-wider">
-                          Nepali Participants
-                        </p>
-                        <span className="text-[#9F8320] text-[10px] font-medium bg-[#9F8320]/10 px-2 py-0.5 rounded-full">
-                          Limited Seats
-                        </span>
-                      </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        {[
-                          {
-                            value: "nepali_institutional",
-                            label: "Institutional Fee",
-                            price: event?.institutional_price_npr
-                              ? `NPR ${event.institutional_price_npr.toLocaleString()}`
-                              : "NPR 100,000",
-                          },
-                          {
-                            value: "nepali_individual",
-                            label: "Individual Fee",
-                            price: event?.individual_price_npr
-                              ? `NPR ${event.individual_price_npr.toLocaleString()}`
-                              : "NPR 45,000",
-                          },
-                          {
-                            value: "nepali_scholars",
-                            label: "Scholars, Academics & Students",
-                            price: event?.nepali_price_npr
-                              ? `NPR ${event.nepali_price_npr.toLocaleString()}`
-                              : "NPR 25,000",
-                          },
-                        ].map((opt) => (
-                          <button
-                            key={opt.value}
-                            type="button"
-                            onClick={() =>
-                              setForm((p) => ({
-                                ...p,
-                                participant_type: opt.value,
-                              }))
-                            }
-                            className={`relative text-left p-4 rounded-xl border-2 bg-white transition-all ${
-                              form.participant_type === opt.value
-                                ? "border-[#9F8320] bg-[#9F8320]/5 shadow-sm"
-                                : "border-stone-200 hover:border-stone-300"
-                            }`}
-                          >
-                            <p className="text-sm font-semibold text-stone-800">
-                              {opt.label}
-                            </p>
-                            <p className="text-lg font-bold text-[#1e3a8a] mt-1">
-                              {opt.price}
-                            </p>
-                            {form.participant_type === opt.value && (
-                              <div className="absolute top-2 right-2 w-5 h-5 bg-[#9F8320] rounded-full flex items-center justify-center">
-                                <CheckCircle className="w-3 h-3 text-white" />
-                              </div>
-                            )}
-                          </button>
-                        ))}
+                    {/* Nepali Participants — subtle note, no self-serve selection */}
+                    <div className="border-t border-stone-100 pt-3">
+                      <p className="text-xs text-stone-500 leading-relaxed">
+                        <span className="font-medium text-stone-600">
+                          Nepali participants —
+                        </span>{" "}
+                        please register by contacting our office directly.
+                      </p>
+                      <div className="flex flex-wrap gap-2 mt-2">
+                        {/* <a
+                          href="tel:+9779860656010"
+                          className="inline-flex items-center gap-1.5 text-xs font-medium text-[#9F8320] border border-[#9F8320]/30 rounded-lg px-3 py-1.5 hover:bg-[#9F8320]/5 transition-colors"
+                        >
+                          <Phone className="w-3 h-3" />
+                          +977 9860656010
+                        </a> */}
+                        <a
+                          href="mailto:secretariat@niac.org.np"
+                          className="inline-flex items-center gap-1.5 text-xs font-medium text-[#9F8320] border border-[#9F8320]/30 rounded-lg px-3 py-1.5 hover:bg-[#9F8320]/5 transition-colors"
+                        >
+                          <Mail className="w-3 h-3" />
+                          secretariat@niac.org.np
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -1719,7 +1685,7 @@ export default function EventRegistrationPage() {
                               : form.participant_type === "nepali_individual"
                                 ? "Individual Fee"
                                 : form.participant_type === "nepali_scholars"
-                                  ? "Scholars, Academics & Students"
+                                  ? "Scholars, Students & Researchers"
                                   : form.participant_type ===
                                       "foreign_early_bird"
                                     ? "Early Bird"
