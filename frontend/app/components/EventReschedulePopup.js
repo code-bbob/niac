@@ -49,7 +49,7 @@ export default function NIACNoticeModal() {
               ASIA ADR SUMMIT & NEPAL ADR WEEK 2027
             </h3>
             <p className="text-sm font-semibold text-[#c17937] mt-1">
-              <span className="line-through text-slate-400 mr-2">4–6 DECEMBER 2026</span> 
+              <span className="line-through text-slate-400 mr-2">5-7 March 2027</span> 
               NEW DATES: 5–7 MARCH 2027.
             </p>
           </div>
