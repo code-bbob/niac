@@ -1112,12 +1112,13 @@ export default function EventRegistrationPage() {
     Nepali
   </span>
   <div className="inline-flex flex-wrap items-center gap-x-6 gap-y-2 px-1 py-1">
-    <div>
+    
+        <div>
       <span className="text-white/60 text-xs tracking-wide block">
-        Institutional Fee
+        Scholars, Students & Researchers
       </span>
       <span className="text-white font-semibold text-sm">
-        NPR {event.institutional_price_npr?.toLocaleString() || "100,000"}
+        NPR {event.nepali_price_npr?.toLocaleString() || "25,000"}
       </span>
     </div>
     <div>
@@ -1128,12 +1129,14 @@ export default function EventRegistrationPage() {
         NPR {event.individual_price_npr?.toLocaleString() || "45,000"}
       </span>
     </div>
+
+
     <div>
       <span className="text-white/60 text-xs tracking-wide block">
-        Scholars, Students & Researchers
+        Institutional Fee
       </span>
       <span className="text-white font-semibold text-sm">
-        NPR {event.nepali_price_npr?.toLocaleString() || "25,000"}
+        NPR {event.institutional_price_npr?.toLocaleString() || "100,000"}
       </span>
     </div>
   </div>
